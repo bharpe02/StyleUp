@@ -1,5 +1,7 @@
 import './assets/stylesheets/App.css';
 import Sidebar from './components/Sidebar';
+import ScreenHeader from './components/ScreenHeader';
+
 function App() {
   return (
     /*<div className="App">
@@ -19,6 +21,7 @@ function App() {
       </header>
     </div>*/
     <div>
+        <ScreenHeader/>
         <Sidebar/>
     </div>
   );

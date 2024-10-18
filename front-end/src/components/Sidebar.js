@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import addRoomImage from "../assets/images/Add Room.png"
 import myRoomsImage from "../assets/images/My Rooms.png"
 import surveyImage from "../assets/images/Survey.png"
@@ -6,6 +7,8 @@ import wishlistImage from "../assets/images/Wishlist.png"
 import "../assets/stylesheets/Button.css"
 
 function Sidebar() {
+    const navigate = useNavigate();
+
     return (
         <div>
             {/* svg is the container for the graphic. We want the size to be the same as the rectangle size */}
@@ -21,7 +24,7 @@ function Sidebar() {
                 <img src={myRoomsImage} alt="My Rooms"/>
             </button>
             {/*Survey Button*/}
-            <button id='survey' className="sidebar-button" style={surveyStyle}>
+            <button id='survey' className="sidebar-button" style={surveyStyle} onClick={() => navigate('/survey/question1')}>
                 <img src={surveyImage} alt="Survey"/>
             </button>
             {/*Wishlist Button*/}

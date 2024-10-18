@@ -1,4 +1,5 @@
-import './App.css';
+import './assets/stylesheets/App.css';
+import Sidebar from './components/Sidebar';
 function App() {
   return (
     /*<div className="App">
@@ -18,7 +19,7 @@ function App() {
       </header>
     </div>*/
     <div>
-        
+        <Sidebar/>
     </div>
   );
 }

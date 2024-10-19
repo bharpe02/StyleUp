@@ -1,6 +1,6 @@
 import './assets/stylesheets/App.css';
 import Sidebar from './components/Sidebar';
-import ScreenHeader from './components/ScreenHeader';
+import BannerMenu from './components/BannerMenu';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       </header>
     </div>*/
     <div>
-        <ScreenHeader/>
+        <BannerMenu/>
         <Sidebar/>
     </div>
   );

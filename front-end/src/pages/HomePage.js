@@ -6,9 +6,11 @@ import Sidebar from '../components/Sidebar.js';
 function HomePage() {
   return (
     <div>
+        {/** 
         <div>
             <LogoButton />
         </div>
+        */}
         <div id="SidebarDiv">
             <Sidebar />
             

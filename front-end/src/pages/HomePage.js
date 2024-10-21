@@ -6,15 +6,9 @@ import Sidebar from '../components/Sidebar.js';
 function HomePage() {
   return (
     <div>
-        {/** 
-        <div>
-            <LogoButton />
-        </div>
-        */}
-        <div id="SidebarDiv">
-            <Sidebar />
-            
-        </div>
+        <LogoButton/>
+        <Sidebar/>
+        <h1 style={{ textAlign: 'center' }}>Home Page</h1>
     </div>
   );
 }

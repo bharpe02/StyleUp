@@ -4,7 +4,7 @@ import logo from '../assets/images/LOGO.png'
 function LogoButton() {
   return (
     <a href="HomePage" target="_blank" rel="noopener noreferrer">
-        <img src={logo} alt={""} style={{ cursor: 'pointer'}}/>
+        <img src={logo} alt={""} style={{position: 'fixed', top: 0, left: 130, height: '100px', cursor: 'pointer'}}/>
     </a>
   )
 }

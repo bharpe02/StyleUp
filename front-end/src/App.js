@@ -5,6 +5,7 @@ import MyRoomsPage from "./pages/MyRoomsPage"
 import AddRoomPage from "./pages/AddRoomPage"
 import WishlistPage from "./pages/WishlistPage"
 import SurveyPage from "./pages/SurveyPage"
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="Survey" element={<SurveyPage />} />
+          <Route path="Login" element={<LoginPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>

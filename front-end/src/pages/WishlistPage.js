@@ -5,10 +5,12 @@ import BannerMenu from '../components/BannerMenu.js';
 
 function WishlistPage() {
   return (
-    <div>
+    <div className='container'>
       <BannerMenu/>
       <Sidebar/>
-      <h1 style={{ textAlign: 'center' }}>Wishlist</h1>
+      <div className='main-content'>
+        <h1>Wishlist</h1>
+      </div>
     </div>
   );
 }

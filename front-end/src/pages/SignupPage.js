@@ -1,16 +1,20 @@
-import { React, useState } from "react";
-import LogoButton from "../components/LogoButton";
-import Sidebar from "../components/Sidebar";
+import { React, useState, useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
+import BannerMenu from "../components/BannerMenu";
+import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
+import { loginUser } from "./LoginPage";
 
 function SignupPage() {
     
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
+    const { login } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -19,65 +23,90 @@ function SignupPage() {
     };
     
     const registerUser = async () => {
-        console.log(firstName)
-        console.log(lastName)
-        console.log(email)
-        console.log(password)
-        navigate("/HomePage"); // Redirect to home page
+        try {
+            // Prepare user data to send to the backend
+            const userData = {
+                fname,
+                lname,
+                email,
+                password,
+            };
+            // Send POST request to backend
+            const response = await axios.post('http://localhost:8080/api/register', userData);
+            
+            if (response.status === 200) {
+                console.log('User registered successfully:', response.data);
+                loginUser(email, password, login, navigate, setErrorMessage)
+                navigate("/MyRooms"); // Redirect to rooms page
+            }
+        } catch (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Error response:", error.response.data);
+                setErrorMessage(`Registration failed: ${error.response.data.message || "Unknown error occurred."}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Error request:", error.request);
+                setErrorMessage("Registration failed: No response from server.");
+            } else {
+                // Something happened in setting up the request
+                console.error("Error message:", error.message);
+                setErrorMessage(`Registration failed: ${error.message}`);
+            }
+        }
       };
     
     return (
-        <div className="login-form">
-            <div>
-                <LogoButton/>
-                <Sidebar/>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h1>Create an Account:</h1>
-                        <label>First Name: </label>
-                        <input 
-                            type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Last Name: </label>
-                        <input 
-                            type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Email: </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Password: </label>
-                        <input 
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button className="login-button" type="submit">Sign Up</button>
-                
-                    <h2>Already have an account?</h2>
-                    <Link to="/Login">
-                        <button className="signup-button">Log In</button>
-                    </Link>
-                </form>
+        <div className="container">
+            <BannerMenu/>
+            <div className="login-form">
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <h1>Create an Account:</h1>
+                            <label htmlFor="fname">First Name: </label>
+                            <input 
+                                type="text"
+                                value={fname}
+                                onChange={(e) => setFname(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="lname">Last Name: </label>
+                            <input 
+                                type="text"
+                                value={lname}
+                                onChange={(e) => setLname(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="email">Email: </label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password: </label>
+                            <input 
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button className="main-login-button" type="submit">Sign Up</button>
+                        <h2>Already have an account?</h2>
+                        <Link to="/Login">
+                            <button className="signup-button">Log In</button>
+                        </Link>
+                    </form>
+                    {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
+                </div>
             </div>
         </div>
     )

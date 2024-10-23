@@ -1,16 +1,18 @@
 .banner-container {
-  /*Container for full menu*/
+  /*Container for full banner menu*/
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px;
-  background-color: #ffffff;
-  height: 90px;
-  width: 100%;
-  box-shadow: rgb(38, 57, 77) 0px 10px 30px -10px;
-  position: fixed;
-  z-index: 2;
+  flex-direction: row;  /*Ensures elements are ordered horizontally*/
+  justify-content: space-between; /*Position of elements are set by distance between*/
+  align-items: center; /*Keeps elements ordered from the center out*/
+  padding: 5px; /*Padding in all cardinal directions*/
+  background-color: #ffffff; /*Background white*/
+  height: 90px;  /*Height of Banner*/
+  width: 100vw;  /*Width is the length of the screen*/
+  box-shadow: rgb(38, 57, 77) 0px 10px 15px -10px;
+  position: fixed; /*ensures it is in the same spot on every screen*/
+  top: 0; /*On the top of the page*/
+  left: 0; /*On the left of the page*/
+  z-index: 3; /*Determines overlap*/
 }
 
 
@@ -75,6 +77,7 @@
   cursor: pointer;
   width: 100px;
   height: 35px;
+  align-self: center;
 }
 
 .logout-button:hover {

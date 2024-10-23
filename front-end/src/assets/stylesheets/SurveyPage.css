@@ -1,0 +1,32 @@
+.survey-page {
+  display: flex;
+  flex-direction: row; /* Align sidebar and content horizontally */
+  height: 100vh; /* Ensure the full height is used */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 80px; /* Make room for the sidebar */
+  overflow-y: auto; /* In case the content overflows */
+}
+
+.survey-sidebar {
+  width: 60px; /* Sidebar width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  height: 100vh; /* Full height for the sidebar */
+  justify-content: flex-start; /* Align rectangles at the top */
+  padding-top: 50px;
+  margin-left: 20px; /* Spacing from the left */
+  position: fixed; /* Fix sidebar in place */
+}
+
+.sidebar-item {
+  width: 70px;
+  height: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

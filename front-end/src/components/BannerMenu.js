@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import LogoButton from './LogoButton.js';
 import '../assets/stylesheets/BannerMenu.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AuthContext } from '../contexts/AuthContext.js';
 
 const BannerMenu = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { name, isLoggedIn } = useContext(AuthContext);
+
   return (
     <div className='banner-container'> 
         {/**Container for the Banner Menu.*/}
@@ -14,25 +16,23 @@ const BannerMenu = () => {
         </div>
 
         <div className='button-container'>
+          {/* When User is logged in */}
           {isLoggedIn ? (
             <>
-            {/* When User is logged in */}
               {/* PFP component PLACEHOLDER*/}
-              <p1>Username</p1> 
-                <button className='logout-button' onClick={() => setIsLoggedIn(false)}>
-                  Log Out
-                </button>
+              <p>{name}</p>
+              <Link to="/MyAccount">
+                <button className='logout-button'>My Account</button>
+              </Link> 
             </>
           ):(
             <>
-            {/* When User is not Logged in */}
-                <button className='login-button' /**Temporary ==> */  onClick={() => setIsLoggedIn(true)}>
-                    Log In
-                </button>
-              <Link to="/Wishlist">
-                  <button className="signup-button">
-                    Sign Up!
-                  </button>
+              {/* When User is not Logged in */}
+              <Link to="/Login">
+                <button className='login-button'>Log In</button>
+              </Link>
+              <Link to="/Signup">
+                <button className="signup-button">Sign Up!</button>
               </Link>
             </>
           )}

@@ -1,13 +1,9 @@
 import React from 'react'
 import logo from '../assets/images/LOGO.png'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function LogoButton() {
   return (
-    <a href="HomePage" target="_blank" rel="noopener noreferrer">
-        <img src={logo} alt={""} style={{position: 'fixed', top: 0, left: 130, height: '50px', cursor: 'pointer'}}/>
-    </a>
-
     <Link to="/MyRooms">
         <img src={logo} alt={""} style={{position: 'fixed', top: 0, left: 130, height: '100px', cursor: 'pointer'}}/>
     </Link>

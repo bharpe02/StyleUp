@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../assets/images/LOGO.png'
+import { Link, useNavigate } from "react-router-dom";
 
 function LogoButton() {
   return (

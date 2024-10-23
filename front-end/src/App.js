@@ -6,6 +6,8 @@ import AddRoomPage from "./pages/AddRoomPage"
 import WishlistPage from "./pages/WishlistPage"
 import SurveyPage from "./pages/SurveyPage"
 import Layout from './components/Layout';
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
   

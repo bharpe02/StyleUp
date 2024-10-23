@@ -4,44 +4,26 @@ import Sidebar from "../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 
-function LoginPage() {
+function SignupPage() {
     
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // Call backend API here
-        loginUser();
+        registerUser();
     };
     
-    const loginUser = async () => {
+    const registerUser = async () => {
+        console.log(firstName)
+        console.log(lastName)
         console.log(email)
         console.log(password)
-        navigate("/HomePage"); // Redirect to Homepage
-        /*try {
-            const response = await fetch("http://your-backend-api.com/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
-    
-            const data = await response.json();
-            if (response.ok) {
-                navigate("/HomePage"); // Redirect to HomePage
-            } else {
-                // Handle login errors
-                console.log("Login failed", data);
-            }
-        } catch (error) {
-          console.error("Error logging in:", error);
-        }*/
+        navigate("/HomePage"); // Redirect to home page
       };
     
     return (
@@ -53,7 +35,25 @@ function LoginPage() {
             <div>
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <h1>Log In:</h1>
+                        <h1>Create an Account:</h1>
+                        <label>First Name: </label>
+                        <input 
+                            type="text"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Last Name: </label>
+                        <input 
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
                         <label>Email: </label>
                         <input
                             type="email"
@@ -71,15 +71,15 @@ function LoginPage() {
                             required
                         />
                     </div>
-                    <button className="login-button" type="submit">Log In</button>
+                    <button className="login-button" type="submit">Sign Up</button>
                 
-                    <h2>Don't have an account?</h2>
-                    <Link to="/Signup">
-                        <button className="signup-button">Sign Up!</button>
+                    <h2>Already have an account?</h2>
+                    <Link to="/Login">
+                        <button className="signup-button">Log In</button>
                     </Link>
                 </form>
             </div>
         </div>
     )
 }
-export default LoginPage;
+export default SignupPage;

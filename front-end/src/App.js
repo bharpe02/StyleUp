@@ -7,6 +7,8 @@ import SurveyPage from "./pages/SurveyPage"
 import Layout from './components/Layout';
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
 
 function App() {

@@ -1,0 +1,19 @@
+.survey-sidebar {
+  width: 60px; /* Adjust the width if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  height: calc(100vh - 100px); /* Adjust height to leave space at the top and bottom */
+  justify-content: flex-start; /* Align rectangles closer to the center */
+  padding-top: 50px; /* Add some space from the top */
+  margin-left: 20px; /* Move the sidebar away from the left */
+  position: relative
+}
+
+.sidebar-item {
+  width: 70px; /* Thinner width for rectangles */
+  height: 20px; /* Adjust height to make rectangles thinner */
+  margin-bottom: 10px; /* Adjust spacing between rectangles */
+  border-radius: 5px;
+}

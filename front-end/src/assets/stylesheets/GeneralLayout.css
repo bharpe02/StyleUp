@@ -10,7 +10,6 @@
     margin-top: 90px; /* Ensures the content starts below the BannerMenu */
     margin-left: 130px; /* Ensures the content starts to the right of the sidebar */
     justify-content: center;
-    align-items: center;
     text-align: center;
 }
   

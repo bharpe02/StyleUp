@@ -6,6 +6,9 @@ import AddRoomPage from "./pages/AddRoomPage"
 import WishlistPage from "./pages/WishlistPage"
 import SurveyPage from "./pages/SurveyPage"
 import Layout from './components/Layout';
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+
 
 function App() {
   
@@ -19,6 +22,8 @@ function App() {
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="Survey" element={<SurveyPage />} />
+          <Route path="Login" element={<LoginPage/>} />
+          <Route path="Signup" element={<SignupPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>

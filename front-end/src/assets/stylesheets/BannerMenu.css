@@ -1,0 +1,83 @@
+.banner-container {
+  /*Container for full menu*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #ffffff;
+  height: 15vh;
+  width: 100%;
+  box-shadow: rgb(38, 57, 77) 0px 10px 30px -10px;
+  position: fixed;
+  z-index: 2;
+}
+
+
+.logo {
+  /*Logo Element, connects to LogoButton.js*/
+  display: flex;
+  margin-left: 100px;
+}
+
+.button-container {
+  /*Container for Log in/sign up buttons*/
+  display: flex;
+  gap: 15px;
+  margin-right: 150px;
+}
+
+/* Button styling */
+.login-button {
+  padding: 5px;
+  background-color: #633B48; 
+  opacity: 0.9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+}
+
+.login-button:hover {
+  background-color: #633B48;
+  opacity: 1;
+}
+
+.signup-button {
+  padding: 5px;
+  background-color: #633B48; 
+  opacity: 0.9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+}
+
+.signup-button:hover {
+  background-color: #633B48;
+  opacity: 1;
+}
+
+.logout-button {
+  padding: 5px;
+  background-color: #633B48; 
+  opacity: 0.9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px;
+  height: 35px;
+}
+
+.logout-button:hover {
+  background-color: #633B48;
+  opacity: 1;
+}

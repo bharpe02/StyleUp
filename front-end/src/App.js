@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, useLocation} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import OpeningPage from "./pages/OpeningPage";
 import MyRoomsPage from "./pages/MyRoomsPage"
@@ -22,9 +22,9 @@ function App() {
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="Survey" element={<SurveyPage />} />
-          <Route path="Login" element={<LoginPage/>} />
-          <Route path="Signup" element={<SignupPage/>} />
         </Route>
+        <Route path="Login" element={<LoginPage/>} />
+        <Route path="Signup" element={<SignupPage/>} />
       </Routes>
     </BrowserRouter>
   );

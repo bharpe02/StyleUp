@@ -1,31 +1,45 @@
-import React from 'react'
-import logo from '../assets/images/LOGO.png'
+import React, {useState} from 'react';
+import LogoButton from './LogoButton.js';
+import '../assets/stylesheets/BannerMenu.css';
+import { Link, useNavigate } from "react-router-dom";
 
-function BannerMenu() {
+const BannerMenu = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div>
-        {/**Container for the Banner Menu. 
-         * NEEDS LOGO RESIZED, LOG IN, SIGN IN, CONDITIONAL "STATE" FOR SIGNED IN USER */}
-        <svg width = "100vw" height = "10vh">
-            <rect width = "100%" height = "100%" fill = 'white' />
-        </svg> 
-            {/**link to the homepage through the logo*/}          
-            <a href="HomePage" target="_self" rel="noopener noreferrer">
-                    <img src={logo} alt={""} style={homeLogoStyle}
-                    width = '262' height = '85'
-                    />
-            </a>
-        
+    <div className='banner-container'> 
+        {/**Container for the Banner Menu.*/}
+        <div>
+          {/* Logo Button */}
+            <LogoButton />  
+        </div>
+
+        <div className='button-container'>
+          {isLoggedIn ? (
+            <>
+            {/* When User is logged in */}
+              {/* PFP component PLACEHOLDER*/}
+              <p1>Username</p1> 
+                <button className='logout-button' onClick={() => setIsLoggedIn(false)}>
+                  Log Out
+                </button>
+            </>
+          ):(
+            <>
+            {/* When User is not Logged in */}
+                <button className='login-button' /**Temporary ==> */  onClick={() => setIsLoggedIn(true)}>
+                    Log In
+                </button>
+              <Link to="/Wishlist">
+                  <button className="signup-button">
+                    Sign Up!
+                  </button>
+              </Link>
+            </>
+          )}
+        </div>
+
     </div>
   )
 }
-
-const homeLogoStyle = {
-    cursor: 'pointer',
-    position: 'absolute', 
-    top: "10px",
-    left: "50px",
-}
-
 
 export default BannerMenu

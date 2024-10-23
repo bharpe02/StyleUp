@@ -1,8 +1,8 @@
 import { React, useState } from "react";
-import LogoButton from "../components/LogoButton";
-import Sidebar from "../components/Sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
+import BannerMenu from "../components/BannerMenu";
+import "../assets/stylesheets/GeneralLayout.css"
 
 function LoginPage() {
     
@@ -45,39 +45,38 @@ function LoginPage() {
       };
     
     return (
-        <div className="login-form">
-            <div>
-                <LogoButton/>
-                <Sidebar/>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <h1>Log In:</h1>
-                        <label>Email: </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label>Password: </label>
-                        <input 
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <button className="login-button" type="submit">Log In</button>
-                
-                    <h2>Don't have an account?</h2>
-                    <Link to="/Signup">
-                        <button className="signup-button">Sign Up!</button>
-                    </Link>
-                </form>
+        <div className="container">
+            <BannerMenu/>
+            <div className="login-form">
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <h1>Log In:</h1>
+                            <label>Email: </label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Password: </label>
+                            <input 
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button className="main-login-button" type="submit">Log In</button>
+                    
+                        <h2>Don't have an account?</h2>
+                        <Link to="/Signup">
+                            <button className="signup-button">Sign Up!</button>
+                        </Link>
+                    </form>
+                </div>
             </div>
         </div>
     )

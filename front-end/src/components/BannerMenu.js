@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import LogoButton from './LogoButton.js';
 import '../assets/stylesheets/BannerMenu.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BannerMenu = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +29,7 @@ const BannerMenu = () => {
                 <button className='login-button' /**Temporary ==> */  onClick={() => setIsLoggedIn(true)}>
                     Log In
                 </button>
-              <Link to="/Wishlist">
+              <Link to="/Signup">
                   <button className="signup-button">
                     Sign Up!
                   </button>

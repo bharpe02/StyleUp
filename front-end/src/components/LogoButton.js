@@ -3,9 +3,9 @@ import logo from '../assets/images/LOGO.png'
 
 function LogoButton() {
   return (
-    <a href="HomePage" target="_blank" rel="noopener noreferrer">
+    <Link to="/MyRooms">
         <img src={logo} alt={""} style={{position: 'fixed', top: 0, left: 130, height: '100px', cursor: 'pointer'}}/>
-    </a>
+    </Link>
   )
 }
 

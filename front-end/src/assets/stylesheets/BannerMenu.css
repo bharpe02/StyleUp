@@ -75,6 +75,7 @@
   cursor: pointer;
   width: 100px;
   height: 35px;
+  align-self: center;
 }
 
 .logout-button:hover {

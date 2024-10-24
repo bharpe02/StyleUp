@@ -45,7 +45,7 @@ h2 {
     cursor: pointer;
 }
   
-.login-button:hover {
+.main-login-button:hover {
     background-color: #633B48;
     opacity: 1;
 }
@@ -61,3 +61,4 @@ h2 {
     cursor: pointer;
     width: 100%;
 }
+

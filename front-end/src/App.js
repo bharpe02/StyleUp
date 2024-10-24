@@ -8,7 +8,7 @@ import SurveyPage from "./pages/SurveyPage"
 import Layout from './components/Layout';
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-
+import MyAccountPage from "./pages/MyAccountPage"
 
 function App() {
   
@@ -22,6 +22,7 @@ function App() {
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="Survey" element={<SurveyPage />} />
+          <Route path="MyAccount" element={<MyAccountPage/>} />
         </Route>
         <Route path="Login" element={<LoginPage/>} />
         <Route path="Signup" element={<SignupPage/>} />

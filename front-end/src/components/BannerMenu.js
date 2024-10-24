@@ -18,10 +18,13 @@ const BannerMenu = () => {
             <>
             {/* When User is logged in */}
               {/* PFP component PLACEHOLDER*/}
-              <p1>Username</p1> 
-                <button className='logout-button' onClick={() => setIsLoggedIn(false)}>
-                  Log Out
-                </button>
+              <p1>Username</p1>
+                <Link to="/MyAccount">
+                  {/*<button className='logout-button' onClick={() => setIsLoggedIn(false)}>
+                    Log Out
+                  </button>*/}
+                  <button className='logout-button'>My Account</button>
+                </Link> 
             </>
           ):(
             <>

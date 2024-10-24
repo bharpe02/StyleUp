@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import LogoButton from './LogoButton.js';
 import '../assets/stylesheets/BannerMenu.css';
-import { Link, useNavigate } from "react-router-dom";
-import DefaultPFP from '../assets/images/DefaultPFP.png'
+import { Link } from "react-router-dom";
 
 const BannerMenu = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,13 +18,13 @@ const BannerMenu = () => {
             <>
             {/* When User is logged in */}
               {/* PFP component PLACEHOLDER*/}
-              <img
-              src = {DefaultPFP} height = '20%' width = '20%'>
-              </img>
-              <h3>Username</h3> 
-                <button className='logout-button' onClick={() => setIsLoggedIn(false)}>
-                  Log Out
-                </button>
+              <p1>Username</p1>
+                <Link to="/MyAccount">
+                  {/*<button className='logout-button' onClick={() => setIsLoggedIn(false)}>
+                    Log Out
+                  </button>*/}
+                  <button className='logout-button'>My Account</button>
+                </Link> 
             </>
           ):(
             <>
@@ -33,7 +32,7 @@ const BannerMenu = () => {
                 <button className='login-button' /**Temporary ==> */  onClick={() => setIsLoggedIn(true)}>
                     Log In
                 </button>
-              <Link to="/Wishlist">
+              <Link to="/Signup">
                   <button className="signup-button">
                     Sign Up!
                   </button>

@@ -15,8 +15,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route index element={<OpeningPage />} />
         <Route path="/" element={<Layout />}>
-          <Route index element={<OpeningPage />} />
           <Route path="HomePage" element={<HomePage />} />
           <Route path="MyRooms" element={<MyRoomsPage />} />
           <Route path="AddRoom" element={<AddRoomPage />} />

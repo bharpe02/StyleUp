@@ -1,5 +1,5 @@
 import React from 'react';
-import './Question1.css';
+import '../assets/stylesheets/Question1.css';
 
 function Question1({ onNext }) {
   return (

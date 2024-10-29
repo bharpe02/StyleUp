@@ -1,5 +1,5 @@
 import React from 'react';
-import './Question2.css';
+import '../assets/stylesheets/Question2.css';
 
 function Question2({ onNext, onPrevious }) {
   return (

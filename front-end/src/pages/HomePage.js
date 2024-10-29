@@ -1,6 +1,5 @@
 import React from 'react'
 import '../assets/stylesheets/HomePage.css';
-import LogoButton from '../components/LogoButton.js';
 import Sidebar from '../components/Sidebar.js';
 import BannerMenu from '../components/BannerMenu.js';
 

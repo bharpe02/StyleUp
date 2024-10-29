@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Question1 from '../components/Question1';
 import Question2 from '../components/Question2';
 import LogoButton from '../components/LogoButton.js';
-import './SurveyPage.css';
+import '../assets/stylesheets/Question1.css';
 
 function SurveyPage() {
   const [currentQuestion, setCurrentQuestion] = useState(1);

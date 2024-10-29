@@ -1,5 +1,5 @@
 import React from 'react';
-import './SurveySidebar.css';
+import '../assets/stylesheets/SurveySidebar.css';
 
 function SurveySidebar({ currentQuestion }) {
   const totalQuestions = 5;

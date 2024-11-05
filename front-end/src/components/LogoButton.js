@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function LogoButton() {
   return (
-    <Link to="/MyRooms">
+    <Link to="/">
         <img src={logo} alt={""} style={{position: 'fixed', top: 0, left: 130, height: '100px', cursor: 'pointer'}}/>
     </Link>
   )

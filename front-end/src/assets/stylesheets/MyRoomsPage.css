@@ -1,0 +1,43 @@
+.page-title {
+    height: 50px;
+    width: calc(100vw - 70px - 130px);
+    background-color: #660C0C33; /*Background color with opacity [CC] #------CC*/
+    display: flex;
+    margin-left:70px; 
+    margin-top: 40px;
+    align-items: center;
+}
+
+.image-style {
+    height: 35px;
+    width: 70px;
+    display: inline;
+    overflow: hidden; /*cut out words from the logo*/ 
+    position: relative; 
+     filter: brightness(0); /*Make logo black*/
+}
+
+.main-content {
+    flex-direction:column;
+    height: 100vh;
+    overflow:hidden;
+    align-items: center;
+    justify-content: start;
+
+}
+
+.no-room-message {
+    margin-top:25vh;
+}
+.no-room-message p1 {
+    /* font-size: x-large; */
+    font-size: 40pt;
+}
+
+.arrow-container {
+    position: relative;
+    top: -70px;
+    left: -400px;
+    margin-bottom: -400px;
+    z-index: 2;
+}

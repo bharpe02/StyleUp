@@ -17,6 +17,7 @@ public class AuthController {
         this.authService = authService;
     }
 
+    /*
     // Login endpoint
     @PostMapping("/login")
     //@RequestBody maps the JSON request body (from the frontend) to this Java object.
@@ -30,4 +31,5 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials"); // HTTP 401 for failed login
         }
     }
+    */
 }

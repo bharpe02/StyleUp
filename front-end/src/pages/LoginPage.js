@@ -3,46 +3,52 @@ import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 import BannerMenu from "../components/BannerMenu";
 import "../assets/stylesheets/GeneralLayout.css"
+import axios from "axios";
 
 function LoginPage() {
     
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState(''); 
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setErrorMessage(''); // Clear any previous error messages
         // Call backend API here
         loginUser();
     };
     
     const loginUser = async () => {
-        console.log(email)
-        console.log(password)
-        navigate("/HomePage"); // Redirect to Homepage
-        /*try {
-            const response = await fetch("http://your-backend-api.com/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            });
-    
-            const data = await response.json();
-            if (response.ok) {
-                navigate("/HomePage"); // Redirect to HomePage
-            } else {
-                // Handle login errors
-                console.log("Login failed", data);
+        try {
+            // Prepare user data to send to the backend
+            const userData = {
+                email,
+                password,
+            };
+            // Send POST request to backend
+            const response = await axios.post('http://localhost:8080/api/login', userData);
+            
+            if (response.status === 200) {
+                console.log('User logged in successfully:', response.data);
+                navigate("/HomePage"); // Redirect to home page
             }
         } catch (error) {
-          console.error("Error logging in:", error);
-        }*/
-      };
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Error response:", error.response.data);
+                setErrorMessage(error.response.data);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Error request:", error.request);
+                setErrorMessage("Login failed: No response from server.");
+            } else {
+                // Something happened in setting up the request
+                console.error("Error message:", error.message);
+                setErrorMessage(error.message);
+            }
+        }
+    };
     
     return (
         <div className="container">
@@ -76,6 +82,7 @@ function LoginPage() {
                             <button className="signup-button">Sign Up!</button>
                         </Link>
                     </form>
+                    {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
                 </div>
             </div>
         </div>

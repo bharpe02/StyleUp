@@ -1,15 +1,16 @@
-import { React, useState } from "react";
+import { React, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 import BannerMenu from "../components/BannerMenu";
+import axios from "axios";
 
 function SignupPage() {
     
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [fname, setFName] = useState("");
+    const [lname, setLName] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,11 +19,36 @@ function SignupPage() {
     };
     
     const registerUser = async () => {
-        console.log(firstName)
-        console.log(lastName)
-        console.log(email)
-        console.log(password)
-        navigate("/HomePage"); // Redirect to home page
+        try {
+            // Prepare user data to send to the backend
+            const userData = {
+                fname,
+                lname,
+                email,
+                password,
+            };
+            // Send POST request to backend
+            const response = await axios.post('http://localhost:8080/api/register', userData);
+            
+            if (response.status === 200) {
+                console.log('User registered successfully:', response.data);
+                navigate("/HomePage"); // Redirect to home page
+            }
+        } catch (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                console.error("Error response:", error.response.data);
+                alert(`Registration failed: ${error.response.data.message || "Unknown error occurred."}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error("Error request:", error.request);
+                alert("Registration failed: No response from server.");
+            } else {
+                // Something happened in setting up the request
+                console.error("Error message:", error.message);
+                alert(`Registration failed: ${error.message}`);
+            }
+        }
       };
     
     return (
@@ -36,8 +62,8 @@ function SignupPage() {
                             <label>First Name: </label>
                             <input 
                                 type="text"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                value={fname}
+                                onChange={(e) => setFName(e.target.value)}
                                 required
                             />
                         </div>
@@ -45,8 +71,8 @@ function SignupPage() {
                             <label>Last Name: </label>
                             <input 
                                 type="text"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                value={lname}
+                                onChange={(e) => setLName(e.target.value)}
                                 required
                             />
                         </div>

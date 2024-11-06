@@ -1,12 +1,11 @@
 import React, {useContext} from 'react';
 import LogoButton from './LogoButton.js';
 import '../assets/stylesheets/BannerMenu.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext.js';
 
 const BannerMenu = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   return (
     <div className='banner-container'> 
@@ -32,9 +31,11 @@ const BannerMenu = () => {
           ):(
             <>
             {/* When User is not Logged in */}
-                <button className='login-button' /**Temporary ==> */  onClick={() => navigate("/Login")}>
+              <Link to="/Login">
+                <button className='login-button'>
                     Log In
                 </button>
+              </Link>
               <Link to="/Signup">
                   <button className="signup-button">
                     Sign Up!

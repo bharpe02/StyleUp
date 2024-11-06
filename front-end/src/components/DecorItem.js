@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../assets/stylesheets/DecorItem.css';
-import { Link } from "react-router-dom";
 
 function DecorItem() {
     // Decoration Item that contains a Picture, Name, Description, and the Seller Information. Can be clicked to be expanded

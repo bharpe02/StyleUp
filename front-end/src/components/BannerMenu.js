@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import LogoButton from './LogoButton.js';
 import '../assets/stylesheets/BannerMenu.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../contexts/AuthContext.js';
 
 const BannerMenu = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   return (
     <div className='banner-container'> 
         {/**Container for the Banner Menu.*/}
@@ -29,7 +32,7 @@ const BannerMenu = () => {
           ):(
             <>
             {/* When User is not Logged in */}
-                <button className='login-button' /**Temporary ==> */  onClick={() => setIsLoggedIn(true)}>
+                <button className='login-button' /**Temporary ==> */  onClick={() => navigate("/Login")}>
                     Log In
                 </button>
               <Link to="/Signup">

@@ -1,19 +1,18 @@
-import { React } from "react";
+import { React, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import BannerMenu from "../components/BannerMenu";
 import "../assets/stylesheets/MyAccount.css"
+import { AuthContext } from "../contexts/AuthContext";
 
 function MyAccountPage() {
     
     const navigate = useNavigate();
+    const { logout } = useContext(AuthContext);
 
     const handleClick = (event) => {
         event.preventDefault();
         // Call backend API here
-        logoutUser();
-    };
-    
-    const logoutUser = async () => {
+        logout();
         console.log("The user has logged out")
         navigate("/Login"); // Redirect to login page
     };

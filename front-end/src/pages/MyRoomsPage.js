@@ -1,18 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import BannerMenu from '../components/BannerMenu';
 import Sidebar from '../components/Sidebar';
 import "../assets/stylesheets/GeneralLayout.css"
 import "../assets/stylesheets/MyRoomsPage.css"
 import myRoomsImage from "../assets/images/My Rooms.png"
 import arrowcurve from "../assets/images/ArrowCurve.png"
+import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function MyRoomsPage() {
   const [hasRooms, setHasRooms] = useState(false);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/Login"); // Redirect to Login if not logged in
+    }
+  }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
+
   return (
     <div>
       <BannerMenu/>
       <Sidebar/>
-
+      {isLoggedIn ? (
       <div className='main-content'>
         {/* <h1 style={{ textAlign: 'center' }}>My Rooms</h1> */}
         <div className='page-title'>
@@ -40,7 +51,9 @@ function MyRoomsPage() {
       }
 
       </div>
-      
+      ):(
+        <p style={{ textAlign: 'center' }}>Redirecting to login...</p>
+      )}
     </div>
   );
 }

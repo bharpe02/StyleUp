@@ -1,9 +1,10 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 import BannerMenu from "../components/BannerMenu";
 import "../assets/stylesheets/GeneralLayout.css"
 import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
 
 function LoginPage() {
     
@@ -11,6 +12,7 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(''); 
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -31,6 +33,7 @@ function LoginPage() {
             
             if (response.status === 200) {
                 console.log('User logged in successfully:', response.data);
+                login();
                 navigate("/HomePage"); // Redirect to home page
             }
         } catch (error) {

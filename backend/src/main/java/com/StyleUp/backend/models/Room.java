@@ -17,7 +17,13 @@ public class Room {
     @OneToMany (cascade = CascadeType.ALL)//declares that one room can have many decorations, updates everything when one is saved
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
-    @JoinColumn (name = "fk_rm_id", referencedColumnName = "rm_id")
+    @JoinColumn (name = "rm_id", referencedColumnName = "rm_id")
     private List<Decoration> decorations;
+
+    public Room() {}
+
+    public Room(String roomName) {
+        this.roomName = roomName;
+    }
 
 }

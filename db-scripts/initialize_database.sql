@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS rooms (
     usr_id BIGINT
 );
 -- Create decorations table
-CREATE TABLE IF NOT EXISTS rooms (
+CREATE TABLE IF NOT EXISTS decorations (
     dec_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     searchLink VARCHAR(255) NOT NULL,
     rm_id BIGINT 

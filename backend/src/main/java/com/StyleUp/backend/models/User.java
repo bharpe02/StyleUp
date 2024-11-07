@@ -24,6 +24,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+
     // Default constructor for JPA
     public User() {}
 

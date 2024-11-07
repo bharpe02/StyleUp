@@ -1,8 +1,9 @@
-import { React, useState} from "react";
+import { React, useState, useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 import BannerMenu from "../components/BannerMenu";
 import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
 
 function SignupPage() {
     
@@ -11,6 +12,7 @@ function SignupPage() {
     const [password, setPassword] = useState("");
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,6 +34,7 @@ function SignupPage() {
             
             if (response.status === 200) {
                 console.log('User registered successfully:', response.data);
+                login();
                 navigate("/HomePage"); // Redirect to home page
             }
         } catch (error) {

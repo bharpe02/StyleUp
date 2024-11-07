@@ -32,6 +32,7 @@ public class User {
     @JoinColumn (name = "fk_usr_id", referencedColumnName = "id")
     private List<Room> rooms;
 
+
     // Default constructor for JPA
     public User() {}
 

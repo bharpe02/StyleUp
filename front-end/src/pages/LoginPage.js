@@ -33,14 +33,19 @@ function LoginPage() {
             
             if (response.status === 200) {
                 console.log('User logged in successfully:', response.data);
-                login();
+
+                // Extract and store the JWT token
+                const token = response.data;
+
+                login(token);
+
                 navigate("/HomePage"); // Redirect to home page
             }
         } catch (error) {
             if (error.response) {
-                // The request was made and the server responded with a status code
                 console.error("Error response:", error.response.data);
-                setErrorMessage(error.response.data);
+                const parsedMessage = error.response.data.split('"')[1] || error.response.data.split(" ").slice(-1)[0];
+                setErrorMessage(parsedMessage);
             } else if (error.request) {
                 // The request was made but no response was received
                 console.error("Error request:", error.request);

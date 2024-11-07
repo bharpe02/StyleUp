@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 function MyAccountPage() {
     
     const navigate = useNavigate();
-    const { logout } = useContext(AuthContext);
+    const { username, logout } = useContext(AuthContext);
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -29,9 +29,8 @@ function MyAccountPage() {
                 <div className="account-info">
                     <div className="account-details">
                         <h2>Account Details</h2>
-                        <p><strong>Name:</strong> John Doe</p>
+                        <p><strong>Name:</strong> {username}</p>
                         <p><strong>Email:</strong> johndoe@example.com</p>
-                        <p><strong>Member Since:</strong> January 2023</p>
                     </div>
                     <div className="account-settings">
                         <h2>Settings</h2>

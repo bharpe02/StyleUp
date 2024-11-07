@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create rooms table
 CREATE TABLE IF NOT EXISTS rooms (
     rm_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    roomName VARCHAR(255) NOT NULL
+    roomName VARCHAR(255) NOT NULL,
     usr_id BIGINT
 );
 -- Create decorations table

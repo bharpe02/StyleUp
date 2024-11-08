@@ -42,18 +42,4 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
     }
-
-    //Get user details
-    @GetMapping("/user")
-    public ResponseEntity<String> getUserDetails(@AuthenticationPrincipal UserPrincipal user) {
-        try {
-            // Ensure the user is authenticated and has the necessary information
-            if (user == null) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-            }
-            return ResponseEntity.ok(user.getFname() + " " + user.getLname());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");
-        }
-    }
 }

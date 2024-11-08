@@ -3,6 +3,7 @@ package com.StyleUp.backend.models;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,21 +27,22 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany (cascade = CascadeType.ALL)//declares that one room can have many decorations, updates everything when one is saved
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)//declares that one room can have many decorations, updates everything when one is saved
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
-    @JoinColumn (name = "UserId", referencedColumnName = "UserId")
+    @JoinColumn (name = "fk_user_id", referencedColumnName = "UserId")
     private List<Room> rooms;
 
     // Default constructor for JPA
     public User() {}
 
     //Actual constructor
-    public User(String fname, String lname, String email, String password) {
+    public User(String fname, String lname, String email, String password, List<Room> rooms) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.password = password;
+        this.rooms = rooms;
     }
 
     // Getters and setters

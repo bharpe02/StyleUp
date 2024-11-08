@@ -17,11 +17,11 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS rooms (
     RoomId BIGINT AUTO_INCREMENT PRIMARY KEY,
     roomName VARCHAR(255) NOT NULL,
-    UserId BIGINT
+    fk_user_id BIGINT
 );
 -- Create decorations table
 CREATE TABLE IF NOT EXISTS decorations (
     DecorationId BIGINT AUTO_INCREMENT PRIMARY KEY,
     searchLink VARCHAR(255) NOT NULL,
-    RoomId BIGINT 
+    fk_room_id BIGINT 
 );

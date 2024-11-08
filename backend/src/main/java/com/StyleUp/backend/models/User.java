@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long UserId;
 
     @Column(nullable = false)
     private String fname;
@@ -29,7 +29,7 @@ public class User {
     @OneToMany (cascade = CascadeType.ALL)//declares that one room can have many decorations, updates everything when one is saved
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
-    @JoinColumn (name = "usr_id", referencedColumnName = "id")
+    @JoinColumn (name = "UserId", referencedColumnName = "UserId")
     private List<Room> rooms;
 
     // Default constructor for JPA
@@ -45,16 +45,14 @@ public class User {
 
     // Getters and setters
     public Long getId() {
-        return id;
+        return UserId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.UserId = id;
     }
 
-    public String getFname() {
-        return fname;
-    }
+    public String getFname() {return fname;}
 
     public void setFname(String fname) {
         this.fname = fname;
@@ -82,6 +80,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @PrePersist

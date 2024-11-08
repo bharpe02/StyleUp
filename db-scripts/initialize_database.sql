@@ -6,7 +6,7 @@ USE styleup_db;
 
 -- Create users table
 CREATE TABLE IF NOT EXISTS users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    UserId BIGINT AUTO_INCREMENT PRIMARY KEY,
     fname VARCHAR(255) NOT NULL,
     lname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -15,13 +15,13 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Create rooms table
 CREATE TABLE IF NOT EXISTS rooms (
-    rm_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    RoomId BIGINT AUTO_INCREMENT PRIMARY KEY,
     roomName VARCHAR(255) NOT NULL,
-    usr_id BIGINT
+    UserId BIGINT
 );
 -- Create decorations table
 CREATE TABLE IF NOT EXISTS decorations (
-    dec_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    DecorationId BIGINT AUTO_INCREMENT PRIMARY KEY,
     searchLink VARCHAR(255) NOT NULL,
-    rm_id BIGINT 
+    RoomId BIGINT 
 );

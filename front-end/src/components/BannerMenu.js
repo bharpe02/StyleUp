@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext.js';
 
 const BannerMenu = () => {
-  const { username, isLoggedIn } = useContext(AuthContext);
+  const { name, isLoggedIn } = useContext(AuthContext);
 
   return (
     <div className='banner-container'> 
@@ -20,7 +20,7 @@ const BannerMenu = () => {
           {isLoggedIn ? (
             <>
               {/* PFP component PLACEHOLDER*/}
-              <p>{username}</p>
+              <p>{name}</p>
               <Link to="/MyAccount">
                 <button className='logout-button'>My Account</button>
               </Link> 

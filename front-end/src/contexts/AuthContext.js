@@ -6,7 +6,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
-  const [username, setUsername] = useState(null);
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   // Optional: load initial login state from local storage or a cookie
@@ -18,13 +19,16 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserDetails = async (authToken) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/user", {
-        headers: {
-          Authorization: `Bearer ${authToken || token}`,  
-        },
-      });
-      setUsername(response.data);
-      setIsLoggedIn(true); // Ensure isLoggedIn is true if user data loads successfully
+      const headers = {
+        Authorization: `Bearer ${authToken || token}`,  
+      };
+
+      const [nameResponse, emailResponse] = await Promise.all([
+        axios.get("http://localhost:8080/api/user/name", { headers }),
+        axios.get("http://localhost:8080/api/user/email", { headers })
+      ]);
+      setName(nameResponse.data)
+      setEmail(emailResponse.data)
     } catch (error) {
       console.error("Failed to fetch user details:", error);
       logout();
@@ -41,13 +45,13 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setIsLoggedIn(false);
-    setUsername(null);
+    setName(null);
     setToken(null);
     localStorage.removeItem("token");
   };
 
   // Memoize the value to prevent unnecessary re-renders
-  const value = useMemo(() => ({ isLoggedIn, username, login, logout }), [isLoggedIn, username]);
+  const value = useMemo(() => ({ isLoggedIn, name, email, login, logout }), [isLoggedIn, name, email]);
 
   return (
     <AuthContext.Provider value={value}>

@@ -9,35 +9,36 @@ import java.util.*;
 @Table (name = "rooms")
 public class Room {
     @Id
+    @Column(name="room_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long RoomId;
+    private Long room_id;
 
     @Column
     private String roomName;
 
     @Column
-    private Long fkUserId;
+    private Long fku;
 
     @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)//declares that one room can have many decorations, updates everything when one is saved
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
-    @JoinColumn (name = "fk_room_id", referencedColumnName = "RoomId")
+    @JoinColumn (name = "fkr", referencedColumnName = "room_id")
     private List<Decoration> decorations;
 
     public Room() {}
 
     public Room(String roomName, Long fkUserId, List<Decoration> decorations) {
         this.roomName = roomName;
-        this.fkUserId = fkUserId;
+        this.fku = fkUserId;
         this.decorations = decorations;
     }
 
-    public Long getRm_id() {
-        return RoomId;
+    public Long getRoom_id() {
+        return room_id;
     }
 
-    public void setRm_id(Long rm_id) {
-        this.RoomId = rm_id;
+    public void setRoom_id(Long rm_id) {
+        this.room_id = rm_id;
     }
 
     public String getRoomName() {
@@ -55,4 +56,7 @@ public class Room {
     public void setDecorations(List<Decoration> decorations) {
         this.decorations = decorations;
     }
+
+
+
 }

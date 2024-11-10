@@ -33,7 +33,7 @@ public class User {
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
     @JoinColumn (name = "fku", referencedColumnName = "user_id")
-    private List<Room> rooms;
+    private List<Room> rooms=new ArrayList<>();
 
 
     // Default constructor for JPA
@@ -103,7 +103,7 @@ public class User {
                 ", lname='" + lname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", rooms=" + rooms +
+                ", rooms=" + rooms.toString() +
                 '}';
     }
 

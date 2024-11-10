@@ -1,8 +1,10 @@
-import { React, useState} from "react";
+import { React, useState, useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/stylesheets/LoginPage.css"
 import BannerMenu from "../components/BannerMenu";
 import axios from "axios";
+import { AuthContext } from "../contexts/AuthContext";
+import { loginUser } from "./LoginPage";
 
 function SignupPage() {
     
@@ -11,6 +13,8 @@ function SignupPage() {
     const [password, setPassword] = useState("");
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
+    const { login } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,21 +36,22 @@ function SignupPage() {
             
             if (response.status === 200) {
                 console.log('User registered successfully:', response.data);
+                loginUser(email, password, login, navigate, setErrorMessage)
                 navigate("/HomePage"); // Redirect to home page
             }
         } catch (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 console.error("Error response:", error.response.data);
-                alert(`Registration failed: ${error.response.data.message || "Unknown error occurred."}`);
+                setErrorMessage(`Registration failed: ${error.response.data.message || "Unknown error occurred."}`);
             } else if (error.request) {
                 // The request was made but no response was received
                 console.error("Error request:", error.request);
-                alert("Registration failed: No response from server.");
+                setErrorMessage("Registration failed: No response from server.");
             } else {
                 // Something happened in setting up the request
                 console.error("Error message:", error.message);
-                alert(`Registration failed: ${error.message}`);
+                setErrorMessage(`Registration failed: ${error.message}`);
             }
         }
       };
@@ -100,6 +105,7 @@ function SignupPage() {
                             <button className="signup-button">Log In</button>
                         </Link>
                     </form>
+                    {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
                 </div>
             </div>
         </div>

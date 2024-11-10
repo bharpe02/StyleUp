@@ -5,21 +5,34 @@ import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.repositories.DecorationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.StyleUp.backend.models.User;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuthService {
+public class AuthService  {
     
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
     private final DecorationRepository decorationRepository;;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private JWTService jwtService;
+
+    @Autowired
+    AuthenticationManager authManager;
 
     public AuthService(UserRepository userRepository, RoomRepository roomRepository, DecorationRepository decorationRepository) {
         this.userRepository = userRepository;
@@ -30,7 +43,7 @@ public class AuthService {
     // Register a new user
     public User registerUser(String fname, String lname, String email, String password) {
         //Check if user already exists
-        if (userRepository.findByEmail(email).isPresent()) {
+        if (userRepository.findByEmail(email) != null) {
             throw new RuntimeException("User already exists with this email");
         }
         List<Room> rooms= new ArrayList<Room>();
@@ -49,10 +62,46 @@ public class AuthService {
             room.setDecorations(decorations);
         }
         user.setRooms(rooms);
+    }
+    /*public User verifyUser(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+
+        }
+
         if (passwordEncoder.matches(password, user.getPassword())) {
-            return Optional.of(user);
+            //return myUserDetailsService.loadUserByUsername(user.getEmail());
+            return user;
         } else {
             throw new RuntimeException("Invalid password");
+        }
+    }*/
+    public String verifyUser(User user) {
+        // Check if the user exists
+        User foundUser = userRepository.findByEmail(user.getEmail());
+        if (foundUser == null) {
+            System.out.println("User not found: " + user.getEmail());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+        try {
+            Authentication authentication =
+                    authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+
+            if(authentication.isAuthenticated()) {
+                System.out.println("User authenticated successfully: " + user.getEmail());
+                return jwtService.generateToken(user.getEmail());
+            } else {
+                System.out.println("Authentication failed for user: " + user.getEmail());
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password");
+            }
+        } catch (BadCredentialsException e) {
+            System.out.println("Bad credentials for user: " + user.getEmail());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect password.");
+        } catch (Exception e) {
+            // Catch any other unexpected errors
+            System.out.println("Unexpected error occurred for user: " + user.getEmail());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An unexpected error occurred", e);
         }
     }
 }

@@ -6,6 +6,43 @@ import "../assets/stylesheets/GeneralLayout.css"
 import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext";
 
+export const loginUser = async (email, password, login, navigate, setErrorMessage) => {
+    try {
+        // Prepare user data to send to the backend
+        const userData = {
+            email,
+            password,
+        };
+        // Send POST request to backend
+        const response = await axios.post('http://localhost:8080/api/login', userData);
+        
+        if (response.status === 200) {
+            console.log('User logged in successfully:', response.data);
+
+            // Extract and store the JWT token
+            const token = response.data;
+
+            login(token);
+
+            navigate("/HomePage"); // Redirect to home page
+        }
+    } catch (error) {
+        if (error.response) {
+            console.error("Error response:", error.response.data);
+            const parsedMessage = error.response.data.split('"')[1] || error.response.data.split(" ").slice(-1)[0];
+            setErrorMessage(parsedMessage);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error("Error request:", error.request);
+            setErrorMessage("Login failed: No response from server.");
+        } else {
+            // Something happened in setting up the request
+            console.error("Error message:", error.message);
+            setErrorMessage(error.message);
+        }
+    }
+};
+
 function LoginPage() {
     
     const navigate = useNavigate();
@@ -18,39 +55,7 @@ function LoginPage() {
         event.preventDefault();
         setErrorMessage(''); // Clear any previous error messages
         // Call backend API here
-        loginUser();
-    };
-    
-    const loginUser = async () => {
-        try {
-            // Prepare user data to send to the backend
-            const userData = {
-                email,
-                password,
-            };
-            // Send POST request to backend
-            const response = await axios.post('http://localhost:8080/api/login', userData);
-            
-            if (response.status === 200) {
-                console.log('User logged in successfully:', response.data);
-                login();
-                navigate("/HomePage"); // Redirect to home page
-            }
-        } catch (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                console.error("Error response:", error.response.data);
-                setErrorMessage(error.response.data);
-            } else if (error.request) {
-                // The request was made but no response was received
-                console.error("Error request:", error.request);
-                setErrorMessage("Login failed: No response from server.");
-            } else {
-                // Something happened in setting up the request
-                console.error("Error message:", error.message);
-                setErrorMessage(error.message);
-            }
-        }
+        loginUser(email, password, login, navigate, setErrorMessage);
     };
     
     return (

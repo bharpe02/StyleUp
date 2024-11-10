@@ -34,7 +34,7 @@ public class Room {
     }
 
     public Long getRoom_id() {
-        return room_id;
+        return this.room_id;
     }
 
     public void setRoom_id(Long rm_id) {
@@ -42,7 +42,7 @@ public class Room {
     }
 
     public String getRoomName() {
-        return roomName;
+        return this.roomName;
     }
 
     public void setRoomName(String roomName) {
@@ -50,7 +50,7 @@ public class Room {
     }
 
     public List<Decoration> getDecorations() {
-        return decorations;
+        return this.decorations;
     }
 
     public void setDecorations(List<Decoration> decorations) {

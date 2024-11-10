@@ -8,7 +8,7 @@ import axios from 'axios';
 
 function AddRoomPage() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, token } = useContext(AuthContext);
   const [roomName, setRoomName] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -19,18 +19,20 @@ function AddRoomPage() {
   }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
   const handleSubmit = (event) => {
-    //event.preventDefault();
-    //createRoom();
+    event.preventDefault();
+    createRoom();
 };
 
   const createRoom = async () => {
     try {
         // Prepare user data to send to the backend
-        const roomData = {
-            roomName
+        const headers = {
+          Authorization: `Bearer ${token}`,  
         };
+        console.log("Room name:", roomName);
+
         // Send POST request to backend
-        const response = await axios.post('http://localhost:8080/room/create', roomData);
+        const response = await axios.post('http://localhost:8080/api/room/create', roomName, {headers});
         
         if (response.status === 200) {
             console.log('Room created successfully:', response.data);

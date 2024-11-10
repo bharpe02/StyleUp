@@ -13,10 +13,10 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long room_id;
 
-    @Column
+    @Column(name = "room_name", nullable = false)
     private String roomName;
 
-    @Column
+    @Column(name = "fku")
     private Long fku;
 
     @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)//declares that one room can have many decorations, updates everything when one is saved
@@ -60,10 +60,10 @@ public class Room {
     @Override
     public String toString() {
         return "Room{" +
-                "room_id=" + room_id +
-                ", roomName='" + roomName + '\'' +
-                ", fku=" + fku +
-                ", decorations=" + decorations.toString() +
+                "room_id=" + this.room_id +
+                ", roomName='" + this.roomName + '\'' +
+                ", fku=" + this.fku +
+                ", decorations=" + this.decorations.toString() +
                 '}';
     }
 }

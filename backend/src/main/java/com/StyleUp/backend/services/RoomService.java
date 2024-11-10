@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,8 @@ public class RoomService {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             // Access user details (e.g., user ID, username, etc.)
             userId = userPrincipal.getId();
-
+            System.out.println("USER ID: " + userId);
+            System.out.println("ROOM NAME: " + roomName);
         } else {
             // Handle case where the authentication or principal is not present
             System.out.println("No user is logged in.");
@@ -36,7 +39,8 @@ public class RoomService {
         }
 
         List<Decoration> decorations = new ArrayList<>();
-        Room room = new Room(roomName, userId, decorations);
+        Room room = new Room(URLDecoder.decode(roomName, StandardCharsets.UTF_8), userId, decorations);
+        System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }
 

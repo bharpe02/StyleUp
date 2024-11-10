@@ -16,16 +16,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.StyleUp.backend.models.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AuthService  {
-    
+
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
-    private final DecorationRepository decorationRepository;;
+    private final DecorationRepository decorationRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
@@ -46,38 +44,13 @@ public class AuthService  {
         if (userRepository.findByEmail(email) != null) {
             throw new RuntimeException("User already exists with this email");
         }
-        List<Room> rooms= new ArrayList<Room>();
+        List<Room> rooms= new ArrayList<>();
         User user = new User(fname, lname, email, password, rooms);
         return userRepository.save(user);
     }
 
     // Authenticate user
-    public Optional<User> loginUser(String email, String password) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        //this might be scuffed and need work later
-        List<Room> rooms = roomRepository.findByFkUserId(user.getId());
-        for (Room room : rooms) {
-            List<Decoration> decorations = decorationRepository.findByFkRoomId(room.getRm_id());
-            room.setDecorations(decorations);
-        }
-        user.setRooms(rooms);
-    }
-    /*public User verifyUser(String email, String password) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-
-        }
-
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            //return myUserDetailsService.loadUserByUsername(user.getEmail());
-            return user;
-        } else {
-            throw new RuntimeException("Invalid password");
-        }
-    }*/
-    public String verifyUser(User user) {
+        public String verifyUser(User user) {
         // Check if the user exists
         User foundUser = userRepository.findByEmail(user.getEmail());
         if (foundUser == null) {
@@ -90,6 +63,14 @@ public class AuthService  {
 
             if(authentication.isAuthenticated()) {
                 System.out.println("User authenticated successfully: " + user.getEmail());
+                //fetch room decorations from db, fetch user rooms from db
+                System.out.println("USER ID: "+user.toString());
+                List<Room> foundRooms = roomRepository.findByFku(user.getId());
+                for (Room room : foundRooms) {
+                    List<Decoration> decorations = decorationRepository.findByFkr(room.getRoom_id());
+                    room.setDecorations(decorations);
+                }
+                user.setRooms(foundRooms);
                 return jwtService.generateToken(user.getEmail());
             } else {
                 System.out.println("Authentication failed for user: " + user.getEmail());

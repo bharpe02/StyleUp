@@ -12,8 +12,9 @@ import java.util.List;
 public class User {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long UserId;
+    private Long user_id;
 
     @Column(nullable = false)
     private String fname;
@@ -27,10 +28,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)//declares that one room can have many decorations, updates everything when one is saved
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)
+    //declares that one room can have many decorations, updates everything when one is saved
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
-    @JoinColumn (name = "fk_user_id", referencedColumnName = "UserId")
+    @JoinColumn (name = "fku", referencedColumnName = "user_id")
     private List<Room> rooms;
 
 
@@ -48,11 +50,11 @@ public class User {
 
     // Getters and setters
     public Long getId() {
-        return UserId;
+        return user_id;
     }
 
     public void setId(Long id) {
-        this.UserId = id;
+        this.user_id = id;
     }
 
     public String getFname() {return fname;}
@@ -91,6 +93,18 @@ public class User {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + user_id +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", rooms=" + rooms +
+                '}';
     }
 
     @PrePersist

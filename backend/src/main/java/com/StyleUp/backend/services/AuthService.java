@@ -1,5 +1,9 @@
 package com.StyleUp.backend.services;
 
+import com.StyleUp.backend.models.Decoration;
+import com.StyleUp.backend.models.Room;
+import com.StyleUp.backend.repositories.DecorationRepository;
+import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +16,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.StyleUp.backend.models.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthService  {
     
     private final UserRepository userRepository;
+    private final RoomRepository roomRepository;
+    private final DecorationRepository decorationRepository;;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
@@ -26,8 +34,10 @@ public class AuthService  {
     @Autowired
     AuthenticationManager authManager;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, RoomRepository roomRepository, DecorationRepository decorationRepository) {
         this.userRepository = userRepository;
+        this.roomRepository = roomRepository;
+        this.decorationRepository = decorationRepository;
     }
 
     // Register a new user
@@ -36,11 +46,23 @@ public class AuthService  {
         if (userRepository.findByEmail(email) != null) {
             throw new RuntimeException("User already exists with this email");
         }
-        User user = new User(fname, lname, email, password);
+        List<Room> rooms= new ArrayList<Room>();
+        User user = new User(fname, lname, email, password, rooms);
         return userRepository.save(user);
     }
 
     // Authenticate user
+    public Optional<User> loginUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        //this might be scuffed and need work later
+        List<Room> rooms = roomRepository.findByFkUserId(user.getId());
+        for (Room room : rooms) {
+            List<Decoration> decorations = decorationRepository.findByFkRoomId(room.getRm_id());
+            room.setDecorations(decorations);
+        }
+        user.setRooms(rooms);
+    }
     /*public User verifyUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user == null) {

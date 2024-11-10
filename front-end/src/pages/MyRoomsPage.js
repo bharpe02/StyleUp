@@ -11,13 +11,15 @@ import { useNavigate } from 'react-router-dom';
 function MyRoomsPage() {
   const [hasRooms, setHasRooms] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, rooms } = useContext(AuthContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/Login"); // Redirect to Login if not logged in
+    } else {
+      setHasRooms(rooms && rooms.length > 0); // Set hasRooms based on whether rooms exist
     }
-  }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
+  }, [isLoggedIn, rooms, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
   return (
     <div>
@@ -34,9 +36,16 @@ function MyRoomsPage() {
         </div>  
         {hasRooms? (
           // If the user has rooms
-          <> 
-          {/* Display Saved Rooms of account */}
-          </>
+          // If the user has rooms
+          <div className="rooms-list">
+            {rooms.map((room) => (
+              <div key={room.room_id} className="room-item">
+                <h1>Room ID: {room.room_id}</h1>
+                <h2>Room Name: {room.roomName}</h2>
+                {/* Display additional room details as needed */}
+              </div>
+            ))}
+          </div>
         ):(
           // If the user has no rooms
           <>
@@ -48,7 +57,7 @@ function MyRoomsPage() {
           </div>
           </>
         )
-      }
+        }
 
       </div>
       ):(

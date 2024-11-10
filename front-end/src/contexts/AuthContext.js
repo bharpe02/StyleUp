@@ -29,8 +29,9 @@ export const AuthProvider = ({ children }) => {
         axios.get("http://localhost:8080/api/user/email", { headers }),
         axios.get("http://localhost:8080/api/user/rooms", { headers })
       ]);
+      
+      console.log("Rooms data:", roomsResponse.data); // Check rooms 
 
-      console.log("Rooms data:", roomsResponse.data); // Check rooms data structure
       setName(nameResponse.data)
       setEmail(emailResponse.data)
       setRooms(roomsResponse.data)
@@ -56,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Memoize the value to prevent unnecessary re-renders
-  const value = useMemo(() => ({ isLoggedIn, name, email, rooms, login, logout }), [isLoggedIn, name, email, rooms]);
+  const value = useMemo(() => ({ isLoggedIn, name, email, rooms, token, login, logout }), [isLoggedIn, name, email, rooms, token]);
 
   return (
     <AuthContext.Provider value={value}>

@@ -39,7 +39,7 @@ public class RoomService {
         }
 
         List<Decoration> decorations = new ArrayList<>();
-        Room room = new Room(URLDecoder.decode(roomName, StandardCharsets.UTF_8), userId, decorations);
+        Room room = new Room(roomName, userId, decorations);
         System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }

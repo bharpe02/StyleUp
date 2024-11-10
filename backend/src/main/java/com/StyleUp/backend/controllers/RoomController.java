@@ -1,5 +1,6 @@
 package com.StyleUp.backend.controllers;
 
+import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.User;
 import com.StyleUp.backend.services.RoomService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,8 @@ public class RoomController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createRoom(@RequestBody String roomName) {
+    public ResponseEntity<String> createRoom(@RequestBody Room room) {
+        String roomName = room.getRoomName();
         System.out.println("RECEIVED CREATE REQUEST FOR ROOM: "+roomName);
         try {
             roomService.addRoom(roomName);

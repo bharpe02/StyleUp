@@ -19,8 +19,8 @@ function AddRoomPage() {
   }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
   const handleSubmit = (event) => {
-    //event.preventDefault();
-    //createRoom();
+    event.preventDefault();
+    createRoom();
 };
 
   const createRoom = async () => {

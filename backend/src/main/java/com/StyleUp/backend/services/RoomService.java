@@ -20,7 +20,7 @@ public class RoomService {
     }
 
     public Room addRoom(String roomName){
-
+        System.out.println("In addRoom!!");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long userId;
         if (authentication != null && authentication.getPrincipal() instanceof UserPrincipal) {
@@ -49,7 +49,7 @@ public class RoomService {
             throw new RuntimeException("Room not found with id: " + roomId);
         }
     }
-    
+
     //implement share method: need shared room and invitation classes too
 
     //implement remove collaborator method?

@@ -34,6 +34,7 @@ public class UserController {
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
             }
+            System.out.println("USER ID: "+user.toString());
             return ResponseEntity.ok(user.getUsername());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");

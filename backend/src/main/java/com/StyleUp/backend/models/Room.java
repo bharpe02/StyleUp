@@ -23,7 +23,7 @@ public class Room {
     /*The @JoinColumn annotation combined with a @OneToOne mapping indicates that a given column in the owner entity
     refers to a primary key in the reference entity*/
     @JoinColumn (name = "fkr", referencedColumnName = "room_id")
-    private List<Decoration> decorations;
+    private List<Decoration> decorations=new ArrayList<>();
 
     public Room() {}
 
@@ -57,6 +57,13 @@ public class Room {
         this.decorations = decorations;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Room{" +
+                "room_id=" + room_id +
+                ", roomName='" + roomName + '\'' +
+                ", fku=" + fku +
+                ", decorations=" + decorations.toString() +
+                '}';
+    }
 }

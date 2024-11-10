@@ -63,14 +63,6 @@ public class AuthService  {
 
             if(authentication.isAuthenticated()) {
                 System.out.println("User authenticated successfully: " + user.getEmail());
-                //fetch room decorations from db, fetch user rooms from db
-
-                List<Room> foundRooms = roomRepository.findByFku(user.getId());
-                for (Room room : foundRooms) {
-                    List<Decoration> decorations = decorationRepository.findByFkr(room.getRoom_id());
-                    room.setDecorations(decorations);
-                }
-                user.setRooms(foundRooms);
                 return jwtService.generateToken(user.getEmail());
             } else {
                 System.out.println("Authentication failed for user: " + user.getEmail());

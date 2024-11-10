@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.*;
 
 public interface DecorationRepository extends JpaRepository<Decoration, Long> {
-    List<Decoration> findByFkRoomId(Long fkUserId);
+    List<Decoration> findByFkr(Long fkUserId);
 }

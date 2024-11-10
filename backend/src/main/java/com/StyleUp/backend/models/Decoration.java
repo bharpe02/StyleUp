@@ -6,11 +6,12 @@ import jakarta.persistence.*;
 @Table (name = "decorations")
 public class Decoration {
     @Id
+    @Column(name="decoration_id")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long DecorationId;
+    private Long decoration_id;
 
     @Column
-    private Long fkRoomId;
+    private Long fkr;
 
     @Column
     private String searchLink;
@@ -23,15 +24,15 @@ public class Decoration {
 
     public Decoration(String searchLink, Long fkRoomId) {
         this.searchLink = searchLink;
-        this.fkRoomId = fkRoomId;
+        this.fkr = fkRoomId;
     }
 
     public Long getDec_id() {
-        return DecorationId;
+        return decoration_id;
     }
 
     public void setDec_id(Long dec_id) {
-        this.DecorationId = dec_id;
+        this.decoration_id = dec_id;
     }
 
     public String getSearchLink() {
@@ -40,5 +41,14 @@ public class Decoration {
 
     public void setSearchLink(String searchLink) {
         this.searchLink = searchLink;
+    }
+
+    @Override
+    public String toString() {
+        return "Decoration{" +
+                "DecorationId=" + decoration_id +
+                ", fkr=" + fkr +
+                ", searchLink='" + searchLink + '\'' +
+                '}';
     }
 }

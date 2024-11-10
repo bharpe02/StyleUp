@@ -19,6 +19,11 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .color-option:focus, .color-option.active {
+    outline: 2px solid black;
+    outline-offset: 2px; /* Adds a slight gap between the button and the outline */
+  }
   
   .navigation-buttons {
     display: flex;
@@ -33,3 +38,7 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  
+
+  

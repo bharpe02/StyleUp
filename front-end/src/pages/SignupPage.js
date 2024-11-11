@@ -37,7 +37,7 @@ function SignupPage() {
             if (response.status === 200) {
                 console.log('User registered successfully:', response.data);
                 loginUser(email, password, login, navigate, setErrorMessage)
-                navigate("/HomePage"); // Redirect to home page
+                navigate("/MyRooms"); // Redirect to rooms page
             }
         } catch (error) {
             if (error.response) {

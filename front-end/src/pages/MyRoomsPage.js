@@ -7,59 +7,90 @@ import myRoomsImage from "../assets/images/My Rooms.png"
 import arrowcurve from "../assets/images/ArrowCurve.png"
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function MyRoomsPage() {
-  const [hasRooms, setHasRooms] = useState(false);
   const navigate = useNavigate();
-  const { isLoggedIn, rooms } = useContext(AuthContext);
+  const [rooms, setRooms] = useState([])
+  const [loading, setLoading] = useState(true); // Loading state to manage async data fetching
+  const { isLoggedIn, token } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/Login"); // Redirect to Login if not logged in
     } else {
-      setHasRooms(rooms && rooms.length > 0); // Set hasRooms based on whether rooms exist
+      getRooms()
     }
-  }, [isLoggedIn, rooms, navigate]); // Depend on isLoggedIn to trigger re-navigation
+  }, [isLoggedIn, token, navigate]); // Depend on isLoggedIn to trigger re-navigation
+
+  const getRooms = async () => {
+    try {
+      setLoading(true); // Start loading
+
+      const headers = {
+        Authorization: `Bearer ${token}`,  
+      };
+
+      const roomsResponse = await axios.get("http://localhost:8080/api/user/rooms", {headers})
+
+      console.log("Rooms data:", roomsResponse.data); // Check rooms 
+      setRooms(roomsResponse.data)
+
+    } catch (error) {
+      console.error("Failed to fetch user details:", error);
+      setErrorMessage(error);
+    } finally {
+      setLoading(false); // Stop loading after fetch is done
+    }
+    
+  }
+
+  const renderContent = () => {
+    if (loading) {
+      return <p style={{ textAlign: 'center' }}>Loading rooms...</p>;
+    }
+
+    if (rooms.length > 0) {
+      return (
+        <div className="rooms-list">
+          {rooms.map((room) => (
+            <div key={room.room_id} className="room-item">
+              <h1>Room ID: {room.room_id}</h1>
+              <h2>Room Name: {room.roomName}</h2>
+            </div>
+          ))}
+          {errorMessage && <p style={{ textAlign: "center", color: 'red' }}>{errorMessage}</p>}
+        </div>
+      );
+    } 
+
+    return (
+      <>
+        <div className="arrow-container">
+          <img src={arrowcurve} alt="arrow" height='500px' width='800px' />
+        </div>
+        <div className="no-room-message">
+          <p>You don't have any rooms yet...</p>
+        </div>
+      </>
+    );
+  };
 
   return (
     <div>
       <BannerMenu/>
       <Sidebar/>
       {isLoggedIn ? (
-      <div className='main-content'>
-        {/* <h1 style={{ textAlign: 'center' }}>My Rooms</h1> */}
-        <div className='page-title'>
-          <div className='image-style'>
-            <img src={myRoomsImage} alt="My Rooms"/>
-          </div>
-          <h1>My Rooms</h1>
-        </div>  
-        {hasRooms? (
-          // If the user has rooms
-          // If the user has rooms
-          <div className="rooms-list">
-            {rooms.map((room) => (
-              <div key={room.room_id} className="room-item">
-                <h1>Room ID: {room.room_id}</h1>
-                <h2>Room Name: {room.roomName}</h2>
-                {/* Display additional room details as needed */}
-              </div>
-            ))}
-          </div>
-        ):(
-          // If the user has no rooms
-          <>
-          <div className = "arrow-container">
-            <img src={arrowcurve} alt="arrow" height = '500px' width = '800px'></img>
-          </div>
-          <div className="no-room-message">
-            <p1>You don't have any rooms yet...</p1>
-          </div>
-          </>
-        )
-        }
-
-      </div>
+        <div className='main-content'>
+          <div className='page-title'>
+            <div className='image-style'>
+              <img src={myRoomsImage} alt="My Rooms"/>
+            </div>
+            <h1>My Rooms</h1>
+          </div>  
+          {renderContent()}
+        </div>
       ):(
         <p style={{ textAlign: 'center' }}>Redirecting to login...</p>
       )}

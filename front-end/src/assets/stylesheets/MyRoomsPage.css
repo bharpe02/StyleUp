@@ -19,8 +19,7 @@
 
 .main-content {
     flex-direction:column;
-    height: 100vh;
-    overflow:hidden;
+    overflow-y:auto;
     align-items: center;
     justify-content: start;
 

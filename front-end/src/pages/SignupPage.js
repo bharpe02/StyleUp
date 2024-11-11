@@ -11,8 +11,8 @@ function SignupPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [fname, setFName] = useState("");
-    const [lname, setLName] = useState("");
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
     const { login } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -64,40 +64,44 @@ function SignupPage() {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <h1>Create an Account:</h1>
-                            <label>First Name: </label>
+                            <label>First Name: 
                             <input 
                                 type="text"
                                 value={fname}
-                                onChange={(e) => setFName(e.target.value)}
+                                onChange={(e) => setFname(e.target.value)}
                                 required
                             />
+                            </label>
                         </div>
                         <div>
-                            <label>Last Name: </label>
+                            <label>Last Name: 
                             <input 
                                 type="text"
                                 value={lname}
-                                onChange={(e) => setLName(e.target.value)}
+                                onChange={(e) => setLname(e.target.value)}
                                 required
                             />
+                            </label>
                         </div>
                         <div>
-                            <label>Email: </label>
+                            <label>Email: 
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
+                            </label>
                         </div>
                         <div>
-                            <label>Password: </label>
+                            <label>Password: 
                             <input 
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+                            </label>
                         </div>
                         <button className="main-login-button" type="submit">Sign Up</button>
                         <h2>Already have an account?</h2>

@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         Authorization: `Bearer ${authToken || token}`,  
       };
 
-      const [nameResponse, emailResponse, roomsResponse] = await Promise.all([
+      const [nameResponse, emailResponse] = await Promise.all([
         axios.get("http://localhost:8080/api/user/name", { headers }),
         axios.get("http://localhost:8080/api/user/email", { headers }),
         //axios.get("http://localhost:8080/api/user/rooms", { headers })

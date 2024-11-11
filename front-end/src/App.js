@@ -21,9 +21,9 @@ function App() {
           <Route path="MyRooms" element={<MyRoomsPage />} />
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
-          <Route path="Survey" element={<SurveyPage />} />
           <Route path="MyAccount" element={<MyAccountPage/>} />
         </Route>
+        <Route path="Survey" element={<SurveyPage />} />
         <Route path="Login" element={<LoginPage/>} />
         <Route path="Signup" element={<SignupPage/>} />
       </Routes>

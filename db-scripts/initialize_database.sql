@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create rooms table
 CREATE TABLE IF NOT EXISTS rooms (
     room_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    roomName VARCHAR(255) NOT NULL,
+    room_name VARCHAR(255) NOT NULL,
     fku BIGINT,
     FOREIGN KEY(fku) references users(user_id)
 );

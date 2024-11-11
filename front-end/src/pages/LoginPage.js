@@ -24,7 +24,7 @@ export const loginUser = async (email, password, login, navigate, setErrorMessag
 
             login(token);
 
-            navigate("/HomePage"); // Redirect to home page
+            navigate("/MyRooms"); // Redirect to rooms page
         }
     } catch (error) {
         if (error.response) {

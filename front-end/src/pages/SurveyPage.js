@@ -4,6 +4,7 @@ import Question1 from '../components/Question1';
 import Question2 from '../components/Question2';
 import LogoButton from '../components/LogoButton.js';
 import '../assets/stylesheets/Question1.css';
+import SurveySidebar from '../components/SurveySidebar.js';
 
 function SurveyPage() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -32,6 +33,7 @@ function SurveyPage() {
   return (
     <div className="survey-page">
       <LogoButton />
+      <SurveySidebar currentQuestion={currentQuestion}/>
       <div className="main-content">
         {currentQuestion === 1 && <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)}/>}
         {currentQuestion === 2 && <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)}/>}

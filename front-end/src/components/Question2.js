@@ -1,5 +1,6 @@
 import React from 'react';
 import '../assets/stylesheets/Question2.css';
+import PropTypes from 'prop-types';
 
 function Question2({ onAnswer }) {
   const handleSelectColor = (color) => {
@@ -25,5 +26,10 @@ function Question2({ onAnswer }) {
     </div>
   );
 }
+
+// Add prop types validation
+Question2.propTypes = {
+  onAnswer: PropTypes.func.isRequired,
+};
 
 export default Question2;

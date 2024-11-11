@@ -66,24 +66,22 @@ function LoginPage() {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <h1>Log In:</h1>
-                            <label>Email: 
+                            <label htmlFor="email">Email: </label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <div>
-                            <label>Password: 
+                            <label htmlFor="password">Password: </label>
                             <input 
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <button className="main-login-button" type="submit">Log In</button>
                     

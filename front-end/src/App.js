@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import OpeningPage from "./pages/OpeningPage";
 import MyRoomsPage from "./pages/MyRoomsPage"
 import AddRoomPage from "./pages/AddRoomPage"
@@ -17,7 +16,6 @@ function App() {
       <Routes>
       <Route index element={<OpeningPage />} />
         <Route path="/" element={<Layout />}>
-          <Route path="HomePage" element={<HomePage />} />
           <Route path="MyRooms" element={<MyRoomsPage />} />
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />

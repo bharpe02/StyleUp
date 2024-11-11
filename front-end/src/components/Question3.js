@@ -86,6 +86,7 @@ function Question3({ onAnswer }) {
                 <label>
                     <input
                     type="checkbox"
+                    className='checkbox-large'
                     value={aesthetic}
                     checked={selectedAesthetics.includes(aesthetic)}
                     onChange={() => handleSelectAesthetic(aesthetic)}

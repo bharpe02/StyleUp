@@ -97,10 +97,12 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-.color-option:focus, .color-option.active {
-  outline: 2px solid black;
-  outline-offset: 2px; /* Adds a slight gap between the button and the outline */
+.color-option.selected {
+  border: 3px solid #55dc75; /* Gold border for selected state */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
+
+
 
 /*Question 3*/
 .aesthetic-options {
@@ -110,7 +112,7 @@ input[type="radio"] {
 
 .aesthetic-option {
   margin-right: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
 }
 
 .aesthetic-option img {
@@ -119,3 +121,9 @@ input[type="radio"] {
   margin-bottom: 10px;     /* Space between image and text */
   border-radius: 8px;      /* Optional: rounded corners for the image */
 }
+
+.checkbox-large {
+  transform: scale(2); /* Adjust scale as needed */
+  margin-bottom: 10px;
+}
+

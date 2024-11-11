@@ -1,3 +1,5 @@
+/*Survey Page*/
+
 .survey-page {
   display: flex;
   flex-direction: row; /* Align sidebar and content horizontally */
@@ -29,4 +31,91 @@
   height: 20px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.nav-button {
+  background: #b35d5d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*General*/
+
+.question-container {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/*Question 1*/
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+.next-button {
+  background: #b35d5d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/*Question 2*/
+.color-options {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.color-option:focus, .color-option.active {
+  outline: 2px solid black;
+  outline-offset: 2px; /* Adds a slight gap between the button and the outline */
+}
+
+/*Question 3*/
+.aesthetic-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.aesthetic-option {
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.aesthetic-option img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;     /* Space between image and text */
+  border-radius: 8px;      /* Optional: rounded corners for the image */
 }

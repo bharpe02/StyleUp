@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/stylesheets/Question2.css';
+import '../assets/stylesheets/SurveyPage.css';
 import PropTypes from 'prop-types';
 
 function Question2({ onAnswer }) {
@@ -9,8 +9,8 @@ function Question2({ onAnswer }) {
 
   return (
     <div className="question-container">
-      <h2>Question 2</h2>
-      <p>What is your color preference?</p>
+      <h1>Question 2</h1>
+      <h2>What is your color preference?</h2>
       <div className="color-options">
         {['#000000', '#4d0000', '#e27602', '#FCCF55', '#315e26', '#023E8A', '#FFFFFF'].map((color) => (
           <button 

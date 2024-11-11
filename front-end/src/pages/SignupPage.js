@@ -64,44 +64,40 @@ function SignupPage() {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <h1>Create an Account:</h1>
-                            <label>First Name: 
+                            <label htmlFor="fname">First Name: </label>
                             <input 
                                 type="text"
                                 value={fname}
                                 onChange={(e) => setFname(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <div>
-                            <label>Last Name: 
+                            <label htmlFor="lname">Last Name: </label>
                             <input 
                                 type="text"
                                 value={lname}
                                 onChange={(e) => setLname(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <div>
-                            <label>Email: 
+                            <label htmlFor="email">Email: </label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <div>
-                            <label>Password: 
+                            <label htmlFor="password">Password: </label>
                             <input 
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
-                            </label>
                         </div>
                         <button className="main-login-button" type="submit">Sign Up</button>
                         <h2>Already have an account?</h2>

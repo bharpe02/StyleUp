@@ -68,14 +68,13 @@ function AddRoomPage() {
               <form onSubmit={handleSubmit}>
                   <div>
                       <h1>Create a Room:</h1>
-                      <label>Room Name: 
+                      <label htmlFor='roomName'>Room Name: </label>
                       <input 
                           type="text"
                           value={roomName}
                           onChange={(e) => setRoomName(e.target.value)}
                           required
                       />
-                      </label>
                   </div>
                   <button className="main-login-button" type="submit">Create Room</button>
               </form>

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../assets/stylesheets/Question1.css';
+import PropTypes from 'prop-types';
 
 function Question1({ onAnswer }) {
   const handleChange = (event) => {
@@ -26,5 +27,10 @@ function Question1({ onAnswer }) {
     </div>
   );
 }
+
+// Add prop types validation
+Question1.propTypes = {
+  onAnswer: PropTypes.func.isRequired,
+};
 
 export default Question1;

@@ -1,7 +1,6 @@
-import React from 'react';
+import { React, useMemo } from 'react';
 import '../assets/stylesheets/SurveyPage.css';
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
 
 function SurveySidebar({ currentQuestion }) {
   const totalQuestions = 5;

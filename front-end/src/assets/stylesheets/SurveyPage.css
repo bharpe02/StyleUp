@@ -57,20 +57,28 @@ h2 {
 .options {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .option {
   display: flex;
   align-items: center;
   background: #f5f5f5;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  font-size: 16px;
 }
 
-input[type="radio"] {
+.option input[type="radio"] {
   margin-right: 10px;
+  margin-left: 0;
+}
+
+.option:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
 }
 
 .next-button {
@@ -81,6 +89,10 @@ input[type="radio"] {
   border-radius: 5px;
   margin-top: 20px;
   cursor: pointer;
+}
+
+.next-button:hover {
+  background: #9c4d4d;
 }
 
 /*Question 2*/

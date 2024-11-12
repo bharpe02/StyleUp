@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 function SurveySidebar({ currentQuestion }) {
   const totalQuestions = 5;
-  const darkColor = '#660C0C'; // Dark brown color
-  const lightColor = '#d3b4b4'; // Light brown color
+  const darkColor = '#633B48'; // Dark brown color
+  const lightColor = '#F1E8E8'; // Light brown color
 
   const sidebarItems = useMemo(() =>
     Array.from({ length: totalQuestions }, (_, index) => ({

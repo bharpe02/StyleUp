@@ -1,23 +1,48 @@
-import React from 'react';
-import '../assets/stylesheets/Question2.css';
+import { React, useState } from 'react';
+import '../assets/stylesheets/SurveyPage.css';
 import PropTypes from 'prop-types';
 
 function Question2({ onAnswer }) {
-  const handleSelectColor = (color) => {
-    onAnswer(color);
+
+  const [selectedColors, setSelectedColors] = useState([]);
+
+  const handleSelectColor = (colorName) => {
+    setSelectedColors((prevSelected) => {
+      const updatedSelection = prevSelected.includes(colorName)
+        ? prevSelected.filter((item) => item !== colorName)
+        : [...prevSelected, colorName];
+        
+      onAnswer(updatedSelection); // Pass the updated array to SurveyPage
+      return updatedSelection;
+    });
+  };
+
+  // List of aesthetics for the user to choose from
+  const colorHexMap = {
+    Red: '#8F1600',
+    Orange: '#e27602',
+    Yellow: '#FCCF55',
+    Green: '#315e26',
+    Blue: '#023E8A',
+    Purple: '#6A0DAD',
+    Black: '#000000',
+    White: '#FFFFFF',
+    Tan: '#D2B48C',
+    Brown: '#8B4513',
+    Gray: '#808080'
   };
 
   return (
     <div className="question-container">
-      <h2>Question 2</h2>
-      <p>What is your color preference?</p>
+      <h1>Question 2</h1>
+      <h2>What is your color preference?</h2>
       <div className="color-options">
-        {['#000000', '#4d0000', '#e27602', '#FCCF55', '#315e26', '#023E8A', '#FFFFFF'].map((color) => (
+        {Object.keys(colorHexMap).map((colorName) => (
           <button 
-          key={color} 
-          className="color-option" 
-          style={{ backgroundColor: color }}
-          onClick={() => handleSelectColor(color)}
+          key={colorName} 
+          className={`color-option ${selectedColors.includes(colorName) ? 'selected' : ''}`}
+          style={{ backgroundColor: colorHexMap[colorName] }}
+          onClick={() => handleSelectColor(colorName)}
           > 
           </button>
         ))}

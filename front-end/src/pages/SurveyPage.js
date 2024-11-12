@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Question1 from '../components/Question1';
 import Question2 from '../components/Question2';
+import Question3 from '../components/Question3.js';
 import LogoButton from '../components/LogoButton.js';
-import '../assets/stylesheets/Question1.css';
 import SurveySidebar from '../components/SurveySidebar.js';
 
 function SurveyPage() {
@@ -37,6 +37,7 @@ function SurveyPage() {
       <div className="main-content">
         {currentQuestion === 1 && <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)}/>}
         {currentQuestion === 2 && <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)}/>}
+        {currentQuestion === 3 && <Question3 onAnswer={(answer) => handleAnswer('Question 3', answer)}/>}
         {/* Add more questions similarly */}
         <div className="nav-buttons">
           <button className="back-button" onClick={handlePrevious}>←</button>
@@ -47,7 +48,7 @@ function SurveyPage() {
           <ul>
             {Object.entries(responses).map(([question, answer]) => (
               <li key={question}>
-                <strong>{question}:</strong> {answer}
+                <strong>{question}:</strong> {Array.isArray(answer) ? answer.join(', ') : answer}
               </li>
             ))}
           </ul>

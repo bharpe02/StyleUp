@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
       const [nameResponse, emailResponse] = await Promise.all([
         axios.get("http://localhost:8080/api/user/name", { headers }),
         axios.get("http://localhost:8080/api/user/email", { headers }),
-        //axios.get("http://localhost:8080/api/user/rooms", { headers })
       ]);
 
       setName(nameResponse.data)

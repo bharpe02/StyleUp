@@ -6,7 +6,6 @@ function Layout() {
   
     return (
       <div style={{ display: 'flex' }}>
-        {/* Conditionally render the sidebar */}
         <Sidebar/>
   
         {/* Main content */}

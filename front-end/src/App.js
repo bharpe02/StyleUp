@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
+import RoomPage from "./pages/RoomPage";
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="MyAccount" element={<MyAccountPage/>} />
+          <Route path="Room" element={<RoomPage/>} />
         </Route>
         <Route path="Survey" element={<SurveyPage />} />
         <Route path="Login" element={<LoginPage/>} />

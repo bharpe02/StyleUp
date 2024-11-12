@@ -21,7 +21,7 @@ function AddRoomPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     createRoom();
-};
+  };
 //blah
   const createRoom = async () => {
     try {
@@ -32,7 +32,7 @@ function AddRoomPage() {
         console.log("Room name:", roomName);
 
         // Send POST request to backend
-        const response = await axios.post('http://localhost:8080/api/room/create', {roomName} , {headers});
+        const response = await axios.post('http://localhost:8080/api/room/create', {roomName}, {headers});
         
         if (response.status === 200) {
             console.log('Room created successfully:', response.data);
@@ -68,7 +68,7 @@ function AddRoomPage() {
               <form onSubmit={handleSubmit}>
                   <div>
                       <h1>Create a Room:</h1>
-                      <label htmlFor='roomName'>Room Name: </label>
+                      <label>Room Name: </label>
                       <input 
                           type="text"
                           value={roomName}

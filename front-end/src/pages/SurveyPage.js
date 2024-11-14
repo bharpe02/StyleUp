@@ -18,7 +18,7 @@ function SurveyPage() {
                  
   const handlePrevious = () => {
     if (currentQuestion === 1) {
-      navigate('/HomePage'); // Navigate back to the home page if on the first question
+      navigate('/'); // Navigate back to the home page if on the first question
     } else {
       setCurrentQuestion((prev) => prev - 1); // Otherwise, go to the previous question
     }

@@ -20,19 +20,21 @@ const BannerMenu = () => {
           {isLoggedIn ? (
             <>
               {/* PFP component PLACEHOLDER*/}
-              <p>{name}</p>
+              <div className='user-info'>
+                <p>{name}</p>
+              </div>
               <Link to="/MyAccount">
-                <button className='logout-button'>My Account</button>
+                <button className='button-style'>My Account</button>
               </Link> 
             </>
           ):(
             <>
               {/* When User is not Logged in */}
               <Link to="/Login">
-                <button className='login-button'>Log In</button>
+                <button className='button-style'>Log In</button>
               </Link>
               <Link to="/Signup">
-                <button className="signup-button">Sign Up!</button>
+                <button className="button-style">Sign Up!</button>
               </Link>
             </>
           )}

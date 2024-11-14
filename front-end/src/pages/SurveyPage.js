@@ -18,7 +18,7 @@ function SurveyPage() {
                  
   const handlePrevious = () => {
     if (currentQuestion === 1) {
-      navigate('/HomePage'); // Navigate back to the home page if on the first question
+      navigate('/MyRooms'); // Navigate back to the home page if on the first question
     } else {
       setCurrentQuestion((prev) => prev - 1); // Otherwise, go to the previous question
     }
@@ -35,7 +35,7 @@ function SurveyPage() {
     <div className="survey-page">
       <LogoButton />
       <SurveySidebar currentQuestion={currentQuestion}/>
-      <div className="main-content">
+      <div className="survey-main-content">
         {currentQuestion === 1 && <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)}/>}
         {currentQuestion === 2 && <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)}/>}
         {currentQuestion === 3 && <Question3 onAnswer={(answer) => handleAnswer('Question 3', answer)}/>}

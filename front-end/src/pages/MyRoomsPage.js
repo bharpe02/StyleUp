@@ -6,7 +6,7 @@ import "../assets/stylesheets/MyRoomsPage.css"
 import myRoomsImage from "../assets/images/My Rooms.png"
 import arrowcurve from "../assets/images/ArrowCurve.png"
 import { AuthContext } from '../contexts/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function MyRoomsPage() {
@@ -46,23 +46,16 @@ function MyRoomsPage() {
     
   }
 
-  //navigate to room page and send selected room id and name in params
-  const handleRoomClick = (roomId, roomName) => {
-    navigate(`/Room?id=${roomId}&name=${encodeURIComponent(roomName)}`);
-  };
-
   const renderContent = () => {
     if (loading) {
       return <p style={{ textAlign: 'center' }}>Loading rooms...</p>;
     }
+
     if (rooms.length > 0) {
       return (
         <div className="rooms-list">
           {rooms.map((room) => (
-            <div key={room.room_id} className="room-item" 
-              onClick={() => handleRoomClick(room.room_id, room.roomName)}  
-              style={{ cursor: 'pointer' }}
-              >
+            <div key={room.room_id} className="room-item">
               <h1>Room ID: {room.room_id}</h1>
               <h2>Room Name: {room.roomName}</h2>
             </div>
@@ -71,7 +64,7 @@ function MyRoomsPage() {
         </div>
       );
     } 
-    
+
     return (
       <>
         <div className="arrow-container">
@@ -89,7 +82,7 @@ function MyRoomsPage() {
       <BannerMenu/>
       <Sidebar/>
       {isLoggedIn ? (
-        <div className='main-content'>
+        <div className='main-content'>  {/**breaks background for some reason */}
           <div className='page-title'>
             <div className='image-style'>
               <img src={myRoomsImage} alt="My Rooms"/>

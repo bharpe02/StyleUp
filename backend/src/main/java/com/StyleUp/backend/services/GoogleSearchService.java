@@ -10,11 +10,11 @@ import java.util.Map;
 @Service
 public class GoogleSearchService {
 
-    //  GOOGLE_API_KEY AIzaSyCAbvc5y-W2qc8Aa6x0Y6_uke4FqN-kZx8
+
     @Value("${google.api.key}")
     private String apiKey;
 
-    // GOOGLE_CSE_ID c52d0d0e5d68b4176
+
     @Value("${google.cse.id}")
     private String cseId;
 

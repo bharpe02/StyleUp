@@ -24,7 +24,6 @@ function App() {
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="Survey" element={<SurveyPage />} />
           <Route path="MyAccount" element={<MyAccountPage/>} />
-          <Route path="SurveyResults" element={<SurveyResultsPage/>} />
         </Route>
         <Route path="Login" element={<LoginPage/>} />
         <Route path="Signup" element={<SignupPage/>} />

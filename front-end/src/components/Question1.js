@@ -1,5 +1,6 @@
 import React from 'react';
-import '../assets/stylesheets/Question1.css';
+import '../assets/stylesheets/SurveyPage.css';
+import PropTypes from 'prop-types';
 
 function Question1({ onAnswer }) {
   const handleChange = (event) => {
@@ -8,8 +9,8 @@ function Question1({ onAnswer }) {
   
   return (
     <div className="question-container">
-      <h2>Question 1</h2>
-      <p>What type of place are you looking to design?</p>
+      <h1>Question 1</h1>
+      <h2>What type of place are you looking to design?</h2>
       <div className="options">
         {['Bathroom', 'Kitchen', 'Living Room', 'College Dorm', 'Bedroom', 'Other: Specify'].map((item) => (
           <label key={item} className="option">
@@ -26,5 +27,10 @@ function Question1({ onAnswer }) {
     </div>
   );
 }
+
+// Add prop types validation
+Question1.propTypes = {
+  onAnswer: PropTypes.func.isRequired,
+};
 
 export default Question1;

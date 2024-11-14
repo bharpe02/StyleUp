@@ -11,8 +11,8 @@ function SignupPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [fname, setFName] = useState("");
-    const [lname, setLName] = useState("");
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
     const { login } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,7 +37,7 @@ function SignupPage() {
             if (response.status === 200) {
                 console.log('User registered successfully:', response.data);
                 loginUser(email, password, login, navigate, setErrorMessage)
-                navigate("/HomePage"); // Redirect to home page
+                navigate("/MyRooms"); // Redirect to rooms page
             }
         } catch (error) {
             if (error.response) {
@@ -64,25 +64,25 @@ function SignupPage() {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <h1>Create an Account:</h1>
-                            <label>First Name: </label>
+                            <label htmlFor="fname">First Name: </label>
                             <input 
                                 type="text"
                                 value={fname}
-                                onChange={(e) => setFName(e.target.value)}
+                                onChange={(e) => setFname(e.target.value)}
                                 required
                             />
                         </div>
                         <div>
-                            <label>Last Name: </label>
+                            <label htmlFor="lname">Last Name: </label>
                             <input 
                                 type="text"
                                 value={lname}
-                                onChange={(e) => setLName(e.target.value)}
+                                onChange={(e) => setLname(e.target.value)}
                                 required
                             />
                         </div>
                         <div>
-                            <label>Email: </label>
+                            <label htmlFor="email">Email: </label>
                             <input
                                 type="email"
                                 value={email}
@@ -91,7 +91,7 @@ function SignupPage() {
                             />
                         </div>
                         <div>
-                            <label>Password: </label>
+                            <label htmlFor="password">Password: </label>
                             <input 
                                 type="password"
                                 value={password}

@@ -1,24 +1,37 @@
-import React from 'react';
-import '../assets/stylesheets/SurveySidebar.css';
+import { React, useMemo } from 'react';
+import '../assets/stylesheets/SurveyPage.css';
+import PropTypes from 'prop-types';
 
 function SurveySidebar({ currentQuestion }) {
   const totalQuestions = 5;
-  const darkColor = '#660C0C'; // Dark brown color
-  const lightColor = '#d3b4b4'; // Light brown color
+  const darkColor = '#633B48'; // Dark brown color
+  const lightColor = '#F1E8E8'; // Light brown color
+
+  const sidebarItems = useMemo(() =>
+    Array.from({ length: totalQuestions }, (_, index) => ({
+      key: `question-${index}`,
+      color: index < currentQuestion ? darkColor : lightColor,
+    }))
+  , [currentQuestion, totalQuestions]);
 
   return (
     <div className="survey-sidebar">
-      {[...Array(totalQuestions)].map((_, index) => (
+      {sidebarItems.map(({ key, color }) => (
         <div
-          key={index}
+          key={key}
           className="sidebar-item"
           style={{
-            backgroundColor: index < currentQuestion ? darkColor : lightColor,
+            backgroundColor: color,
           }}
         ></div>
       ))}
     </div>
   );
 }
+
+// Add PropTypes validation
+SurveySidebar.propTypes = {
+  currentQuestion: PropTypes.number.isRequired,
+};
 
 export default SurveySidebar;

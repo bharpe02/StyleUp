@@ -1,9 +1,7 @@
 package com.StyleUp.backend.controllers;
 
-import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

@@ -24,7 +24,7 @@ export const loginUser = async (email, password, login, navigate, setErrorMessag
 
             login(token);
 
-            navigate("/HomePage"); // Redirect to home page
+            navigate("/MyRooms"); // Redirect to rooms page
         }
     } catch (error) {
         if (error.response) {
@@ -66,7 +66,7 @@ function LoginPage() {
                     <form onSubmit={handleSubmit}>
                         <div>
                             <h1>Log In:</h1>
-                            <label>Email: </label>
+                            <label htmlFor="email">Email: </label>
                             <input
                                 type="email"
                                 value={email}
@@ -75,7 +75,7 @@ function LoginPage() {
                             />
                         </div>
                         <div>
-                            <label>Password: </label>
+                            <label htmlFor="password">Password: </label>
                             <input 
                                 type="password"
                                 value={password}

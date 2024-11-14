@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import OpeningPage from "./pages/OpeningPage";
 import MyRoomsPage from "./pages/MyRoomsPage"
 import AddRoomPage from "./pages/AddRoomPage"
@@ -9,7 +8,7 @@ import Layout from './components/Layout';
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
-import SurveyResultsPage from "./pages/SurveyResultsPage";
+import RoomPage from "./pages/RoomPage";
 
 function App() {
   
@@ -18,13 +17,13 @@ function App() {
       <Routes>
       <Route index element={<OpeningPage />} />
         <Route path="/" element={<Layout />}>
-          <Route path="HomePage" element={<HomePage />} />
           <Route path="MyRooms" element={<MyRoomsPage />} />
           <Route path="AddRoom" element={<AddRoomPage />} />
           <Route path="Wishlist" element={<WishlistPage />} />
-          <Route path="Survey" element={<SurveyPage />} />
           <Route path="MyAccount" element={<MyAccountPage/>} />
+          <Route path="Room" element={<RoomPage/>} />
         </Route>
+        <Route path="Survey" element={<SurveyPage />} />
         <Route path="Login" element={<LoginPage/>} />
         <Route path="Signup" element={<SignupPage/>} />
       </Routes>

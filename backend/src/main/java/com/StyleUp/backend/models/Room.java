@@ -13,7 +13,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long room_id;
 
-    @Column(name = "room_name", nullable = false)
+    @Column(name = "roomName", nullable = false)
     private String roomName;
 
     @Column(name = "fku")
@@ -65,5 +65,13 @@ public class Room {
                 ", fku=" + this.fku +
                 ", decorations=" + this.decorations.toString() +
                 '}';
+    }
+
+    public Long getFku() {
+        return fku;
+    }
+
+    public void setFku(Long fku) {
+        this.fku = fku;
     }
 }

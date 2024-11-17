@@ -35,7 +35,7 @@ function SurveyPage() {
     <div className="survey-page">
       <LogoButton />
       <SurveySidebar currentQuestion={currentQuestion}/>
-      <div className="main-content">
+      <div className="survey-main-content">
         {currentQuestion === 1 && <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)}/>}
         {currentQuestion === 2 && <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)}/>}
         {currentQuestion === 3 && <Question3 onAnswer={(answer) => handleAnswer('Question 3', answer)}/>}

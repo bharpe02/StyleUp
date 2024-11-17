@@ -42,15 +42,21 @@ body {
   transform: translateY(-2px);
 }
 
-.main-content {
+.survey-main-content {
   flex: 1;
   padding: 30px;
-  margin-left: 100px; /* Make room for the sidebar */
   overflow-y: auto; /* In case the content overflows */
-  background-color: #633B4B;
+  background-color: #633B4B; /*BREAKING*/
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 12px;
-  color: #F1E8E8;
+  flex-direction:column;
+  overflow-y:auto;
+  align-items: center;
+  display: flex;
+  flex-grow: 1; /* Fills remaining space */
+  margin-left: 100px; /* Make room for the sidebar */
+  margin-top: 100px; /* Ensures the content starts below the BannerMenu */
+  justify-content: center;
 }
 
 .question-container {
@@ -59,6 +65,7 @@ body {
   background-color: #F1E8E8;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   color: #333333;
+  margin-top: 60px;
   /*background-color: #d3b4b4;*/
   
 }
@@ -144,6 +151,7 @@ h2 {
   flex-wrap: wrap;
   gap: 20px; /* Even spacing */
   justify-content: center;
+  margin-top: 900px;
 }
 
 .aesthetic-option {

@@ -21,17 +21,17 @@ public class AuthService  {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
     private final DecorationRepository decorationRepository;
+    private final JWTService jwtService;
+    private final AuthenticationManager authManager;
 
-    @Autowired
-    private JWTService jwtService;
-
-    @Autowired
-    AuthenticationManager authManager;
-
-    public AuthService(UserRepository userRepository, RoomRepository roomRepository, DecorationRepository decorationRepository) {
+    public AuthService(UserRepository userRepository, RoomRepository roomRepository,
+                       DecorationRepository decorationRepository, JWTService jwtService,
+                       AuthenticationManager authManager) {
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
         this.decorationRepository = decorationRepository;
+        this.jwtService = jwtService;
+        this.authManager = authManager;
     }
 
     // Register a new user
@@ -46,7 +46,7 @@ public class AuthService  {
     }
 
     // Authenticate user
-        public String verifyUser(User user) {
+    public String verifyUser(User user) {
         // Check if the user exists
         User foundUser = userRepository.findByEmail(user.getEmail());
         if (foundUser == null) {

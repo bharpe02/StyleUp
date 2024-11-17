@@ -40,9 +40,8 @@ public class AuthControllerTests {
     //Tests the /api/register endpoint for a successful user registration.
     @Test
     public void registerUser_Success() throws Exception {
-        ArrayList<Room> rooms = new ArrayList<>();
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", rooms);
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
 
         //A POST request is made to /api/register with the User serialized as JSON.
         mockMvc.perform(post("/api/register")
@@ -60,9 +59,8 @@ public class AuthControllerTests {
         Mockito.doThrow(new RuntimeException("Registration error")).when(authService)
                 .registerUser(any(), any(), any(), any());
 
-        ArrayList<Room> rooms = new ArrayList<>();
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", rooms);
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
 
         // A POST request is made with the same payload as the success test.
         mockMvc.perform(post("/api/register")
@@ -78,9 +76,8 @@ public class AuthControllerTests {
         // The authService.verifyUser method is mocked to return "Login successful".
         when(authService.verifyUser(any())).thenReturn("Login successful");
 
-        ArrayList<Room> rooms = new ArrayList<>();
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", rooms);
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
 
         // A POST request is made to /api/login with valid credentials in the payload.
         mockMvc.perform(post("/api/login")
@@ -96,9 +93,8 @@ public class AuthControllerTests {
         // The authService.verifyUser method is mocked to throw a RuntimeException with the message "Invalid credentials".
         when(authService.verifyUser(any())).thenThrow(new RuntimeException("Invalid credentials"));
 
-        ArrayList<Room> rooms = new ArrayList<>();
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", rooms);
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
 
         // A POST request is made to /api/login with invalid credentials in the payload.
         mockMvc.perform(post("/api/login")

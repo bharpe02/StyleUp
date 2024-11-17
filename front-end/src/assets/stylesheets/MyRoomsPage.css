@@ -14,7 +14,7 @@
     display: inline;
     overflow: hidden; /*cut out words from the logo*/ 
     position: relative; 
-     filter: brightness(0); /*Make logo black*/
+    filter: brightness(0); /*Make logo black*/
 }
 
 .main-content {

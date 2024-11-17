@@ -20,7 +20,7 @@ function MyRoomsPage() {
     if (!isLoggedIn) {
       navigate("/Login"); // Redirect to Login if not logged in
     } else {
-      getRooms()
+      getRooms();
     }
   }, [isLoggedIn, token, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
@@ -29,7 +29,7 @@ function MyRoomsPage() {
       setLoading(true); // Start loading
 
       const headers = {
-        Authorization: `Bearer ${token}`,  
+        Authorization: `Bearer ${token}`,
       };
 
       const roomsResponse = await axios.get("http://localhost:8080/api/user/rooms", {headers})
@@ -47,8 +47,8 @@ function MyRoomsPage() {
   }
 
   //navigate to room page and send selected room id and name in params
-  const handleRoomClick = (roomId, roomName) => {
-    navigate(`/Room?id=${roomId}&name=${encodeURIComponent(roomName)}`);
+  const handleRoomClick = (room) => {
+    navigate(`/Room?id=${room.room_id}&name=${encodeURIComponent(room.roomName)}`);
   };
 
   const renderContent = () => {
@@ -60,7 +60,7 @@ function MyRoomsPage() {
         <div className="rooms-list">
           {rooms.map((room) => (
             <div key={room.room_id} className="room-item" 
-              onClick={() => handleRoomClick(room.room_id, room.roomName)}  
+              onClick={() => handleRoomClick(room)}  
               style={{ cursor: 'pointer' }}
               >
               <h1>Room ID: {room.room_id}</h1>
@@ -72,6 +72,8 @@ function MyRoomsPage() {
       );
     } 
     
+    // Memoize the value to prevent unnecessary re-renders
+
     return (
       <>
         <div className="arrow-container">

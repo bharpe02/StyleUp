@@ -71,12 +71,12 @@ function MyRoomsPage() {
         </div>
       );
     } 
-<<<<<<< HEAD
-    
-    // Memoize the value to prevent unnecessary re-renders
-=======
->>>>>>> 5abe6ac58ca6603255af99672bb855d14c8cccb8
 
+
+
+
+
+    
     return (
       <>
         <div className="arrow-container">

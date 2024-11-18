@@ -1,13 +1,15 @@
 package com.StyleUp.backend;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.StyleUp.backend.controllers.AuthControllerTests;
+import com.StyleUp.backend.services.AuthServiceTests;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
-@SpringBootTest
+@Suite
+@SelectClasses({
+		AuthControllerTests.class,
+		AuthServiceTests.class,
+})
 class BackendApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
 
 }

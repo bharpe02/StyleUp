@@ -1,0 +1,22 @@
+/* Back button styling */
+.back-button {
+    position: fixed;
+    top: 90px; /* Adjust to sit below the BannerMenu */
+    left: 130px; /* Distance from the left edge of the page */
+    padding: 10px 20px;
+    margin: 40px;
+    font-size: 14px;
+    color: #633B48; /* Text color */
+    background-color: #f5f5f5; /* Button background */
+    border: 2px solid #633B48; /* Outline border */
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+  
+.back-button:hover {
+    background-color: #633B48; /* Change background to match border */
+    color: #f5f5f5; /* Change text color for contrast */
+    border: 2px solid #633B48; /* Retain border outline */
+}

@@ -203,6 +203,7 @@ function RoomPage() {
           <div>
             <button className="main-login-button" onClick={deleteRoom}>delete room</button>
             {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
+            {renderContent()}
                {/*     FOR SHARING WITH OTHER USER
               <div className="login-form">
                     <div>

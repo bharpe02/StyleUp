@@ -20,7 +20,7 @@ function MyRoomsPage() {
     if (!isLoggedIn) {
       navigate("/Login"); // Redirect to Login if not logged in
     } else {
-      getRooms()
+      getRooms();
     }
   }, [isLoggedIn, token, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
@@ -29,7 +29,7 @@ function MyRoomsPage() {
       setLoading(true); // Start loading
 
       const headers = {
-        Authorization: `Bearer ${token}`,  
+        Authorization: `Bearer ${token}`,
       };
 
       const roomsResponse = await axios.get("http://localhost:8080/api/user/rooms", {headers})
@@ -46,6 +46,14 @@ function MyRoomsPage() {
     
   }
 
+<<<<<<< HEAD
+  //navigate to room page and send selected room id and name in params
+  const handleRoomClick = (room) => {
+    navigate(`/Room?id=${room.room_id}&name=${encodeURIComponent(room.roomName)}`);
+  };
+
+=======
+>>>>>>> 5abe6ac58ca6603255af99672bb855d14c8cccb8
   const renderContent = () => {
     if (loading) {
       return <p style={{ textAlign: 'center' }}>Loading rooms...</p>;
@@ -55,7 +63,14 @@ function MyRoomsPage() {
       return (
         <div className="rooms-list">
           {rooms.map((room) => (
+<<<<<<< HEAD
+            <div key={room.room_id} className="room-item" 
+              onClick={() => handleRoomClick(room)}  
+              style={{ cursor: 'pointer' }}
+              >
+=======
             <div key={room.room_id} className="room-item">
+>>>>>>> 5abe6ac58ca6603255af99672bb855d14c8cccb8
               <h1>Room ID: {room.room_id}</h1>
               <h2>Room Name: {room.roomName}</h2>
             </div>
@@ -64,6 +79,11 @@ function MyRoomsPage() {
         </div>
       );
     } 
+<<<<<<< HEAD
+    
+    // Memoize the value to prevent unnecessary re-renders
+=======
+>>>>>>> 5abe6ac58ca6603255af99672bb855d14c8cccb8
 
     return (
       <>

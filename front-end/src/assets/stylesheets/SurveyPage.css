@@ -212,3 +212,67 @@ h2 {
   text-align: center;
   margin-top: 10px;
 }
+
+/* Survey Summary Container */
+.responses-summary {
+  background-color: #ffffff; /* White background to frame the summary */
+  padding: 25px;
+  margin-top: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #333333; /* Dark gray text */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.responses-summary h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #633B48; /* Dark theme color */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styling for the List */
+.responses-summary ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Styling for Each Answer Item */
+.responses-summary li {
+  padding: 15px 20px;
+  border: 1px solid #F1E8E8; /* Light border for separation */
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #333333;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Divide question and answer */
+  align-items: center;
+  gap: 10px;
+}
+
+.responses-summary li:last-child {
+  margin-bottom: 0; /* Remove margin from last item */
+}
+
+/* Styling for Question Labels */
+.responses-summary li strong {
+  color: #633B48; /* Dark theme color for question labels */
+  font-weight: 600;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+/* Styling for Answer Text */
+.responses-summary li span {
+  color: #555555; /* Slightly lighter gray for answers */
+  font-size: 1rem;
+}
+
+
+  .responses-summary h3 {
+    font-size: 1.5rem;
+  }

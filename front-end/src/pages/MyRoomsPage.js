@@ -61,7 +61,7 @@ function MyRoomsPage() {
           {rooms.map((room) => (
             <div key={room.room_id} className="room-item" 
               onClick={() => handleRoomClick(room)}  
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer' }}>
               <h1>Room ID: {room.room_id}</h1>
               <h2>Room Name: {room.roomName}</h2>
             </div>

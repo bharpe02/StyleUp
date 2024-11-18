@@ -1,6 +1,5 @@
 package com.StyleUp.backend.services;
 
-import com.StyleUp.backend.models.Decoration;
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.repositories.DecorationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
@@ -11,8 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.StyleUp.backend.models.User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,18 +21,17 @@ public class AuthService  {
     private final UserRepository userRepository;
     private final RoomRepository roomRepository;
     private final DecorationRepository decorationRepository;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final JWTService jwtService;
+    private final AuthenticationManager authManager;
 
-    @Autowired
-    private JWTService jwtService;
-
-    @Autowired
-    AuthenticationManager authManager;
-
-    public AuthService(UserRepository userRepository, RoomRepository roomRepository, DecorationRepository decorationRepository) {
+    public AuthService(UserRepository userRepository, RoomRepository roomRepository,
+                       DecorationRepository decorationRepository, JWTService jwtService,
+                       AuthenticationManager authManager) {
         this.userRepository = userRepository;
         this.roomRepository = roomRepository;
         this.decorationRepository = decorationRepository;
+        this.jwtService = jwtService;
+        this.authManager = authManager;
     }
 
     // Register a new user
@@ -50,7 +46,7 @@ public class AuthService  {
     }
 
     // Authenticate user
-        public String verifyUser(User user) {
+    public String verifyUser(User user) {
         // Check if the user exists
         User foundUser = userRepository.findByEmail(user.getEmail());
         if (foundUser == null) {

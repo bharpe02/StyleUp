@@ -53,7 +53,7 @@ public class RoomController {
 
     @PostMapping("/getThisRoom")
     public ResponseEntity<Room> getThisRoom(@RequestBody Room room) {
-        System.out.println("RECEIVED GET REQUEST FOR ROOM: "+room);
+        System.out.println("RECEIVED GET REQUEST FOR ROOM: "+room.toString());
         Long roomId=room.getRoom_id();
         System.out.println("RECEIVED GET REQUEST FOR ROOM: " + roomId);
         Room thisRoom;

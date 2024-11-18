@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import BannerMenu from '../components/BannerMenu';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import "../assets/stylesheets/LoginPage.css"
 import axios from 'axios';
@@ -24,6 +23,7 @@ function RoomPage() {
             navigate("/Login"); // Redirect to Login if not logged in
         } else {
             getRoom();
+            
         }
     }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
@@ -48,7 +48,7 @@ function RoomPage() {
             console.log(headers)
             console.log(tempRoom)
             const response = await axios.post('http://localhost:8080/api/room/getThisRoom',
-                { tempRoom },
+                tempRoom,
                 { headers }
             );
             if (response.status === 200) {
@@ -99,7 +99,7 @@ function RoomPage() {
             }
             console.log(tempRoom)
             // Send POST request to backend
-            const response = await axios.post('http://localhost:8080/api/room/delete', {tempRoom} , {headers});
+            const response = await axios.post('http://localhost:8080/api/room/delete', tempRoom , {headers});
             
             if (response.status === 200) {
                 console.log('Room deleted successfully:', response.data);
@@ -126,13 +126,12 @@ function RoomPage() {
         if (loading) {
           return <p style={{ textAlign: 'center' }}>Loading decorations...</p>;
         }
-        if (room.decorations.length > 0) {
+        if (room && room.decorations.length > 0) {
           return (
             <div className="rooms-list">
-              {room.decorations.map((decoration) => (
-                <div key={decoration.decoration_id} className="decoration-item">
-                  <h1>decoration ID: {decoration.decoration_id}</h1>
-                  <h2>Room Name: {decoration.searchLink}</h2>
+              {room.decorations.map((decoration, index) => (
+                <div key={`decoration-${decoration.searchLink}`} className="decoration-item">
+                  <h2>Search Link: {decoration.searchLink}</h2>
                 </div>
               ))}
               {errorMessage && <p style={{ textAlign: "center", color: 'red' }}>{errorMessage}</p>}
@@ -143,11 +142,9 @@ function RoomPage() {
         // Memoize the value to prevent unnecessary re-renders
     
         return (
-          <>
             <div className="no-decorations-message">
               <p>You don't have any decorations saved here yet...</p>
             </div>
-          </>
         );
       };
 
@@ -201,7 +198,16 @@ function RoomPage() {
       {isLoggedIn ? (
         <div className="delete room" style={{ textAlign: 'center' }}>
           <div>
-            <button className="main-login-button" onClick={deleteRoom}>delete room</button>
+            {room ? (
+                <div>
+                    <h1>{room.roomName}</h1>
+                    <button className="main-login-button" onClick={deleteRoom}>delete room</button>
+                    {renderContent()}
+                </div>
+            ) : (
+                <p>Loading room data...</p>
+            )}
+            
             {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
                {/*     FOR SHARING WITH OTHER USER
               <div className="login-form">

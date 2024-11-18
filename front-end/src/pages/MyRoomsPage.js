@@ -45,7 +45,6 @@ function MyRoomsPage() {
     }
     
   }
-
   //navigate to room page and send selected room id and name in params
   const handleRoomClick = (room) => {
     navigate(`/Room?id=${room.room_id}&name=${encodeURIComponent(room.roomName)}`);
@@ -63,7 +62,6 @@ function MyRoomsPage() {
             <div key={room.room_id} className="room-item" 
               onClick={() => handleRoomClick(room)}  
               style={{ cursor: 'pointer' }}
-            >
               <h1>Room ID: {room.room_id}</h1>
               <h2>Room Name: {room.roomName}</h2>
             </div>
@@ -72,9 +70,8 @@ function MyRoomsPage() {
         </div>
       );
     } 
-    
     // Memoize the value to prevent unnecessary re-renders
-
+    
     return (
       <>
         <div className="arrow-container">

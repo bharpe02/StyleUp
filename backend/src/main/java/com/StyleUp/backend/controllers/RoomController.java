@@ -2,9 +2,12 @@ package com.StyleUp.backend.controllers;
 
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.User;
+import com.StyleUp.backend.models.UserPrincipal;
+import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.services.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
 
     private final RoomService roomService;
+    private final RoomRepository roomRepository;
 
-    public RoomController(RoomService roomService) {
+    public RoomController(RoomService roomService, RoomRepository roomRepository) {
         this.roomService = roomService;
+        this.roomRepository = roomRepository;
     }
 
     @PostMapping("/create")
@@ -31,8 +36,9 @@ public class RoomController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public ResponseEntity<String> remRoom(@RequestBody Room room) {
+        System.out.println("RECEIVED remove REQUEST FOR ROOM: "+room);
         Long roomId=room.getRoom_id();
         System.out.println("RECEIVED REMOVE REQUEST FOR ROOM: "+roomId);
         try {
@@ -45,4 +51,18 @@ public class RoomController {
         }
     }
 
+    @PostMapping("/getThisRoom")
+    public ResponseEntity<Room> getThisRoom(@RequestBody Room room) {
+        System.out.println("RECEIVED GET REQUEST FOR ROOM: "+room.toString());
+        Long roomId=room.getRoom_id();
+        System.out.println("RECEIVED GET REQUEST FOR ROOM: " + roomId);
+        Room thisRoom;
+        if(roomRepository.findById(roomId).isPresent()) {
+            thisRoom = roomRepository.findById(roomId).get();
+            return ResponseEntity.ok(thisRoom);
+        } else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }

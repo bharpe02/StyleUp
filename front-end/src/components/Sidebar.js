@@ -3,6 +3,7 @@ import addRoomImage from "../assets/images/Add Room.png"
 import myRoomsImage from "../assets/images/My Rooms.png"
 import surveyImage from "../assets/images/Survey.png"
 import wishlistImage from "../assets/images/Wishlist.png"
+import invitationsImage from "../assets/images/Invitations.png"
 import "../assets/stylesheets/GeneralLayout.css"
 import { Link } from 'react-router-dom';
 
@@ -31,6 +32,12 @@ function Sidebar() {
             <Link to="/Wishlist">
                 <button id='wishlist' className="sidebar-button">
                     <img src={wishlistImage} alt="Wishlist"/>
+                </button>
+            </Link>
+            {/*Invitations Button*/}
+            <Link to="/Invitations">
+                <button id='invitations' className="sidebar-button">
+                    <img src={invitationsImage} alt="Invitations"/>
                 </button>
             </Link>
         </div>

@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
 import RoomPage from "./pages/RoomPage";
+import ResultsPage from "./pages/ResultsPage";
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
           <Route path="Room" element={<RoomPage/>} />
         </Route>
         <Route path="Survey" element={<SurveyPage />} />
+        <Route path="Results" element={<ResultsPage />} />
         <Route path="Login" element={<LoginPage/>} />
         <Route path="Signup" element={<SignupPage/>} />
       </Routes>

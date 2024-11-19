@@ -6,6 +6,7 @@ import Question3 from '../components/Question3.js';
 import Question4 from '../components/Question4';
 import LogoButton from '../components/LogoButton.js';
 import SurveySidebar from '../components/SurveySidebar.js';
+import axios from 'axios';
 
 function SurveyPage() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
@@ -13,7 +14,7 @@ function SurveyPage() {
   const navigate = useNavigate();
 
   const handleNext = () => {
-    setCurrentQuestion((prev) => Math.min(prev + 1, 5));
+    setCurrentQuestion((prev) => Math.min(prev + 1, 4));
   };
                  
   const handlePrevious = () => {
@@ -31,27 +32,66 @@ function SurveyPage() {
     }));
   };
 
+  const handleSubmit = async () => {
+    console.log('Submitting responses:', responses); // Debugging
+    try {
+      const response = await axios.post('/api/survey', responses);
+      navigate('/Results', { state: { results: response.data } });
+    } catch (error) {
+      console.error('Error submitting survey:', error);
+    }
+  };
+
+
   return (
     <div className="survey-page">
+      {/* Logo Button */}
       <LogoButton />
-      <SurveySidebar currentQuestion={currentQuestion}/>
-      <div className="survey-main-content">
-        {currentQuestion === 1 && <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)}/>}
-        {currentQuestion === 2 && <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)}/>}
-        {currentQuestion === 3 && <Question3 onAnswer={(answer) => handleAnswer('Question 3', answer)}/>}
-        {currentQuestion === 4 && <Question4 onAnswer={(answer) => handleAnswer('Question 4', answer)} />}
 
-        {/* Add more questions similarly */}
+      {/* Sidebar to track question progress */}
+      <SurveySidebar currentQuestion={currentQuestion} />
+
+      {/* Main Content */}
+      <div className="survey-main-content">
+        {/* Render Questions */}
+        {currentQuestion === 1 && (
+          <Question1 onAnswer={(answer) => handleAnswer('Question 1', answer)} />
+        )}
+        {currentQuestion === 2 && (
+          <Question2 onAnswer={(answer) => handleAnswer('Question 2', answer)} />
+        )}
+        {currentQuestion === 3 && (
+          <Question3 onAnswer={(answer) => handleAnswer('Question 3', answer)} />
+        )}
+        {currentQuestion === 4 && (
+          <Question4 onAnswer={(answer) => handleAnswer('Question 4', answer)} />
+        )}
+
+        {/* Navigation Buttons */}
         <div className="nav-buttons">
-          <button className="back-button" onClick={handlePrevious}>←</button>
-          <button className="next-button" onClick={handleNext} disabled={currentQuestion === 5}>Next</button>
+          <button className="back-button" onClick={handlePrevious}>
+            ← Back
+          </button>
+          {currentQuestion < 4 && (
+            <button className="next-button" onClick={handleNext}>
+              Next →
+            </button>
+          )}
+          {currentQuestion === 4 && (
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit Survey
+            </button>
+          )}
         </div>
+
+        {/* Survey Summary */}
         <div className="responses-summary">
           <h3>Survey Summary</h3>
           <ul>
             {Object.entries(responses).map(([question, answer]) => (
               <li key={question}>
-                <strong>{question}:</strong> {Array.isArray(answer) ? answer.join(', ') : answer}
+                <strong>{question}:</strong>{' '}
+                {Array.isArray(answer) ? answer.join(', ') : answer}
               </li>
             ))}
           </ul>

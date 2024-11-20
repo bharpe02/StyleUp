@@ -13,7 +13,7 @@
   }
 
 .back-button {
-    position: fixed;
+    position: absolute;
     top: 90px; /* Adjust to sit below the BannerMenu */
     left: 130px; /* Distance from the left edge of the page */
     padding: 10px 20px;
@@ -24,7 +24,7 @@
     border: 2px solid #633B48; /* Outline border */
     border-radius: 5px;
     cursor: pointer;
-    z-index: 10;
+    z-index: 0;
     transition: all 0.3s ease; /* Smooth transition for hover effects */
 }
   
@@ -39,7 +39,7 @@
     display: flex;
     flex-wrap: wrap; /* Ensure cards wrap to the next line */
     gap: 20px; /* Space between cards */
-    justify-content: flex-start; /* Align to left */
+    justify-content: center; /* Align to left */
     align-items: flex-start; /* Align vertically */
     margin: 0; /* Remove unnecessary margin */
     padding: 10px; /* Add some padding around the container */
@@ -47,7 +47,7 @@
   
 .decoration {
     display: inline-block;
-    max-width: 100%; /* Prevent the decoration from becoming too wide */
+    width: 275px; /* Prevent the decoration from becoming too wide */
     word-wrap: break-word; /* Ensure text wraps within the decoration */
     overflow-wrap: break-word; /* Compatibility for text wrapping */
     border: 1px solid #ccc; /* Example border */
@@ -82,7 +82,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 
-  .dropdown {
+.dropdown {
     position: relative;
     display: inline-block;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -119,7 +119,13 @@
     display: flex;
     justify-content: space-between; /* Space out elements horizontally */
     align-items: center; /* Vertically align elements */
-    padding: 10px;
+    border-bottom: 1px solid #ccc; /* Optional: Adds a separator line */
+    padding: 5px;
+}
+
+.room-header h2 {
+    font-size:20px;
+    font-weight: 1000;
 }
 
 
@@ -134,4 +140,28 @@
 .menu-button:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: left; /* Align items to the top */
+    gap: 5px; /* Add space between the elements */
+    max-width: 100%; /* Prevent the container from growing beyond its parent */
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  .description h2 {
+    margin: 0; /* Remove default margins */
+    white-space: nowrap;
+  }
+  
+  .description p {
+    margin: 0; /* Remove default margins */
+    word-wrap: break-word; /* Break long words if necessary */
+    overflow-wrap: break-word; /* Ensure wrapping of long text */
+    flex: 1; /* Allow the paragraph to take up remaining space */
+    max-width: 100%;
+    text-align: center;
   }

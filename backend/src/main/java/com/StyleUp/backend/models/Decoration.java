@@ -50,6 +50,14 @@ public class Decoration {
         this.decoration_id = dec_id;
     }
 
+    public Long getFkr() {
+        return fkr;
+    }
+
+    public void setFkr(Long fkr) {
+        this.fkr = fkr;
+    }
+
     public String getSearchLink() {
         return searchLink;
     }

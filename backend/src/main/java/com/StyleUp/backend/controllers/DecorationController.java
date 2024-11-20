@@ -21,7 +21,9 @@ public class DecorationController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createDecoration(@RequestBody String link, Long roomId, String description, String title, String image) {
+    public ResponseEntity<String> createDecoration(@RequestBody Decoration decoration) {
+        String link= decoration.getSearchLink();
+        Long roomId=decoration.getFkr();
         System.out.println("RECEIVED CREATE REQUEST FOR Decoration: " + link);
         try {
             decoService.addDecoration(link, roomId, description, title,  image);

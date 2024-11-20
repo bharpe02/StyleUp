@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import com.StyleUp.backend.models.Decoration;
 
 @RestController
 @RequestMapping("/api/room")
@@ -64,5 +65,16 @@ public class RoomController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addItemToRoom(@RequestBody Decoration decoration, @RequestParam Long roomId) {
+        try {
+            roomService.addDecorationToRoom(decoration, roomId);
+            return ResponseEntity.ok("Item added to room successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to add item to room: " + e.getMessage());
+        }
     }
 }

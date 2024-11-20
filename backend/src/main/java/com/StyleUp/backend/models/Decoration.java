@@ -18,8 +18,6 @@ public class Decoration {
     /* my current thinking is that each decoration object will just have a link to the Google search result.
     * maybe we can add an image too? not sure if that would work for every search*/
 
-    /*Aidan Adding image, Name, Description
-    */
     @Column
     private String description;
 
@@ -64,14 +62,6 @@ public class Decoration {
                 '}';
     }
 }
-
-
-/*  TO DO:
-Update fields in decoration,
- Update columns in database,
-update Decoration service,
-Decoration Controller(Maybe)*/
-
 
 /*
 * EXAMPLE RESULT

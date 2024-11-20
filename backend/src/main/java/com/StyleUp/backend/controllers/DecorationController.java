@@ -24,9 +24,13 @@ public class DecorationController {
     public ResponseEntity<String> createDecoration(@RequestBody Decoration decoration) {
         String link= decoration.getSearchLink();
         Long roomId=decoration.getFkr();
+        String description=decoration.getDescription();
+        String title=decoration.getTitle();
+        String image=decoration.getImage();
+
         System.out.println("RECEIVED CREATE REQUEST FOR Decoration: " + link);
         try {
-            decoService.addDecoration(link, roomId);
+            decoService.addDecoration(link, roomId, description, title,  image);
             return ResponseEntity.ok("Decoration Created successfully");
         } catch (Exception e) {
             System.out.println(e.getMessage());

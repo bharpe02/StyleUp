@@ -10,6 +10,7 @@ import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
 import RoomPage from "./pages/RoomPage";
 import ResultsPage from "./pages/ResultsPage";
+import InvitationsPage from "./pages/InvitationsPage"
 
 function App() {
   

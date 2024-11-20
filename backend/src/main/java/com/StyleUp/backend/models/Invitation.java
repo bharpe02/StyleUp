@@ -12,7 +12,7 @@ public class Invitation {
     Long invitation_id;
 
     @Column(name="owner_id")
-    Long owner_id;
+    Long ownerId;
 
     @Column(name="email")
     String email;
@@ -20,10 +20,13 @@ public class Invitation {
     @Column(name="room_id")
     Long room_id;
 
+    @Column(name="room_name")
+    String roomName;
+
     public Invitation() {}
 
     public Invitation(Long owner_id, String email, Long room_id) {
-        this.owner_id = owner_id;
+        this.ownerId = owner_id;
         this.email = email;
         this.room_id = room_id;
     }
@@ -37,11 +40,11 @@ public class Invitation {
     }
 
     public Long getOwner_id() {
-        return owner_id;
+        return ownerId;
     }
 
     public void setOwner_id(Long owner_id) {
-        this.owner_id = owner_id;
+        this.ownerId = owner_id;
     }
 
     public String getEmail() {

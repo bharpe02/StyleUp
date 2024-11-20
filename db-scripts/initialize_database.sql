@@ -27,3 +27,12 @@ CREATE TABLE IF NOT EXISTS decorations (
     fkr BIGINT,
     FOREIGN KEY(fkr) references rooms(room_id)
 );
+
+-- Create invitations table
+CREATE TABLE IF NOT EXISTS invitations (
+    invitation_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    owner_id BIGINT,
+    room_id BIGINT,
+    room_name VARCHAR(255) NOT NULL
+);

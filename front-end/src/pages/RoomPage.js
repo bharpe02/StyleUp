@@ -17,6 +17,7 @@ function RoomPage() {
     const roomId = searchParams.get('id');
     const roomName = searchParams.get('name');
     const [room, setRoom] = useState();
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -74,15 +75,7 @@ function RoomPage() {
         }
     }
 
-
-
-    const deleteRoom = (event) => {
-        console.log("Delete clicked");
-        event.preventDefault();
-        remRoom();
-    };
-
-    const remRoom = async () => {
+    const deleteRoom = async () => {
         try {
             // Prepare user data to send to the backend
             const headers = {
@@ -122,16 +115,25 @@ function RoomPage() {
         }
     };
 
+    const toggleMenu = () => setMenuOpen(!menuOpen);
+
     const renderContent = () => {
         if (loading) {
           return <p style={{ textAlign: 'center' }}>Loading decorations...</p>;
         }
         if (room && room.decorations.length > 0) {
           return (
-            <div className="rooms-list">
+            <div className="decorations">
               {room.decorations.map((decoration, index) => (
-                <div key={`decoration-${decoration.searchLink}`} className="decoration-item">
-                  <h2>Search Link: {decoration.searchLink}</h2>
+                <div key={`decoration-${decoration.searchLink}`} className="decoration">
+                    <a
+                        href={decoration.searchLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="decoration-link"
+                    >
+                        <h2>{decoration.searchLink}</h2>
+                    </a>
                 </div>
               ))}
               {errorMessage && <p style={{ textAlign: "center", color: 'red' }}>{errorMessage}</p>}
@@ -194,17 +196,25 @@ function RoomPage() {
         <BannerMenu/>
         <Sidebar/>
         <h1 style={{ textAlign: 'center' }}>  {roomName}  </h1>
-        <Link to="/MyRooms">
-            <button id='backToRooms' className='back-button'>← Back To Rooms</button>
-        </Link>
       </div>
       {isLoggedIn ? (
-        <div className="delete-room" style={{ textAlign: 'center' }}>
-          <div>
+        <div className='main-content'>
+            <Link to="/MyRooms">
+                <button id='backToRooms' className='back-button'>← Back To Rooms</button>
+            </Link>
             {room ? (
                 <div>
-                    <h1>{room.roomName}</h1>
-                    <button className="main-login-button" onClick={deleteRoom}>delete room</button>
+                    <div className='room-header'>
+                        <h1>{room.roomName}</h1>
+                        <div className="dropdown">
+                            <button className="menu-button" onClick={toggleMenu}>⋮</button>
+                            {menuOpen && (
+                                <div className="dropdown-menu">
+                                    <button onClick={deleteRoom} className="delete-button">Delete Room</button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                     {renderContent()}
                 </div>
             ) : (
@@ -232,8 +242,7 @@ function RoomPage() {
                     </div>
                 </div>
                 */}
-          </div>
-      </div>
+        </div>
       ):(
         <p style={{ textAlign: 'center' }}>Redirecting to login...</p>
       )}

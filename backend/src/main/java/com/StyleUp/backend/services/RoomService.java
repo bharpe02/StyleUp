@@ -58,4 +58,23 @@ public class RoomService {
 
     //implement remove collaborator method?
     //is this a completely separate controller, class, table, etc?? many-many relation
+
+    /**
+     * Add a decoration to an existing room.
+     *
+     * @param decoration decoration to add
+     * @param roomId ID of the room which the decoration should be added
+     * @return updated room with the new decoration.
+     */
+    public Room addDecorationToRoom(Decoration decoration, Long roomId) {
+        // Find the room by ID
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found with id: " + roomId));
+
+        // Add the decoration to the room's list of decorations
+        room.getDecorations().add(decoration);
+
+        // Save and return the updated room
+        return roomRepository.save(room);
+    }
 }

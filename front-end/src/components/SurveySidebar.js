@@ -3,7 +3,7 @@ import '../assets/stylesheets/SurveyPage.css';
 import PropTypes from 'prop-types';
 
 function SurveySidebar({ currentQuestion }) {
-  const totalQuestions = 5;
+  const totalQuestions = 4;
   const darkColor = '#633B48'; // Dark brown color
   const lightColor = '#F1E8E8'; // Light brown color
 

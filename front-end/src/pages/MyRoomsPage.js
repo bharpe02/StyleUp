@@ -69,8 +69,9 @@ function MyRoomsPage() {
         </div>
       );
     } 
+
     // Memoize the value to prevent unnecessary re-renders
-    
+
     return (
       <>
         <div className="arrow-container">

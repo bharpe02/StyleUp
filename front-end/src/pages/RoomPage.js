@@ -222,6 +222,7 @@ function RoomPage() {
             )}
             
             {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
+            {renderContent()}
                {/*     FOR SHARING WITH OTHER USER
               <div className="login-form">
                     <div>

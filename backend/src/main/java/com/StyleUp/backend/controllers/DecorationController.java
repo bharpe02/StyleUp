@@ -21,10 +21,10 @@ public class DecorationController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createDecoration(@RequestBody String link, Long roomId) {
+    public ResponseEntity<String> createDecoration(@RequestBody String link, Long roomId, String description, String title, String image) {
         System.out.println("RECEIVED CREATE REQUEST FOR Decoration: " + link);
         try {
-            decoService.addDecoration(link, roomId);
+            decoService.addDecoration(link, roomId, description, title,  image);
             return ResponseEntity.ok("Decoration Created successfully");
         } catch (Exception e) {
             System.out.println(e.getMessage());

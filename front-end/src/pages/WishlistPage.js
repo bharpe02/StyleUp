@@ -19,7 +19,6 @@ function WishlistPage() {
   return (
     <div className='container'>
       <BannerMenu/>
-      <Sidebar/>
       {isLoggedIn ? (
       <div className='main-content'>
         <h1>Wishlist</h1>

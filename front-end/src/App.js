@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import MyAccountPage from "./pages/MyAccountPage"
 import RoomPage from "./pages/RoomPage";
+import InvitationsPage from "./pages/InvitationsPage";
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
           <Route path="Wishlist" element={<WishlistPage />} />
           <Route path="MyAccount" element={<MyAccountPage/>} />
           <Route path="Room" element={<RoomPage/>} />
+          <Route path="Invitations" element={<InvitationsPage/>} />
         </Route>
         <Route path="Survey" element={<SurveyPage />} />
         <Route path="Login" element={<LoginPage/>} />

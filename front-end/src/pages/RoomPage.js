@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import BannerMenu from '../components/BannerMenu';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
-import "../assets/stylesheets/LoginPage.css"
 import axios from 'axios';
+import "../assets/stylesheets/RoomPage.css"
 
 function RoomPage() {
     const location = useLocation();
@@ -194,9 +194,12 @@ function RoomPage() {
         <BannerMenu/>
         <Sidebar/>
         <h1 style={{ textAlign: 'center' }}>  {roomName}  </h1>
+        <Link to="/MyRooms">
+            <button id='backToRooms' className='back-button'>← Back To Rooms</button>
+        </Link>
       </div>
       {isLoggedIn ? (
-        <div className="delete room" style={{ textAlign: 'center' }}>
+        <div className="delete-room" style={{ textAlign: 'center' }}>
           <div>
             {room ? (
                 <div>

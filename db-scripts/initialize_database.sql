@@ -23,8 +23,11 @@ CREATE TABLE IF NOT EXISTS rooms (
 -- Create decorations table
 CREATE TABLE IF NOT EXISTS decorations (
     decoration_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    searchLink VARCHAR(255) NOT NULL,
+    search_link VARCHAR(255) NOT NULL,
     fkr BIGINT,
+    description VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    image VARCHAR(225) NOT NULL,
     FOREIGN KEY(fkr) references rooms(room_id)
 );
 

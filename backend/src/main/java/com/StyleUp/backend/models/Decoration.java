@@ -18,10 +18,8 @@ public class Decoration {
     @Column
     private Long fkr;
 
-    @Column
-    private String searchLink;
-    /* my current thinking is that each decoration object will just have a link to the Google search result.
-    * maybe we can add an image too? not sure if that would work for every search*/
+    @Column(name="search_link")
+    private String search_link;
 
     @Column
     private String description;
@@ -35,7 +33,7 @@ public class Decoration {
     public Decoration() {}
 
     public Decoration(String searchLink, Long fkRoomId, String description, String title, String image) {
-        this.searchLink = searchLink;
+        this.search_link = searchLink;
         this.fkr = fkRoomId;
         this.description = description;
         this.title = title;
@@ -59,11 +57,11 @@ public class Decoration {
     }
 
     public String getSearchLink() {
-        return searchLink;
+        return search_link;
     }
 
     public void setSearchLink(String searchLink) {
-        this.searchLink = searchLink;
+        this.search_link = searchLink;
     }
 
     public String getDescription() {
@@ -95,7 +93,7 @@ public class Decoration {
         return "Decoration{" +
                 "DecorationId=" + decoration_id +
                 ", fkr=" + fkr +
-                ", searchLink='" + searchLink + '\'' +
+                ", searchLink='" + search_link + '\'' +
                 ", description=" + description + '\'' +
                 ", title=" + title + '\'' +
                 ", image=" + image + '\'' +

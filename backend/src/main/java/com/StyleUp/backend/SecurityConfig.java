@@ -45,7 +45,7 @@ public class SecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/login", "/api/register", "/api/room/**").permitAll() // Allow login and signup without authentication
+                        .requestMatchers("/api/login", "/api/register", "/api/room/**", "/api/search").permitAll() // Allow login and signup without authentication
                         .anyRequest().authenticated() // All other endpoints require authentication
                         //.anyRequest().permitAll() // Permit all requests without requiring authentication
                 )

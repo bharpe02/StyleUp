@@ -1,0 +1,68 @@
+.results-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+    margin-left: 130px; /* Adjust for Sidebar width */
+    margin-top: 130px; /* Adjust for BannerMenu height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: #fff;
+    position: relative;
+  }
+  
+  .results-content {
+    margin: 20px;
+  }
+  
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    overflow: visible; /* Allow dropdowns to overflow this container */
+  }
+  
+  .result-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .result-card h2 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .result-card a {
+    display: block;
+    color: #1e90ff;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    word-break: break-word;
+  }
+  
+  .result-card p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+.add-button {
+    background-color: #f9f9f9;
+    border: none;
+    color: #333;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-button:hover {
+    background-color: #f1f1f1;
+}
+

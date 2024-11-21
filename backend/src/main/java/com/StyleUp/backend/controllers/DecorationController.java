@@ -28,7 +28,7 @@ public class DecorationController {
         String title=decoration.getTitle();
         String image=decoration.getImage();
 
-        System.out.println("RECEIVED CREATE REQUEST FOR Decoration: " + link);
+        System.out.println("RECEIVED CREATE REQUEST FOR Decoration: " + decoration);
         try {
             decoService.addDecoration(link, roomId, description, title,  image);
             return ResponseEntity.ok("Decoration Created successfully");

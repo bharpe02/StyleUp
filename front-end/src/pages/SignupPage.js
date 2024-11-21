@@ -31,6 +31,7 @@ function SignupPage() {
                 email,
                 password,
             };
+            console.log(userData)
             // Send POST request to backend
             const response = await axios.post('http://localhost:8080/api/register', userData);
             

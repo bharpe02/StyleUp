@@ -51,7 +51,20 @@ public class InvitationController {
     //remove for reject invitation
     @PostMapping("/reject")
     public ResponseEntity<String> remInvite(@RequestBody Invitation invite) {
-        System.out.println("RECEIVED REMOVE REQUEST FOR DECORATION: " + invite.getInvitation_id());
+        System.out.println("RECEIVED REMOVE REQUEST FOR INVIte: " + invite.getInvitation_id());
+        try {
+            invitationService.removeInvite(invite.getInvitation_id());
+            return ResponseEntity.ok("Decoration deleted successfully");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Delete failed: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/share")
+    public ResponseEntity<String> share(@RequestBody Invitation invite) {
+        System.out.println("RECEIVED Share REQUEST FOR invite: " + invite.getInvitation_id());
         try {
             invitationService.removeInvite(invite.getInvitation_id());
             return ResponseEntity.ok("Decoration deleted successfully");

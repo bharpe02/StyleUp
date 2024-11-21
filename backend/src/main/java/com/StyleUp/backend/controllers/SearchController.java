@@ -19,8 +19,8 @@ public class SearchController {
     }
 
     //Searches google with given String Query returning a map between the query
-    @GetMapping
-    public Map<String, Object> search(@RequestParam String query) {
+    @PostMapping
+    public Map<String, Object> search(@RequestBody String query) {
         return googleSearchService.search(query);
     }
 }

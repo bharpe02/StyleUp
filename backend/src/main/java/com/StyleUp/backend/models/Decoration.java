@@ -18,7 +18,7 @@ public class Decoration {
     @Column
     private Long fkr;
 
-    @Column(name="search_link")
+    @Column
     private String search_link;
 
     @Column
@@ -57,7 +57,7 @@ public class Decoration {
     }
 
     public String getSearchLink() {
-        return search_link;
+        return this.search_link;
     }
 
     public void setSearchLink(String searchLink) {

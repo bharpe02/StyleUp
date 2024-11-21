@@ -7,12 +7,10 @@ import { AuthContext } from '../contexts/AuthContext.js';
 import Sidebar from '../components/Sidebar.js'
 
 function OpeningPage() {
-  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <div className="all">
         <BannerMenu />
-        {isLoggedIn ? <Sidebar/> : null}
         <div className="gradient">
         <GradientBackground />
         </div>

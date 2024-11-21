@@ -152,7 +152,7 @@ function RoomPage() {
           ...prevState,
           [decorationId]: !prevState[decorationId],
         }));
-      };
+    };
 
     const renderContent = () => {
         if (loading) {

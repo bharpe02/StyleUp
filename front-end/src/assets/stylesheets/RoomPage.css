@@ -90,8 +90,8 @@
 
 .dropdown-menu {
     position: absolute;
-    top: 0;
-    right: 30px;
+    top: 30;
+    right: 0px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -109,11 +109,6 @@
     width: 100%;
 
 }
-
-.dropdown:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  }
 
 .room-header {
     display: flex;

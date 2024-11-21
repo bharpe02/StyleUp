@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSurveyContext } from '../contexts/SurveyContext.js';
 import { useNavigate } from 'react-router-dom';
 import Question1 from '../components/Question1';
 import Question2 from '../components/Question2';
@@ -6,12 +7,12 @@ import Question3 from '../components/Question3.js';
 import Question4 from '../components/Question4';
 import LogoButton from '../components/LogoButton.js';
 import SurveySidebar from '../components/SurveySidebar.js';
-import axios from 'axios';
 
 function SurveyPage() {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [responses, setResponses] = useState({});
   const navigate = useNavigate();
+  const { setFinalResponse } = useSurveyContext();
 
   const handleNext = () => {
     setCurrentQuestion((prev) => Math.min(prev + 1, 4));
@@ -33,13 +34,16 @@ function SurveyPage() {
   };
 
   const handleSubmit = async () => {
-    console.log('Submitting responses:', responses); // Debugging
-    try {
-      const response = await axios.post('/api/survey', responses);
-      navigate('/Results', { state: { results: response.data } });
-    } catch (error) {
-      console.error('Error submitting survey:', error);
-    }
+    // Combine responses into a single string
+    const responseArray = Object.values(responses).map((answer) =>
+      Array.isArray(answer) ? answer.join('%20') : answer
+    );
+    const finalResponse = responseArray.join('%20');
+
+    // Save to context
+    setFinalResponse(finalResponse);
+    console.log('Submitting responses:', finalResponse); // Debugging
+    navigate('/Results');
   };
 
 

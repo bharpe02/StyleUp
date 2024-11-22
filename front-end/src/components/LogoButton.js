@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import logo from '../assets/images/LOGO.png'
 import { Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
 
 function LogoButton() {
   
-  const { isLoggedIn, token } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     

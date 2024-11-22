@@ -12,12 +12,6 @@ function Question4({ onAnswer }) {
     onAnswer(newBudget); 
   };
 
-  const displayBudget = () => {
-    if (budget == 5) return "<= $5";
-    if (budget == 500) return ">= $500";
-    return `$${budget}`;
-  }
-
   return (
     <div className="question-container">
       <h1>Question 4</h1>

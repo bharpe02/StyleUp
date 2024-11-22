@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSurveyContext } from "../contexts/SurveyContext";
 import axios from "axios";
 import BannerMenu from "../components/BannerMenu"

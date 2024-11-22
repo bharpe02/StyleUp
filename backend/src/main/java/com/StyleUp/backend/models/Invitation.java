@@ -25,10 +25,11 @@ public class Invitation {
 
     public Invitation() {}
 
-    public Invitation(Long owner_id, String email, Long room_id) {
+    public Invitation(Long owner_id, String email, Long room_id, String roomName) {
         this.ownerId = owner_id;
         this.email = email;
         this.room_id = room_id;
+        this.roomName = roomName;
     }
 
     public Long getInvitation_id() {
@@ -61,5 +62,24 @@ public class Invitation {
 
     public void setRoom_id(Long room_id) {
         this.room_id = room_id;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    @Override
+    public String toString() {
+        return "Invitation{" +
+                "invitation_id=" + invitation_id +
+                ", ownerId=" + ownerId +
+                ", email='" + email + '\'' +
+                ", room_id=" + room_id +
+                ", roomName='" + roomName + '\'' +
+                '}';
     }
 }

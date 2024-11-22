@@ -15,19 +15,19 @@ public class Decoration {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long decoration_id;
 
-    @Column
+    @Column (name = "fkr")
     private Long fkr;
 
     @Column(name="search_link")
     private String search_link;
 
-    @Column
+    @Column (name="description")
     private String description;
 
-    @Column
+    @Column (name="title")
     private String title;
 
-    @Column
+    @Column (name="image")
     private String image;
 
     public Decoration() {}

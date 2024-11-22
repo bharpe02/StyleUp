@@ -76,5 +76,15 @@ public class RoomController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Failed to add item to room: " + e.getMessage());
         }
+    } //not used, delete?
+
+    @PostMapping("/leave")
+    public ResponseEntity<String> leaveRoom(@RequestBody Room room) {
+        System.out.println("RECEIVED LEAVE REQUEST FOR ROOM: "+room);
+    }
+
+    @PostMapping("/getCollaborators")
+    public ResponseEntity<?> getCollaborators(@RequestBody Room room) {
+
     }
 }

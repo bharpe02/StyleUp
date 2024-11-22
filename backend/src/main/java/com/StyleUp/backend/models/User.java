@@ -37,7 +37,7 @@ public class User {
     @JoinColumn (name = "fku", referencedColumnName = "user_id")
     private List<Room> rooms=new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable (name="collaborations",
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "room_id")
@@ -101,6 +101,14 @@ public class User {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public Set<Room> getCollabRooms() {
+        return collabRooms;
+    }
+
+    public void setCollabRooms(Set<Room> collabRooms) {
+        this.collabRooms = collabRooms;
     }
 
     @Override

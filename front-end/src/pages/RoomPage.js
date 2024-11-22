@@ -160,9 +160,9 @@ function RoomPage() {
         }
         if (room && room.decorations.length > 0) {
           return (
-            <div className="decorations">
+            <div className="results-grid">
               {room.decorations.map((decoration) => (
-                <div key={`decoration-${decoration.dec_id}`} className="decoration">
+                <div key={`decoration-${decoration.dec_id}`} className="result-card">
                     <div className='room-header'>
                         <h2>{decoration.title}</h2>
                         <div className="dropdown">
@@ -184,6 +184,7 @@ function RoomPage() {
                             )}
                         </div>
                     </div>
+                    {decoration.image && <img src={decoration.image} alt={decoration.title} className="result-image" />}
                     <div className='description'> 
                         <h2>Description:</h2>
                         <p>{decoration.description}</p>
@@ -194,9 +195,9 @@ function RoomPage() {
                             href={decoration.searchLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="decoration-link"
+                            className="result-card-link"
                         >
-                            <p>{decoration.searchLink}</p>
+                            {decoration.searchLink}
                         </a>
                     </div>
                 </div>

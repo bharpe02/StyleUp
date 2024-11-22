@@ -62,7 +62,7 @@
 
 .decoration-link {
     text-decoration: none; /* Remove underline from link */
-    color: inherit; /* Inherit the parent color for consistency */
+    color: blue; /* Inherit the parent color for consistency */
   }
   
 .decoration img {

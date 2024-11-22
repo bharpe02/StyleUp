@@ -60,7 +60,7 @@ const ResultsPage = ({ query }) => {
     }     
   }
 
-  const addDecoration = async (item, room_id, index) => {
+  const addDecoration = async (item, room_id, index, image_url) => {
     try {
         // Prepare user data to send to the backend
         const headers = {
@@ -74,7 +74,7 @@ const ResultsPage = ({ query }) => {
           "fkr": room_id,
           "description": new DOMParser().parseFromString(item.htmlSnippet, 'text/html').body.textContent.trim() || "No description available.",
           "title": item.title,
-          "image": null,
+          "image": image_url,
         }
 
         console.log("Create Decoration:", decoration);
@@ -125,13 +125,17 @@ const ResultsPage = ({ query }) => {
       <div className="results-content">
         <h1>Search Results</h1>
         <div className="results-grid">
-          {items.map((item, index) => (
+          {items.map((item, index) => {
+            const imageUrl =
+              item.pagemap?.cse_image?.[0]?.src || item.pagemap?.metatags?.[0]?.["og:image"];
+            return (
             <div className="result-card" key={index}>
               <h2>{item.title}</h2>
               <a href={item.link} target="_blank" rel="noopener noreferrer">
                 {item.link}
               </a> {/* Use item.link */}
               <p dangerouslySetInnerHTML={{ __html: item.htmlSnippet }}></p> {/* Use item.htmlSnippet */}
+              {imageUrl && <img src={imageUrl} alt={item.title} className="result-image" />}
               {isLoggedIn ? (
                 <div className="dropdown">
                   <button className="menu-button" onClick={() => toggleRoomMenu(index)}>
@@ -144,7 +148,7 @@ const ResultsPage = ({ query }) => {
                       ) : (
                       rooms.map((room) => (
                         <button key={room.room_id} className="add-button" 
-                          onClick={() => addDecoration(item, room.room_id, index)}  
+                          onClick={() => addDecoration(item, room.room_id, index, imageUrl)}  
                         >
                           {room.roomName}
                         </button>
@@ -162,7 +166,8 @@ const ResultsPage = ({ query }) => {
                 <p className="login-prompt">Log in to add this to a room.</p>
               )}
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Navigation Buttons */}

@@ -68,7 +68,7 @@ function AddRoomPage() {
               <form onSubmit={handleSubmit}>
                   <div>
                       <h1>Create a Room:</h1>
-                      <label>Room Name: </label>
+                      <label id="room-name" >Room Name: </label>
                       <input 
                           type="text"
                           value={roomName}

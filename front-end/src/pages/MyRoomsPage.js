@@ -49,6 +49,9 @@ function MyRoomsPage() {
   const handleRoomClick = (room) => {
     navigate(`/Room?id=${room.room_id}&name=${encodeURIComponent(room.roomName)}`);
   };
+  const handleKeyDown = (room) => {
+    navigate(`/Room?id=${room.room_id}&name=${encodeURIComponent(room.roomName)}`);
+  };
 
   const renderContent = () => {
     if (loading) {
@@ -59,8 +62,9 @@ function MyRoomsPage() {
       return (
         <div className="rooms-list">
           {rooms.map((room) => (
-            <div key={room.room_id} className="room-item" 
-              onClick={() => handleRoomClick(room)}  
+            <div role="button" key={room.room_id} className="room-item" 
+              onClick={() => handleRoomClick(room) }
+              onKeyDown={() => handleKeyDown(room)}  
               style={{ cursor: 'pointer' }}>
               <h1>{room.roomName}</h1>
             </div>

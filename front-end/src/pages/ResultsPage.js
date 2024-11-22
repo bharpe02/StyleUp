@@ -6,9 +6,9 @@ import BannerMenu from "../components/BannerMenu"
 import { AuthContext } from "../contexts/AuthContext";
 import Sidebar from "../components/Sidebar";
 import "../assets/stylesheets/ResultsPage.css"
+import PropTypes from 'prop-types';
 
 const ResultsPage = ({ query }) => {
-  const location = useLocation();
   const navigate = useNavigate();
   const { finalResponse } = useSurveyContext();
   const { token, isLoggedIn } = useContext(AuthContext);
@@ -178,6 +178,10 @@ const ResultsPage = ({ query }) => {
       </div>
     </div>
   );
+};
+
+ResultsPage.propTypes = {
+  query: PropTypes.string.isRequired
 };
 
 export default ResultsPage;

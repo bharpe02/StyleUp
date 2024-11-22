@@ -2,8 +2,10 @@ package com.StyleUp.backend.services;
 
 import com.StyleUp.backend.models.Decoration;
 import com.StyleUp.backend.models.Room;
+import com.StyleUp.backend.models.User;
 import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.RoomRepository;
+import com.StyleUp.backend.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,11 @@ import java.util.List;
 @Service
 public class RoomService {
     private final RoomRepository roomRepository;
+    private final UserRepository userRepository;
 
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(RoomRepository roomRepository, UserRepository userRepository) {
         this.roomRepository = roomRepository;
+        this.userRepository = userRepository;
     }
 
     public Room addRoom(String roomName){
@@ -53,12 +57,6 @@ public class RoomService {
             throw new RuntimeException("Room not found with id: " + roomId);
         }
     }
-
-    //implement share method: need shared room and invitation classes too
-
-    //implement remove collaborator method?
-    //is this a completely separate controller, class, table, etc?? many-many relation
-
     /**
      * Add a decoration to an existing room.
      *
@@ -70,11 +68,19 @@ public class RoomService {
         // Find the room by ID
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room not found with id: " + roomId));
-
         // Add the decoration to the room's list of decorations
         room.getDecorations().add(decoration);
-
         // Save and return the updated room
         return roomRepository.save(room);
+    }
+
+    //@TODO: implement remove collaborator/leave room method!!!
+    public User removeCollaborator(Long roomId, Long userId) {
+
+    }
+    //@TODO: implement get collaborators!!!!!!!!!!!!!!!!!!!!!!!
+    public List<User> getCollaborators(Long roomId) {
+        List<User> collaborators = new ArrayList<>();
+
     }
 }

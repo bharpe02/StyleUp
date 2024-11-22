@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS invitations (
 
 -- Create join table for collaborations on rooms
 CREATE TABLE IF NOT EXISTS collaborations(
-    user_id BIGINT,
-    room_id BIGINT,
+    user_id BIGINT NOT NULL,
+    room_id BIGINT NOT NULL,
     FOREIGN KEY(user_id) references users(user_id),
     FOREIGN KEY(room_id) references rooms(room_id)
-)
+);

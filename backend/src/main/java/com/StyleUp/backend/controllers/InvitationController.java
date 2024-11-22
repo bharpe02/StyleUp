@@ -1,6 +1,7 @@
 package com.StyleUp.backend.controllers;
 
 import com.StyleUp.backend.models.Invitation;
+import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.InvitationRepository;
 import com.StyleUp.backend.services.InvitationService;
@@ -15,6 +16,7 @@ public class InvitationController {
 
     private final InvitationService invitationService;
     private final InvitationRepository invitationRepository;
+
 
     public InvitationController(InvitationService invitationService, InvitationRepository invitationRepository) {
         this.invitationService = invitationService;
@@ -54,7 +56,7 @@ public class InvitationController {
         System.out.println("RECEIVED REMOVE REQUEST FOR INVIte: " + invite.getInvitation_id());
         try {
             invitationService.removeInvite(invite.getInvitation_id());
-            return ResponseEntity.ok("Decoration deleted successfully");
+            return ResponseEntity.ok("INVITE deleted successfully");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -64,14 +66,28 @@ public class InvitationController {
 
     @PostMapping("/share")
     public ResponseEntity<String> share(@RequestBody Invitation invite) {
-        System.out.println("RECEIVED Share REQUEST FOR invite: " + invite.getInvitation_id());
+        System.out.println("RECEIVED Share REQUEST FOR invite: " + invite);
         try {
-            invitationService.removeInvite(invite.getInvitation_id());
-            return ResponseEntity.ok("Decoration deleted successfully");
+            invitationService.addInvitation(invite.getEmail(), invite.getRoom_id(),
+                    invite.getOwner_id(), invite.getRoomName());
+            return ResponseEntity.ok("ROOM SHARED successfully");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Delete failed: " + e.getMessage());
+                    .body("Share failed: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/accept")
+    public ResponseEntity<?> acceptInvite(@RequestBody Invitation invite) {
+        System.out.println("RECEIVED accept REQUEST FOR invite: " + invite);
+        try {
+            invitationService.acceptInvite(invite.getInvitation_id());
+            return ResponseEntity.ok("invite accepted successfully");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("ACCEPT failed: " + e.getMessage());
         }
     }
 }

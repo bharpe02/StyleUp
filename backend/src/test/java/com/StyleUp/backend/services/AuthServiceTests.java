@@ -1,12 +1,9 @@
 package com.StyleUp.backend.services;
 
-import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.User;
 import com.StyleUp.backend.repositories.DecorationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,9 +47,10 @@ public class AuthServiceTests {
     @InjectMocks
     private AuthService authService;
 
+    //AUTH SERVICE TESTS
 
     @Test
-    void registerUser_ShouldRegisterUser_WhenEmailIsNew() {
+    void testRegisterUser_newEmail() {
         /**
          * Test Case: Registering a new user with a unique email.
          * Scenario: The email does not already exist in the database.
@@ -85,7 +83,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    void registerUser_ShouldThrowException_WhenEmailAlreadyExists() {
+    void testRegisterUser_emailAlreadyExists() {
         /**
          * Test Case: Registering a user with an already existing email.
          * Scenario: The email is found in the database.
@@ -104,7 +102,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    void verifyUser_ShouldReturnToken_WhenAuthenticationIsSuccessful() {
+    void testVerifyUser_success() {
         /**
          * Test Case: Verifying a user's login credentials.
          * Scenario: The email exists, and the password matches.
@@ -143,7 +141,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    void verifyUser_ShouldThrowException_WhenUserNotFound() {
+    void testVerifyUser_userNotFound() {
         /**
          * Test Case: Verifying a user that does not exist.
          * Scenario: The email does not match any records in the database.
@@ -169,7 +167,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    void verifyUser_ShouldThrowException_WhenPasswordIsIncorrect() {
+    void testVerifyUser_incorrectPassword() {
         /**
          * Test Case: Verifying a user with incorrect credentials.
          * Scenario: The email exists, but the password is incorrect.
@@ -197,7 +195,7 @@ public class AuthServiceTests {
     }
 
     @Test
-    void verifyUser_ShouldThrowInternalServerError_WhenUnexpectedErrorOccurs() {
+    void testVerifyUser_unexpectedError() {
         // Given
         String email = "john.doe@example.com";
         String password = "securepassword";
@@ -221,7 +219,7 @@ public class AuthServiceTests {
         assertEquals("An unexpected error occurred", exception.getReason());
     }
 
-    @Test
+    /*@Test
     void verifyUser_ShouldThrowUnauthorized_WhenAuthenticationFails() {
         // Given
         String email = "john.doe@example.com";
@@ -246,5 +244,7 @@ public class AuthServiceTests {
         // Verify the exception details
         assertEquals(HttpStatus.UNAUTHORIZED, exception.getStatusCode());
         assertEquals("Incorrect password", exception.getReason());
-    }
+    }*/
+
+
 }

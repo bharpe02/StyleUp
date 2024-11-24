@@ -19,17 +19,46 @@ function CollabRoomPage() {
     const [room, setRoom] = useState();
     const [menuOpenStates, setMenuOpenStates] = useState({});
     const [roomMenuOpen, setRoomMenuOpen] = useState(false);
+    const [loading1, setLoading1] = useState(true);
+    const [collaborators, setCollaborators] = useState([]);
 
     useEffect(() => {
         if (!isLoggedIn) {
             navigate("/Login"); // Redirect to Login if not logged in
         } else {
             getRoom();
+            getCollaborators();
             
         }
     }, [isLoggedIn, navigate]); // Depend on isLoggedIn to trigger re-navigation
 
+    const getCollaborators = async () => {
+        try {
+          setLoading1(true); // Start loading
+    
+          const headers = {
+            Authorization: `Bearer ${token}`,
+          };
+          
+          const tempRoom={
+            "room_id": roomId,
+            "roomName": roomName,
+            "fku": null,
+            "decorations": []
+        }
 
+          const sentResponse = await axios.post("http://localhost:8080/api/room/getCollaborators", tempRoom,{headers})
+    
+          console.log("Collaborators data:", sentResponse.data); // Check invites 
+          setCollaborators(sentResponse.data)
+    
+        } catch (error) {
+          console.error("Failed to fetch collaborators details:", error);
+          setErrorMessage(error);
+        } finally {
+          setLoading1(false); // Stop loading after fetch is done
+        }
+    }
 
     const getRoom = async () => {
         try{
@@ -215,6 +244,33 @@ function CollabRoomPage() {
         );
       };
 
+      const renderCollaborators = () => {
+        if (loading1) {
+          return <p style={{ textAlign: 'center' }}>Loading collaborators...</p>;
+        }
+        
+        if (Array.isArray(collaborators) && collaborators.length > 0) {
+            console.log("rendering collaborators")
+            return (
+                <div className="rooms-list">
+                    {collaborators.map((collaborator) => (
+                        <div className="room-item" key={collaborator.id}>
+                            <h2>{collaborator.email}</h2>
+                        </div>
+                    ))}
+                </div>
+          );
+        } 
+        // Memoize the value to prevent unnecessary re-renders
+        return (
+          <>
+            <div className="no-room-message">
+              <p>You haven't invited anyone to collaborate yet...</p>
+            </div>
+          </>
+        );
+      };
+
   return (
     <div>
       <div>
@@ -247,6 +303,10 @@ function CollabRoomPage() {
             )}
             
             {errorMessage && <p style={{ textAlign:"center", color: 'red' }}>{errorMessage}</p>}
+
+            <h1>Collaborators:</h1>
+            {renderCollaborators()}
+            <h2>--------------</h2>
         </div>
       ):(
         <p style={{ textAlign: 'center' }}>Redirecting to login...</p>

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 import "../assets/stylesheets/LoginPage.css"
 import axios from 'axios';
+import { createRoom } from "../utils/RoomUtils";
 
 function AddRoomPage() {
   const navigate = useNavigate();
@@ -20,10 +21,15 @@ function AddRoomPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createRoom();
+    createRoom(
+      roomName,
+      token,
+      () => navigate("/MyRooms"),
+      setErrorMessage
+    );
   };
 //blah
-  const createRoom = async () => {
+  /*const createRoom = async () => {
     try {
         // Prepare user data to send to the backend
         const headers = {
@@ -53,7 +59,7 @@ function AddRoomPage() {
             setErrorMessage(`Room creation failed: ${error.message}`);
         }
     }
-  };
+  };*/
 
   return (
     <div>

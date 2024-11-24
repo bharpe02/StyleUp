@@ -7,6 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import Sidebar from "../components/Sidebar";
 import "../assets/stylesheets/ResultsPage.css"
 import PropTypes from 'prop-types';
+import { createRoom } from "../utils/RoomUtils";
 
 const ResultsPage = ({ query }) => {
   const navigate = useNavigate();
@@ -32,6 +33,20 @@ const ResultsPage = ({ query }) => {
     return () => document.removeEventListener("click", handleClickOutside);
 
   }, []);
+
+  const handleCreateRoom = () => {
+    const roomName = prompt("Enter room name:");
+    if (roomName) {
+      createRoom(
+        roomName,
+        token,
+        () => getRooms(),
+        (error) => {
+          alert(error); // Show error message
+        }
+      );
+    }
+  };
 
   const fetchResults = async () => {
     try {
@@ -160,7 +175,9 @@ const ResultsPage = ({ query }) => {
                   {menuOpenStates[index] && (
                     <div className="dropdown-menu">
                       {rooms.length === 0 ? (
-                        <p style={{textAlign: "center"}}>No rooms available. Create one to add items!</p>
+                        <div>
+                          <button className="add-button" onClick={handleCreateRoom}>Create a Room</button>
+                        </div>
                       ) : (
                       rooms.map((room) => (
                         <button key={room.room_id} className="add-button" 

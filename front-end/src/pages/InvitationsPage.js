@@ -10,6 +10,7 @@ function InvitationsPage() {
     const navigate = useNavigate();
     const { isLoggedIn, token } = useContext(AuthContext);
     const [invitations, setInvitations] = useState([]);
+
     const [errorMessage, setErrorMessage] = useState('');
     const [sent, setSent] = useState([]);
     const [loading, setLoading] = useState(true); // Loading state to manage async data fetching
@@ -134,6 +135,9 @@ function InvitationsPage() {
                                     }}
                                     onMouseOver={(e) => (e.target.style.backgroundColor = "#4B2C37")}
                                     onMouseOut={(e) => (e.target.style.backgroundColor = "#633B48")}
+                                    /**for accessibility*/
+                                    onFocus={(e) => (e.target.style.backgroundColor = "#4B2C37")}
+                                    onBlur={(e) => (e.target.style.backgroundColor = "#633B48")}
                                 >
                                     Accept
                                 </button>
@@ -153,11 +157,24 @@ function InvitationsPage() {
                                     onMouseOver={(e) => {
                                         e.target.style.backgroundColor = "#633B48";
                                         e.target.style.color = "#F1E8E8";
+
                                     }}
                                     onMouseOut={(e) => {
                                         e.target.style.backgroundColor = "#F1E8E8";
                                         e.target.style.color = "#633B48";
+            
                                     }}
+                                    onFocus={(e) => {
+                                        //for accessibility
+                                        e.target.style.backgroundColor = "#633B48";
+                                        e.target.style.color = "#F1E8E8";
+                                    }}
+                                    onBlur={(e) => {
+                                        //for accessibility
+                                        e.target.style.backgroundColor = "#F1E8E8";
+                                        e.target.style.color = "#633B48";
+                                    }}
+
                                 >
                                     Decline
                                 </button>
@@ -170,11 +187,9 @@ function InvitationsPage() {
         } 
         // Memoize the value to prevent unnecessary re-renders
         return (
-          <>
             <div className="no-room-message">
               <p>You don't have any invitations yet...</p>
             </div>
-          </>
         );
       };
 

@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS invitations (
     email VARCHAR(255) NOT NULL,
     owner_id BIGINT,
     room_id BIGINT,
-    room_name VARCHAR(255) NOT NULL
+    room_name VARCHAR(255) NOT NULL,
+    sender_name VARCHAR(255) NOT NULL
 );
 
 -- Create join table for collaborations on rooms

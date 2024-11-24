@@ -27,11 +27,13 @@ public class InvitationController {
     //need find by email to render received invitations
     @GetMapping("/getReceived")
     public ResponseEntity<?> getReceivedInvites(@AuthenticationPrincipal UserPrincipal user) {
+        System.out.println("RECEIVED GET REQUEST FOR INVItes for user: " + user.getUsername());
         try {
             // Ensure the user is authenticated and has the necessary information
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
             }
+            System.out.println(invitationRepository.findByEmail(user.getUsername()));
             return ResponseEntity.ok(invitationRepository.findByEmail(user.getUsername()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");
@@ -40,11 +42,13 @@ public class InvitationController {
     //find by owner to render sent invitations
     @GetMapping("/getSent")
     public ResponseEntity<?> getSentInvites(@AuthenticationPrincipal UserPrincipal user) {
+        System.out.println("RECEIVED GET REQUEST FOR sent!! INVItes for user: " + user.getUsername());
         try {
             // Ensure the user is authenticated and has the necessary information
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
             }
+            System.out.println(invitationRepository.findByOwnerId(user.getId()));
             return ResponseEntity.ok(invitationRepository.findByOwnerId(user.getId()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");
@@ -68,8 +72,7 @@ public class InvitationController {
     public ResponseEntity<String> share(@RequestBody Invitation invite) {
         System.out.println("RECEIVED Share REQUEST FOR invite: " + invite);
         try {
-            invitationService.addInvitation(invite.getEmail(), invite.getRoom_id(),
-                    invite.getOwner_id(), invite.getRoomName());
+            invitationService.addInvitation(invite.getEmail(), invite.getRoom_id(), invite.getRoomName());
             return ResponseEntity.ok("ROOM SHARED successfully");
         } catch (Exception e) {
             System.out.println(e.getMessage());

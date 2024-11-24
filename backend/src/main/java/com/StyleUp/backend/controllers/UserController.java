@@ -77,7 +77,7 @@ public class UserController {
             if (user == null) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
             }
-            List<Collaboration> collabs = collaborationRepository.findbyUserId(user.getId());
+            List<Collaboration> collabs = collaborationRepository.findByUserId(user.getId());
             List<Room> collabRooms = new ArrayList<>();
             for (Collaboration collab : collabs) {
                 Room room = roomRepository.findById(collab.getRoomId()).get();

@@ -23,14 +23,22 @@ public class Invitation {
     @Column(name="room_name")
     String roomName;
 
+    @Column(name = "sender_name")
+    String senderName;
+
     public Invitation() {}
 
-    public Invitation(Long owner_id, String email, Long room_id, String roomName) {
+    public Invitation(Long owner_id, String email, Long room_id, String roomName, String senderName) {
         this.ownerId = owner_id;
         this.email = email;
         this.room_id = room_id;
         this.roomName = roomName;
+        this.senderName = senderName;
     }
+
+    public String getSenderName() {return senderName;}
+
+    public void setSenderName(String senderName) {this.senderName = senderName;}
 
     public Long getInvitation_id() {
         return invitation_id;

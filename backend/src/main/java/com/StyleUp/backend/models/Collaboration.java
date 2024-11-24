@@ -46,4 +46,13 @@ public class Collaboration {
     public void setRoomId(Long roomId) {
         this.roomId = roomId;
     }
+
+    @Override
+    public String toString() {
+        return "Collaboration{" +
+                "collaborationId=" + collaborationId +
+                ", userId=" + userId +
+                ", roomId=" + roomId +
+                '}';
+    }
 }

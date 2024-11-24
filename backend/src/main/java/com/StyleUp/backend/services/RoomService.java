@@ -7,6 +7,7 @@ import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.CollaborationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -45,16 +46,17 @@ public class RoomService {
             System.out.println("No user is logged in.");
             return null;
         }
-
         List<Decoration> decorations = new ArrayList<>();
         Room room = new Room(roomName, userId, decorations);
         System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }
-
+    
+    @Transactional
     public void removeRoom(Long roomId){
         if (roomRepository.existsById(roomId)) {
             // Delete the user by ID
+            collaborationRepository.deleteByRoomId(roomId);
             roomRepository.deleteById(roomId);
         } else {
             // Handle the case where the user does not exist (optional)
@@ -84,7 +86,11 @@ public class RoomService {
         Set<Room> collabs= user.getCollabRooms();
         collabs.remove(room);
         user.setCollabRooms(collabs);
-        collaborationRepository.deleteByRoomIdAndUserId(roomId, userId);
+        try {
+            collaborationRepository.deleteByRoomIdAndUserId(roomId, userId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return userRepository.save(user);
     }
 }

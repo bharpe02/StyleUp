@@ -1,10 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import '../assets/stylesheets/OpeningPage.css';
 import BannerMenu from '../components/BannerMenu.js'
 import GradientBackground from '../components/GradientBackground'
 import { Link } from "react-router-dom";
-import { AuthContext } from '../contexts/AuthContext.js';
-import Sidebar from '../components/Sidebar.js'
 
 function OpeningPage() {
 

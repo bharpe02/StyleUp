@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -35,6 +37,12 @@ public class User {
     @JoinColumn (name = "fku", referencedColumnName = "user_id")
     private List<Room> rooms=new ArrayList<>();
 
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name="collaborations",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "room_id")
+                )
+    private Set<Room> collabRooms=new HashSet<>();
 
     // Default constructor for JPA
     public User() {}
@@ -93,6 +101,14 @@ public class User {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public Set<Room> getCollabRooms() {
+        return collabRooms;
+    }
+
+    public void setCollabRooms(Set<Room> collabRooms) {
+        this.collabRooms = collabRooms;
     }
 
     @Override

@@ -23,13 +23,22 @@ public class Invitation {
     @Column(name="room_name")
     String roomName;
 
+    @Column(name = "sender_name")
+    String senderName;
+
     public Invitation() {}
 
-    public Invitation(Long owner_id, String email, Long room_id) {
+    public Invitation(Long owner_id, String email, Long room_id, String roomName, String senderName) {
         this.ownerId = owner_id;
         this.email = email;
         this.room_id = room_id;
+        this.roomName = roomName;
+        this.senderName = senderName;
     }
+
+    public String getSenderName() {return senderName;}
+
+    public void setSenderName(String senderName) {this.senderName = senderName;}
 
     public Long getInvitation_id() {
         return invitation_id;
@@ -61,5 +70,24 @@ public class Invitation {
 
     public void setRoom_id(Long room_id) {
         this.room_id = room_id;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    @Override
+    public String toString() {
+        return "Invitation{" +
+                "invitation_id=" + invitation_id +
+                ", ownerId=" + ownerId +
+                ", email='" + email + '\'' +
+                ", room_id=" + room_id +
+                ", roomName='" + roomName + '\'' +
+                '}';
     }
 }

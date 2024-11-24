@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSurveyContext } from "../contexts/SurveyContext";
 import axios from "axios";
 import BannerMenu from "../components/BannerMenu"
 import { AuthContext } from "../contexts/AuthContext";
 import Sidebar from "../components/Sidebar";
 import "../assets/stylesheets/ResultsPage.css"
+import PropTypes from 'prop-types';
 
 const ResultsPage = ({ query }) => {
-  const location = useLocation();
   const navigate = useNavigate();
   const { finalResponse } = useSurveyContext();
   const { token, isLoggedIn } = useContext(AuthContext);
   const [menuOpenStates, setMenuOpenStates] = useState({});
   const [rooms, setRooms] = useState([])
+  const [collabs, setCollabs] = useState([])
   const [messages, setMessages] = useState({});
 
   // Initialize results as null to show loading state initially
@@ -38,6 +39,7 @@ const ResultsPage = ({ query }) => {
       const response = await axios.post(`http://localhost:8080/api/search`, finalResponse);
       setResults(response.data); // Save the raw JSON object
       await getRooms();
+      await getCollabs();
     } catch (error) {
       console.error("Error fetching results: ", error);
     }
@@ -59,6 +61,20 @@ const ResultsPage = ({ query }) => {
       console.error("Failed to fetch user details:", error);
     }     
   }
+
+  const getCollabs = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const collabsResponse = await axios.get("http://localhost:8080/api/user/collabRooms", {headers})
+      console.log("Collabs data:", collabsResponse.data); // Check rooms 
+      setCollabs(collabsResponse.data)
+    } catch (error) {
+      console.error("Failed to fetch collab details:", error);
+    }
+  }
+
 
   const addDecoration = async (item, room_id, index, image_url) => {
     try {
@@ -154,6 +170,17 @@ const ResultsPage = ({ query }) => {
                         </button>
                       ))
                     )}
+                    {!Array.isArray(collabs) || collabs.length === 0 ? (
+                        <p style={{textAlign: "center"}}>No shared rooms</p>
+                      ) : (
+                      collabs.map((collab) => (
+                        <button key={collab.room_id} className="add-button" 
+                          onClick={() => addDecoration(item, collab.room_id, index, imageUrl)}  
+                        >
+                          {collab.roomName}
+                        </button>
+                      ))
+                    )}
                     </div>
                   )}
                   {messages[index] && (
@@ -178,6 +205,10 @@ const ResultsPage = ({ query }) => {
       </div>
     </div>
   );
+};
+
+ResultsPage.propTypes = {
+  query: PropTypes.string.isRequired
 };
 
 export default ResultsPage;

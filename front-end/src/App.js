@@ -12,6 +12,7 @@ import RoomPage from "./pages/RoomPage";
 import ResultsPage from "./pages/ResultsPage";
 import InvitationsPage from "./pages/InvitationsPage"
 import { SurveyProvider } from "./contexts/SurveyContext";
+import CollabRoomPage from "./pages/CollabRoomPage";
 
 function App() {
   
@@ -26,6 +27,7 @@ function App() {
             <Route path="Wishlist" element={<WishlistPage />} />
             <Route path="MyAccount" element={<MyAccountPage/>} />
             <Route path="Room" element={<RoomPage/>} />
+            <Route path="CollabRoom" element={<CollabRoomPage/>} />
             <Route path="Invitations" element={<InvitationsPage/>} />
           </Route>
           <Route path="Survey" element={<SurveyPage />} />

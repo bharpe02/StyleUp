@@ -204,7 +204,7 @@ function InvitationsPage() {
                     {Array.isArray(sent) && sent.map((send) => (
                         <div className="room-item" key={send.id}>
                             <h2>{send.roomName}</h2>
-                            <p><strong>Invited By:</strong> {send.senderName}</p>
+                            <p><strong>Sent to: </strong> {send.email}</p>
                             <div className="invitation-actions">
                                 <button
                                     onClick={() => rejectInvitation(send)}

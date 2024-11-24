@@ -3,10 +3,13 @@ package com.StyleUp.backend.services;
 import com.StyleUp.backend.models.Invitation;
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.User;
+import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.InvitationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Set;
 
@@ -22,9 +25,28 @@ public class InvitationService {
         this.roomRepository = roomRepository;
     }
 
-    public Invitation addInvitation(String email, Long roomId, Long ownerId, String roomName){
+    public Invitation addInvitation(String email, Long roomId, String roomName){
         System.out.println("In addInvitation!!");
-        Invitation invite = new Invitation(ownerId, email, roomId, roomName);
+        if (!userRepository.existsByEmail(email)){
+            throw new RuntimeException("User not found!");
+        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long ownerId;
+        String senderName;
+        if (authentication != null && authentication.getPrincipal() instanceof UserPrincipal) {
+            // Cast the principal to UserPrincipal
+            UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+            // Access user details (e.g., user ID, username, etc.)
+            ownerId = userPrincipal.getId();
+            senderName = userPrincipal.getUsername();
+            System.out.println("USER ID: " + ownerId);
+            System.out.println("ROOM NAME: " + roomName);
+        } else {
+            // Handle case where the authentication or principal is not present
+            System.out.println("No user is logged in.");
+            return null;
+        }
+        Invitation invite = new Invitation(ownerId, email, roomId, roomName, senderName);
         System.out.println("FULL Invitation: " + invite);
         return invitationRepository.save(invite);
     }

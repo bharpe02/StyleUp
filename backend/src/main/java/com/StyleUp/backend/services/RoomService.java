@@ -4,8 +4,10 @@ import com.StyleUp.backend.models.Decoration;
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.User;
 import com.StyleUp.backend.models.UserPrincipal;
+import com.StyleUp.backend.repositories.CollaborationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import com.StyleUp.backend.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -14,15 +16,18 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class RoomService {
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
+    private final CollaborationRepository collaborationRepository;
 
-    public RoomService(RoomRepository roomRepository, UserRepository userRepository) {
+    public RoomService(RoomRepository roomRepository, UserRepository userRepository, CollaborationRepository collaborationRepository) {
         this.roomRepository = roomRepository;
         this.userRepository = userRepository;
+        this.collaborationRepository = collaborationRepository;
     }
 
     public Room addRoom(String roomName){
@@ -41,16 +46,17 @@ public class RoomService {
             System.out.println("No user is logged in.");
             return null;
         }
-
         List<Decoration> decorations = new ArrayList<>();
         Room room = new Room(roomName, userId, decorations);
         System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }
-
+    
+    @Transactional
     public void removeRoom(Long roomId){
         if (roomRepository.existsById(roomId)) {
             // Delete the user by ID
+            collaborationRepository.deleteByRoomId(roomId);
             roomRepository.deleteById(roomId);
         } else {
             // Handle the case where the user does not exist (optional)
@@ -74,13 +80,17 @@ public class RoomService {
         return roomRepository.save(room);
     }
 
-    //@TODO: implement remove collaborator/leave room method!!!
     public User removeCollaborator(Long roomId, Long userId) {
-
-    }
-    //@TODO: implement get collaborators!!!!!!!!!!!!!!!!!!!!!!!
-    public List<User> getCollaborators(Long roomId) {
-        List<User> collaborators = new ArrayList<>();
-
+        User user = userRepository.findById(userId).get();
+        Room room = roomRepository.findById(roomId).get();
+        Set<Room> collabs= user.getCollabRooms();
+        collabs.remove(room);
+        user.setCollabRooms(collabs);
+        try {
+            collaborationRepository.deleteByRoomIdAndUserId(roomId, userId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return userRepository.save(user);
     }
 }

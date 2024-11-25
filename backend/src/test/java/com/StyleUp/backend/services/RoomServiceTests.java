@@ -51,7 +51,7 @@ public class RoomServiceTests {
 
     /*Test Add Room Success*/
     @Test
-    void testAddRoom() {
+    void testAddRoom_Success() {
         /**
          * Test Case: Adding a room to a user account
          * Scenario: The User exists in the database

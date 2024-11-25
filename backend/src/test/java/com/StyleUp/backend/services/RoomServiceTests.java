@@ -1,8 +1,6 @@
 package com.StyleUp.backend.services;
 
-import com.StyleUp.backend.models.Decoration;
-import com.StyleUp.backend.models.Room;
-import com.StyleUp.backend.models.UserPrincipal;
+import com.StyleUp.backend.models.*;
 import com.StyleUp.backend.repositories.CollaborationRepository;
 import org.junit.jupiter.api.Test;
 import com.StyleUp.backend.repositories.DecorationRepository;
@@ -20,9 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -171,12 +167,47 @@ public class RoomServiceTests {
         // Mock findById to simulate finding the room
         when(roomRepository.findById(roomId)).thenReturn(Optional.of(roomDestination));
 
-
         // Call Method to test
         roomService.addDecorationToRoom( newDecoration, roomId);
 
-
         verify(roomRepository).save(roomDestination);  // Ensure save was called
     }
+
+    @Test
+    void testRemoveCollaborator() {
+        // Arrange: Define room and user details
+        Long roomId = 1L;
+        Long userId = 2L;
+
+        Room room = new Room();
+        room.setRoom_id(roomId);
+
+        User user = new User();
+        user.setId(userId);
+        Set<Room> collabRooms = new HashSet<>();
+        collabRooms.add(room);
+        user.setCollabRooms(collabRooms);
+
+        // Mock Collaboration object
+        Collaboration mockCollaboration = new Collaboration(userId, roomId);
+
+        // Mock repository behavior
+        when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+        when(roomRepository.findById(roomId)).thenReturn(Optional.of(room));
+        when(collaborationRepository.deleteByRoomIdAndUserId(roomId, userId)).thenReturn(mockCollaboration);
+        when(userRepository.save(user)).thenReturn(user);
+
+        // Act
+        User updatedUser = roomService.removeCollaborator(roomId, userId);
+
+        // Assert
+        verify(userRepository).findById(userId);
+        verify(roomRepository).findById(roomId);
+        verify(collaborationRepository).deleteByRoomIdAndUserId(roomId, userId);
+        verify(userRepository).save(user);
+
+        assertFalse(updatedUser.getCollabRooms().contains(room), "Room should be removed from user's collabRooms");
+    }
+
 
 }

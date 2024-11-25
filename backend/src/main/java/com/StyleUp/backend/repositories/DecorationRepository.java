@@ -6,4 +6,5 @@ import java.util.*;
 
 public interface DecorationRepository extends JpaRepository<Decoration, Long> {
     List<Decoration> findByFkr(Long fkUserId);
+    List<Decoration> findByWishId(Long wishId);
 }

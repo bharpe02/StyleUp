@@ -10,8 +10,12 @@ export const loginUser = async (email, password, login, navigate, setErrorMessag
     try {
         // Prepare user data to send to the backend
         const userData = {
-            email,
-            password,
+            "fname": null,
+            "lname": null,
+            "email": email,
+            "password": password,
+            "rooms": [],
+            "wishlist": [],
         };
         // Send POST request to backend
         const response = await axios.post('http://localhost:8080/api/login', userData);

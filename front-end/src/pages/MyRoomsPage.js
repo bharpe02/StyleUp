@@ -166,5 +166,3 @@ function MyRoomsPage() {
 }
 
 export default MyRoomsPage;
-
-//TODO: render collab rooms

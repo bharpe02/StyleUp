@@ -28,38 +28,6 @@ function AddRoomPage() {
       setErrorMessage
     );
   };
-//blah
-  /*const createRoom = async () => {
-    try {
-        // Prepare user data to send to the backend
-        const headers = {
-          Authorization: `Bearer ${token}`,  
-        };
-        console.log("Room name:", roomName);
-
-        // Send POST request to backend
-        const response = await axios.post('http://localhost:8080/api/room/create', {roomName}, {headers});
-        
-        if (response.status === 200) {
-            console.log('Room created successfully:', response.data);
-            navigate("/MyRooms"); // Redirect to home page
-        }
-    } catch (error) {
-        if (error.response) {
-            // The request was made and the server responded with a status code
-            console.error("Error response:", error.response.data);
-            setErrorMessage(`Room creation failed: ${error.response.data.message || "Unknown error occurred."}`);
-        } else if (error.request) {
-            // The request was made but no response was received
-            console.error("Error request:", error.request);
-            setErrorMessage("Room creation failed: No response from server.");
-        } else {
-            // Something happened in setting up the request
-            console.error("Error message:", error.message);
-            setErrorMessage(`Room creation failed: ${error.message}`);
-        }
-    }
-  };*/
 
   return (
     <div>

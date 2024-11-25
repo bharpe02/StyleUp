@@ -44,16 +44,21 @@ public class User {
                 )
     private Set<Room> collabRooms=new HashSet<>();
 
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn (name = "wish_id", referencedColumnName = "user_id")
+    private List<Decoration> wishlist=new ArrayList<>();
+
     // Default constructor for JPA
     public User() {}
 
     //Actual constructor
-    public User(String fname, String lname, String email, String password, List<Room> rooms) {
+    public User(String fname, String lname, String email, String password, List<Room> rooms, List<Decoration> wishlist) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.password = password;
         this.rooms = rooms;
+        this.wishlist = wishlist;
     }
 
     // Getters and setters
@@ -109,6 +114,14 @@ public class User {
 
     public void setCollabRooms(Set<Room> collabRooms) {
         this.collabRooms = collabRooms;
+    }
+
+    public List<Decoration> getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(List<Decoration> wishlist) {
+        this.wishlist = wishlist;
     }
 
     @Override

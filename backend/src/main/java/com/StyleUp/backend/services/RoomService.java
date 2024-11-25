@@ -51,7 +51,7 @@ public class RoomService {
         System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }
-    
+
     @Transactional
     public void removeRoom(Long roomId){
         if (roomRepository.existsById(roomId)) {
@@ -62,22 +62,6 @@ public class RoomService {
             // Handle the case where the user does not exist (optional)
             throw new RuntimeException("Room not found with id: " + roomId);
         }
-    }
-    /**
-     * Add a decoration to an existing room.
-     *
-     * @param decoration decoration to add
-     * @param roomId ID of the room which the decoration should be added
-     * @return updated room with the new decoration.
-     */
-    public Room addDecorationToRoom(Decoration decoration, Long roomId) {
-        // Find the room by ID
-        Room room = roomRepository.findById(roomId)
-                .orElseThrow(() -> new RuntimeException("Room not found with id: " + roomId));
-        // Add the decoration to the room's list of decorations
-        room.getDecorations().add(decoration);
-        // Save and return the updated room
-        return roomRepository.save(room);
     }
 
     public User removeCollaborator(Long roomId, Long userId) {

@@ -22,7 +22,7 @@ function RoomPage() {
     const [roomMenuOpen, setRoomMenuOpen] = useState(false);
     const [loading1, setLoading1] = useState(true);
     const [collaborators, setCollaborators] = useState([]);
-
+    
     useEffect(() => {
         if (!isLoggedIn) {
             navigate("/Login"); // Redirect to Login if not logged in

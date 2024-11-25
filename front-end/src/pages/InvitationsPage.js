@@ -82,7 +82,18 @@ function InvitationsPage() {
           const sentResponse = await axios.post("http://localhost:8080/api/invitation/reject", invitation,{headers})
     
           console.log("Invitation data:", sentResponse.data); // Check invites 
-          setSent(sentResponse.data)
+          if (sentResponse.status === 200) {
+            console.log('Invitation deleted successfully:', sentResponse.data);
+            // Update the local state to remove the deleted decoration
+            setInvitations((prevInvitations) => ({
+                ...prevInvitations,
+                invitations: prevInvitations.filter((inv) => inv.invitation_id !== invitation.invitation_id),
+            }));
+            setSent((prevSent) => ({
+              ...prevSent,
+              sent: prevSent.filter((inv) => inv.invitation_id !== invitation.invitation_id),
+          }));
+          }
     
         } catch (error) {
           console.error("Failed to reject invitation:", error);
@@ -98,8 +109,13 @@ function InvitationsPage() {
     
           const sentResponse = await axios.post("http://localhost:8080/api/invitation/accept", invitation, {headers})
     
-          console.log("Invitation data:", sentResponse.data); // Check invites 
-          setSent(sentResponse.data)
+          if (sentResponse.status === 200) {
+            console.log('Collab deleted successfully:', sentResponse.data);
+            setInvitations((prevInvitations) => ({
+                ...prevInvitations,
+                invitations: prevInvitations.filter((invite) => invite.invitation_id !== invitation.invitations_id),
+            }));
+        }
     
         } catch (error) {
           console.error("Failed to accept invitation:", error);
@@ -188,7 +204,7 @@ function InvitationsPage() {
         // Memoize the value to prevent unnecessary re-renders
         return (
             <div className="no-room-message">
-              <p>You don't have any invitations yet...</p>
+              <h2>You don't have any invitations yet...</h2>
             </div>
         );
       };
@@ -241,7 +257,7 @@ function InvitationsPage() {
         return (
           <>
             <div className="no-room-message">
-              <p>You haven't sent any invitations yet...</p>
+              <h2>You haven't sent any invitations yet...</h2>
             </div>
           </>
         );

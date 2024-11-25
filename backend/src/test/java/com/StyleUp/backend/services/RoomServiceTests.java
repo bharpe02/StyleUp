@@ -173,41 +173,55 @@ public class RoomServiceTests {
         verify(roomRepository).save(roomDestination);  // Ensure save was called
     }
 
+    /*Test Add Decoration to Room*/
     @Test
     void testRemoveCollaborator() {
+        /**
+         * Test Case: Removing a collaborator
+         * Scenario: The User exists in the database
+         * Behavior Expected:
+         * - Collaborator is removed
+         * - The updated user is returned
+         */
+
         // Arrange: Define room and user details
+        String roomName = "Bedroom";
         Long roomId = 1L;
         Long userId = 2L;
 
+        // Mock Room
         Room room = new Room();
         room.setRoom_id(roomId);
+        room.setRoomName(roomName);
 
+        // Mock User
         User user = new User();
         user.setId(userId);
         Set<Room> collabRooms = new HashSet<>();
         collabRooms.add(room);
         user.setCollabRooms(collabRooms);
 
-        // Mock Collaboration object
-        Collaboration mockCollaboration = new Collaboration(userId, roomId);
-
         // Mock repository behavior
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(roomRepository.findById(roomId)).thenReturn(Optional.of(room));
-        when(collaborationRepository.deleteByRoomIdAndUserId(roomId, userId)).thenReturn(mockCollaboration);
+
+        // Mock void method call for deleteByRoomIdAndUserId
+        doNothing().when(collaborationRepository).deleteByRoomIdAndUserId(roomId, userId);
+
+        // Mock save
         when(userRepository.save(user)).thenReturn(user);
 
-        // Act
+        // Act: Call the method
         User updatedUser = roomService.removeCollaborator(roomId, userId);
 
-        // Assert
+        // Assert: Verify behavior and state
         verify(userRepository).findById(userId);
         verify(roomRepository).findById(roomId);
         verify(collaborationRepository).deleteByRoomIdAndUserId(roomId, userId);
         verify(userRepository).save(user);
 
+        // Check that the room was removed from the user's collaboration list
         assertFalse(updatedUser.getCollabRooms().contains(room), "Room should be removed from user's collabRooms");
     }
-
 
 }

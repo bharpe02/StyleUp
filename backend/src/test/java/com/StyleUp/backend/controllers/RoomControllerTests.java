@@ -1,8 +1,6 @@
 package com.StyleUp.backend.controllers;
 
-import com.StyleUp.backend.models.Decoration;
-import com.StyleUp.backend.models.Room;
-import com.StyleUp.backend.models.UserPrincipal;
+import com.StyleUp.backend.models.*;
 import com.StyleUp.backend.repositories.CollaborationRepository;
 import com.StyleUp.backend.services.AuthService;
 import com.StyleUp.backend.services.RoomService;
@@ -44,6 +42,11 @@ public class RoomControllerTests {
 
     @Mock
     private RoomRepository roomRepository;
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private CollaborationRepository collaborationRepository;
 
     //Replaces actual room service with mock room service for testing
     @MockBean
@@ -63,7 +66,6 @@ public class RoomControllerTests {
          * Scenario: User is logged in
          * Behavior Expected:
          * - API Call succeeds
-         * -
          */
         // Arrange: Define room details and mock repository behavior
         String roomName = "Bedroom";
@@ -133,6 +135,42 @@ public class RoomControllerTests {
                     .andExpect(content().string("Item added to room successfully")); //Verifies the response message: "Item added to room successfully".
 
         }
+
+        //LOOP TESTING getCollaborators() AUTH NOT WORKING. 
+//
+//    /**
+//     * Loop Body isn't executed at all
+//     * Loop Body is executed exactly once
+//     * Loop Body is executed exactly twice
+//     * the Loop Body is executed some "Typical" number of times
+//     */
+//    @Test
+//    void testColabRooms_noLoop() throws Exception {
+//        // Arrange
+//        String roomName = "Bedroom";
+//        Long userId = 1L;
+//        Long roomId = 1L;
+//
+//        Room newRoom = new Room(roomName, userId, new ArrayList<>());
+//        newRoom.setRoom_id(roomId);
+//
+//        // Mock Repository Behavior
+//        when(collaborationRepository.findByRoomId(roomId)).thenReturn(new ArrayList<>());
+//
+//        // Generate or use a valid JWT token
+//        String validJwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJicnlubGhhcnBlckBnbWFpbC5jb20iLCJpYXQiOjE3MzEwMDQ5MjQsImV4cCI6MTczMTAwNjcyNH0.kH3MswNcYN5UjNdkWQG5FFrQzxJZHGyw_OyNwDQApH4";
+//
+//        when()
+//
+//        // Perform the request with the Authorization header
+//        mockMvc.perform(post("/getCollaborators")
+//                        .header("Authorization", "Bearer " + validJwtToken)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(newRoom)))
+//                .andExpect(status().isOk())
+//                .andExpect(content().json("[]")); // Expecting an empty list
+//    }
+
 
 
 

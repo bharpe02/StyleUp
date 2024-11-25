@@ -1,5 +1,6 @@
 package com.StyleUp.backend.services;
 
+import com.StyleUp.backend.models.Decoration;
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.repositories.DecorationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
@@ -41,7 +42,8 @@ public class AuthService  {
             throw new RuntimeException("User already exists with this email");
         }
         List<Room> rooms= new ArrayList<>();
-        User user = new User(fname, lname, email, password, rooms);
+        List<Decoration> decorations= new ArrayList<>();
+        User user = new User(fname, lname, email, password, rooms, decorations);
         return userRepository.save(user);
     }
 

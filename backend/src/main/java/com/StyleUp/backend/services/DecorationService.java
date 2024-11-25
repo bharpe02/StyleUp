@@ -13,9 +13,9 @@ public class DecorationService {
         this.decorationRepository = decoRepository;
     }
 
-    public Decoration addDecoration(String link, Long roomId, String description, String title, String image){
+    public Decoration addDecoration(String link, Long roomId, Long wishId,String description, String title, String image){
         System.out.println("In addDecoration!!");
-        Decoration decoration = new Decoration(link, roomId, description, title, image);
+        Decoration decoration = new Decoration(link, roomId, wishId,description, title, image);
         System.out.println("FULL DECORATION: " + decoration);
         return decorationRepository.save(decoration);
     }

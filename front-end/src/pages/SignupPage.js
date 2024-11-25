@@ -26,10 +26,12 @@ function SignupPage() {
         try {
             // Prepare user data to send to the backend
             const userData = {
-                fname,
-                lname,
-                email,
-                password,
+                "fname": fname,
+                "lname": lname,
+                "email": email,
+                "password": password,
+                "rooms": [],
+                "wishlist": [],
             };
             console.log(userData)
             // Send POST request to backend

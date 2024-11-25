@@ -4,6 +4,7 @@ import com.StyleUp.backend.models.Collaboration;
 import com.StyleUp.backend.models.Room;
 import com.StyleUp.backend.models.UserPrincipal;
 import com.StyleUp.backend.repositories.CollaborationRepository;
+import com.StyleUp.backend.repositories.DecorationRepository;
 import com.StyleUp.backend.repositories.RoomRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,13 @@ public class UserController {
 
     private final RoomRepository roomRepository;
     private final CollaborationRepository collaborationRepository;
+    private final DecorationRepository decorationRepository;
 
-    public UserController(RoomRepository roomRepository, CollaborationRepository collaborationRepository) {
+    public UserController(RoomRepository roomRepository, CollaborationRepository collaborationRepository,
+                          DecorationRepository decorationRepository) {
         this.roomRepository = roomRepository;
         this.collaborationRepository = collaborationRepository;
+        this.decorationRepository = decorationRepository;
     }
 
     //Get user full name
@@ -84,6 +88,20 @@ public class UserController {
                 collabRooms.add(room);
             }
             return ResponseEntity.ok(collabRooms);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");
+        }
+    }
+
+    @GetMapping("/wishlist")
+    public ResponseEntity<?> getWishlist(@AuthenticationPrincipal UserPrincipal user) {
+        try {
+            // Ensure the user is authenticated and has the necessary information
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+            }
+            System.out.println("wishlist is: "+decorationRepository.findByWishId(user.getId()));
+            return ResponseEntity.ok(decorationRepository.findByWishId(user.getId()));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error fetching user details");
         }

@@ -25,10 +25,12 @@ CREATE TABLE IF NOT EXISTS decorations (
     decoration_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     search_link VARCHAR(255) NOT NULL,
     fkr BIGINT,
+    wish_id BIGINT,
     description VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     image VARCHAR(225) NOT NULL,
-    FOREIGN KEY(fkr) references rooms(room_id)
+    FOREIGN KEY(fkr) references rooms(room_id),
+    FOREIGN KEY(wish_id) references users(user_id)
 );
 
 -- Create invitations table

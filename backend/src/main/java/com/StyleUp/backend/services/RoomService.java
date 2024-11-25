@@ -10,6 +10,7 @@ import com.StyleUp.backend.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.net.URLDecoder;
@@ -30,6 +31,7 @@ public class RoomService {
         this.collaborationRepository = collaborationRepository;
     }
 
+
     public Room addRoom(String roomName){
         System.out.println("In addRoom!!");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,15 +45,15 @@ public class RoomService {
             System.out.println("ROOM NAME: " + roomName);
         } else {
             // Handle case where the authentication or principal is not present
-            System.out.println("No user is logged in.");
-            return null;
+            throw new UsernameNotFoundException("No user is logged in.");
         }
         List<Decoration> decorations = new ArrayList<>();
         Room room = new Room(roomName, userId, decorations);
         System.out.println("FULL ROOM: " + room.toString());
         return roomRepository.save(room);
     }
-    
+
+
     @Transactional
     public void removeRoom(Long roomId){
         if (roomRepository.existsById(roomId)) {
@@ -70,6 +72,7 @@ public class RoomService {
      * @param roomId ID of the room which the decoration should be added
      * @return updated room with the new decoration.
      */
+
     public Room addDecorationToRoom(Decoration decoration, Long roomId) {
         // Find the room by ID
         Room room = roomRepository.findById(roomId)
@@ -79,6 +82,7 @@ public class RoomService {
         // Save and return the updated room
         return roomRepository.save(room);
     }
+
 
     public User removeCollaborator(Long roomId, Long userId) {
         User user = userRepository.findById(userId).get();

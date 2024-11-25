@@ -105,6 +105,4 @@ public class AuthControllerTests {
                 .andExpect(content().string("Invalid credentials")); //Verifies the error message: "Invalid credentials".
     }
 
-    //ROOM CONTROLLER TESTS
-
 }

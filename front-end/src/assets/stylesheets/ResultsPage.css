@@ -34,8 +34,7 @@
   }
 
   .result-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
   
   .result-card h2 {
@@ -64,19 +63,48 @@
   }
 
 .add-button {
-    background-color: #f9f9f9;
-    border: none;
-    color: #333;
-    padding: 10px 15px;
+    margin-left: 90px;
+    background: none;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color:#f1f1f1;
+    border: 2px solid #633B48;
+    border-radius: 8px;
+    color:#633B48;
+    font-size: 60px;
     cursor: pointer;
-    text-align: left;
-    width: 100%;
-    font-size: 0.9rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .add-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.room-button {
+    background-color: #f9f9f9;
+    border: none;
+    color: #333;
+    padding: 15px 15px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: 0.2s ease;
+}
+
+.room-button:hover {
     background-color: #f1f1f1;
+}
+
+.shared-rooms {
+  border-top: 1px solid black;
+  padding: 0px 20px;
+}
+
+.message-container {
+  margin-left: 70px;
+  justify-content: center;
 }
 
 .result-image {
@@ -88,3 +116,25 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.navigation-buttons button {
+  background-color: #633B48;
+  opacity: 0.9;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 20px;
+  transition: all 0.3s ease;
+}
+
+.navigation-buttons button:hover {
+  background-color: #633B48;
+  opacity: 1;
+}

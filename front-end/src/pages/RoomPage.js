@@ -310,6 +310,10 @@ function RoomPage() {
             
             if (response.status === 200) {
                 console.log('Collab deleted successfully:', response.data);
+                setCollaborators((prevCollaborators) => ({
+                    ...prevCollaborators,
+                    collaborators: prevCollaborators.filter((col) => col.collaborationId !== col.collaborationId),
+                }));
             }
         } catch (error) {
             if (error.response) {

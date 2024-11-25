@@ -50,8 +50,9 @@ const ResultsPage = ({ query }) => {
 
   const fetchResults = async () => {
     try {
-      console.log(finalResponse);
-      const response = await axios.post(`http://localhost:8080/api/search`, finalResponse);
+      const searchString = finalResponse + "%20Decorations"
+      console.log(searchString);
+      const response = await axios.post(`http://localhost:8080/api/search`, searchString);
       setResults(response.data); // Save the raw JSON object
       await getRooms();
       await getCollabs();
@@ -169,18 +170,18 @@ const ResultsPage = ({ query }) => {
               {imageUrl && <img src={imageUrl} alt={item.title} className="result-image" />}
               {isLoggedIn ? (
                 <div className="dropdown">
-                  <button className="menu-button" onClick={() => toggleRoomMenu(index)}>
-                    ⋮
+                  <button className="add-button" onClick={() => toggleRoomMenu(index)}>
+                    +
                   </button>
                   {menuOpenStates[index] && (
                     <div className="dropdown-menu">
                       {rooms.length === 0 ? (
                         <div>
-                          <button className="add-button" onClick={handleCreateRoom}>Create a Room</button>
+                          <button className="room-button" onClick={handleCreateRoom}>Create a Room</button>
                         </div>
                       ) : (
                       rooms.map((room) => (
-                        <button key={room.room_id} className="add-button" 
+                        <button key={room.room_id} className="room-button" 
                           onClick={() => addDecoration(item, room.room_id, index, imageUrl)}  
                         >
                           {room.roomName}
@@ -188,10 +189,12 @@ const ResultsPage = ({ query }) => {
                       ))
                     )}
                     {!Array.isArray(collabs) || collabs.length === 0 ? (
-                        <p style={{textAlign: "center"}}>No shared rooms</p>
-                      ) : (
+                      <div className="shared-rooms">
+                        <p style={{ textAlign: "center"}}>No shared rooms</p>
+                      </div>
+                    ) : (
                       collabs.map((collab) => (
-                        <button key={collab.room_id} className="add-button" 
+                        <button key={collab.room_id} className="room-button" 
                           onClick={() => addDecoration(item, collab.room_id, index, imageUrl)}  
                         >
                           {collab.roomName}
@@ -201,9 +204,11 @@ const ResultsPage = ({ query }) => {
                     </div>
                   )}
                   {messages[index] && (
-                    <p className="message" style={{ color: "green", marginTop: "10px" }}>
-                      {messages[index]}
-                    </p>
+                    <div className="message-container">
+                      <p style={{ color: "green", marginTop: "10px", textAlign: "center" }}>
+                        {messages[index]}
+                      </p>
+                    </div>
                   )}
                 </div>
               ) : (

@@ -10,6 +10,7 @@ import com.StyleUp.backend.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.net.URLDecoder;
@@ -30,6 +31,7 @@ public class RoomService {
         this.collaborationRepository = collaborationRepository;
     }
 
+
     public Room addRoom(String roomName){
         System.out.println("In addRoom!!");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,8 +45,7 @@ public class RoomService {
             System.out.println("ROOM NAME: " + roomName);
         } else {
             // Handle case where the authentication or principal is not present
-            System.out.println("No user is logged in.");
-            return null;
+            throw new UsernameNotFoundException("No user is logged in.");
         }
         List<Decoration> decorations = new ArrayList<>();
         Room room = new Room(roomName, userId, decorations);

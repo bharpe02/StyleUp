@@ -136,42 +136,5 @@ public class RoomControllerTests {
 
         }
 
-        //LOOP TESTING getCollaborators() AUTH NOT WORKING. 
-//
-//    /**
-//     * Loop Body isn't executed at all
-//     * Loop Body is executed exactly once
-//     * Loop Body is executed exactly twice
-//     * the Loop Body is executed some "Typical" number of times
-//     */
-//    @Test
-//    void testColabRooms_noLoop() throws Exception {
-//        // Arrange
-//        String roomName = "Bedroom";
-//        Long userId = 1L;
-//        Long roomId = 1L;
-//
-//        Room newRoom = new Room(roomName, userId, new ArrayList<>());
-//        newRoom.setRoom_id(roomId);
-//
-//        // Mock Repository Behavior
-//        when(collaborationRepository.findByRoomId(roomId)).thenReturn(new ArrayList<>());
-//
-//        // Generate or use a valid JWT token
-//        String validJwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJicnlubGhhcnBlckBnbWFpbC5jb20iLCJpYXQiOjE3MzEwMDQ5MjQsImV4cCI6MTczMTAwNjcyNH0.kH3MswNcYN5UjNdkWQG5FFrQzxJZHGyw_OyNwDQApH4";
-//
-//        when()
-//
-//        // Perform the request with the Authorization header
-//        mockMvc.perform(post("/getCollaborators")
-//                        .header("Authorization", "Bearer " + validJwtToken)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(newRoom)))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json("[]")); // Expecting an empty list
-//    }
-
-
-
 
 }

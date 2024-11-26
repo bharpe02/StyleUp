@@ -42,7 +42,7 @@ public class AuthControllerTests {
     @Test
     public void testRegisterUser_Success() throws Exception {
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>(), new ArrayList<>());
 
         //A POST request is made to /api/register with the User serialized as JSON.
         mockMvc.perform(post("/api/register")
@@ -61,7 +61,7 @@ public class AuthControllerTests {
                 .registerUser(any(), any(), any(), any());
 
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>(), new ArrayList<>());
 
         // A POST request is made with the same payload as the success test.
         mockMvc.perform(post("/api/register")
@@ -78,7 +78,7 @@ public class AuthControllerTests {
         when(authService.verifyUser(any())).thenReturn("Login successful");
 
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>(), new ArrayList<>());
 
         // A POST request is made to /api/login with valid credentials in the payload.
         mockMvc.perform(post("/api/login")
@@ -95,7 +95,7 @@ public class AuthControllerTests {
         when(authService.verifyUser(any())).thenThrow(new RuntimeException("Invalid credentials"));
 
         // Create a user object to be sent in the request
-        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>());
+        User user = new User("John", "Doe", "john.doe@example.com", "password123", new ArrayList<>(), new ArrayList<>());
 
         // A POST request is made to /api/login with invalid credentials in the payload.
         mockMvc.perform(post("/api/login")

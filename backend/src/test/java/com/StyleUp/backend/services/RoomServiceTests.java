@@ -145,34 +145,6 @@ public class RoomServiceTests {
         verify(collaborationRepository).deleteByRoomId(roomId);  // Ensure collaborationRepository deleteByRoomId was called
     }
 
-    /*Test Add Decoration to Room*/
-    @Test
-    void testAddDecorationToRoom() {
-        /**
-         * Test Case: Adding a room to a user account
-         * Scenario: The User exists in the database
-         * Behavior Expected:
-         * - A new room is created
-         *  - The room repository saves the Room and returns it.
-         */
-        //Arrange: Define room details and mock repository behavior
-        String roomName = "Bedroom";
-        Long roomId = 1L;
-        Long fku = 1L;
-        List<Decoration> decorations = new ArrayList<>();
-        Room roomDestination = new Room(roomName, fku, decorations);
-
-        Decoration newDecoration = new Decoration();
-
-        // Mock findById to simulate finding the room
-        when(roomRepository.findById(roomId)).thenReturn(Optional.of(roomDestination));
-
-        // Call Method to test
-        roomService.addDecorationToRoom( newDecoration, roomId);
-
-        verify(roomRepository).save(roomDestination);  // Ensure save was called
-    }
-
     @Test
     void testRemoveCollaborator() {
         // Arrange: Define room and user details

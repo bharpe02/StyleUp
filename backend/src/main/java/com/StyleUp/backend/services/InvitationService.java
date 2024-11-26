@@ -61,7 +61,7 @@ public class InvitationService {
         }
     }
 
-    public void acceptInvite(Long inviteId){
+    public User acceptInvite(Long inviteId){
         if (invitationRepository.existsById(inviteId)) {
             Invitation invite = invitationRepository.findById(inviteId).get();
             User user = userRepository.findByEmail(invite.getEmail());
@@ -69,10 +69,12 @@ public class InvitationService {
                 Room shared = roomRepository.findById(invite.getRoom_id()).get();
                 Set collabRooms = user.getCollabRooms();
                 collabRooms.add(shared);
+                user.setCollabRooms(collabRooms);
+                invitationRepository.deleteById(inviteId);
+                return userRepository.save(user);
             } else {
                 throw new RuntimeException("Invite not found with id: " + invite.getRoom_id());
             }
-            invitationRepository.deleteById(inviteId);
         } else {
             // Handle the case where the invite does not exist (optional)
             throw new RuntimeException("Invite not found with id: " + inviteId);

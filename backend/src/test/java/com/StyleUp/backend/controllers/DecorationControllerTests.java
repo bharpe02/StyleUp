@@ -32,11 +32,12 @@ public class DecorationControllerTests {
 
     @Test
     void testCreateDecoration_Success() throws Exception {
-        Decoration decoration = new Decoration("https://example.com", 1L, "Description", "Title", "ImageURL");
+        Decoration decoration = new Decoration("https://example.com", 1L, null,"Description", "Title", "ImageURL");
 
         when(decorationService.addDecoration(
                 decoration.getSearchLink(),
                 decoration.getFkr(),
+                decoration.getWishId(),
                 decoration.getDescription(),
                 decoration.getTitle(),
                 decoration.getImage()
@@ -51,11 +52,12 @@ public class DecorationControllerTests {
 
     @Test
     void testCreateDecoration_Failure() throws Exception {
-        Decoration decoration = new Decoration("https://example.com", 1L, "Description", "Title", "ImageURL");
+        Decoration decoration = new Decoration("https://example.com", 1L, null,"Description", "Title", "ImageURL");
 
         doThrow(new RuntimeException("Database error")).when(decorationService).addDecoration(
                 decoration.getSearchLink(),
                 decoration.getFkr(),
+                decoration.getWishId(),
                 decoration.getDescription(),
                 decoration.getTitle(),
                 decoration.getImage()

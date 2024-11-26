@@ -64,7 +64,7 @@ public class AuthServiceTests {
         String lname = "Doe";
         String email = "john.doe@example.com";
         String password = "securepassword";
-        User newUser = new User(fname, lname, email, password, new ArrayList<>());
+        User newUser = new User(fname, lname, email, password, new ArrayList<>(), new ArrayList<>());
 
         // Mock findByEmail to simulate that the email does not exist
         when(userRepository.findByEmail(email)).thenReturn(null);
@@ -117,7 +117,7 @@ public class AuthServiceTests {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(password);
 
-        User user = new User("John", "Doe", email, encodedPassword, new ArrayList<>());
+        User user = new User("John", "Doe", email, encodedPassword, new ArrayList<>(), new ArrayList<>());
 
         // Mock repository to simulate finding the user
         when(userRepository.findByEmail(email)).thenReturn(user);
@@ -151,7 +151,7 @@ public class AuthServiceTests {
 
         // Define user details and mock repository behavior
         String email = "nonexistent@example.com";
-        User user = new User("Nonexistent", "User", email, "password", new ArrayList<>());
+        User user = new User("Nonexistent", "User", email, "password", new ArrayList<>(), new ArrayList<>());
 
         // Mock repository to simulate user not found
         when(userRepository.findByEmail(email)).thenReturn(null);
@@ -179,7 +179,7 @@ public class AuthServiceTests {
         // Mock user details and repository behavior
         String email = "john.doe@example.com";
         String password = "wrongpassword";
-        User user = new User("John", "Doe", email, password, new ArrayList<>());
+        User user = new User("John", "Doe", email, password, new ArrayList<>(), new ArrayList<>());
 
         // Mock repository to simulate finding the user
         when(userRepository.findByEmail(email)).thenReturn(user);
@@ -199,10 +199,10 @@ public class AuthServiceTests {
         // Given
         String email = "john.doe@example.com";
         String password = "securepassword";
-        User user = new User("John", "Doe", email, password, new ArrayList<>());
+        User user = new User("John", "Doe", email, password, new ArrayList<>(), new ArrayList<>());
 
         // Mock repository to simulate finding the user
-        User foundUser = new User("John", "Doe", email, "securepassword", new ArrayList<>());
+        User foundUser = new User("John", "Doe", email, "securepassword", new ArrayList<>(), new ArrayList<>());
         when(userRepository.findByEmail(email)).thenReturn(foundUser);
 
         // Mock authentication to simulate an unexpected exception (e.g., RuntimeException)

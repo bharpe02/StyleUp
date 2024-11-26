@@ -25,11 +25,11 @@ public class DecorationServiceTests {
     @Test
     void testAddDecoration_Success() {
 
-        Decoration decoration = new Decoration("https://example.com", 1L, "Description", "Title", "ImageURL");
+        Decoration decoration = new Decoration("https://example.com", 1L,null ,"Description", "Title", "ImageURL");
         when(decorationRepository.save(any(Decoration.class))).thenReturn(decoration);
 
         Decoration createdDecoration = decorationService.addDecoration(
-                "https://example.com", 1L, "Description", "Title", "ImageURL");
+                "https://example.com", 1L,null, "Description", "Title", "ImageURL");
 
         assertNotNull(createdDecoration);
         assertEquals("https://example.com", createdDecoration.getSearchLink());
@@ -42,7 +42,7 @@ public class DecorationServiceTests {
         when(decorationRepository.save(any(Decoration.class))).thenThrow(new RuntimeException("Database error"));
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            decorationService.addDecoration("https://example.com", 1L, "Description", "Title", "ImageURL");
+            decorationService.addDecoration("https://example.com", 1L, null, "Description", "Title", "ImageURL");
         });
         assertEquals("Database error", exception.getMessage());
     }

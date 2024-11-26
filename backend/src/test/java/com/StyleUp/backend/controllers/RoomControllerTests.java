@@ -133,7 +133,4 @@ public class RoomControllerTests {
                     .andExpect(content().string("Item added to room successfully")); //Verifies the response message: "Item added to room successfully".
 
         }
-
-
-
 }

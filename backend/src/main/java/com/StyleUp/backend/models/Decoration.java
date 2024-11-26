@@ -18,6 +18,9 @@ public class Decoration {
     @Column (name = "fkr")
     private Long fkr;
 
+    @Column (name = "wish_id")
+    private Long wishId;
+
     @Column
     private String search_link;
 
@@ -32,9 +35,10 @@ public class Decoration {
 
     public Decoration() {}
 
-    public Decoration(String searchLink, Long fkRoomId, String description, String title, String image) {
+    public Decoration(String searchLink, Long fkRoomId, Long wishId,String description, String title, String image) {
         this.search_link = searchLink;
         this.fkr = fkRoomId;
+        this.wishId = wishId;
         this.description = description;
         this.title = title;
         this.image = image;
@@ -54,6 +58,14 @@ public class Decoration {
 
     public void setFkr(Long fkr) {
         this.fkr = fkr;
+    }
+
+    public Long getWishId() {
+        return wishId;
+    }
+
+    public void setWishId(Long wishId) {
+        this.wishId = wishId;
     }
 
     public String getSearchLink() {

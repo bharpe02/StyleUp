@@ -6,10 +6,9 @@ import BannerMenu from "../components/BannerMenu"
 import { AuthContext } from "../contexts/AuthContext";
 import Sidebar from "../components/Sidebar";
 import "../assets/stylesheets/ResultsPage.css"
-import PropTypes from 'prop-types';
 import { createRoom } from "../utils/RoomUtils";
 
-const ResultsPage = ({ query }) => {
+const ResultsPage = () => {
   const navigate = useNavigate();
   const { finalResponse } = useSurveyContext();
   const { token, isLoggedIn } = useContext(AuthContext);
@@ -104,6 +103,7 @@ const ResultsPage = ({ query }) => {
         const decoration={
           "searchLink": item.link,
           "fkr": room_id,
+          "wishId": null,
           "description": new DOMParser().parseFromString(item.htmlSnippet, 'text/html').body.textContent.trim() || "No description available.",
           "title": item.title,
           "image": image_url,
@@ -118,6 +118,44 @@ const ResultsPage = ({ query }) => {
             setMessages((prevMessages) => ({
               ...prevMessages,
               [index]: "Added to Room!", // Set message for the specific index
+            }));
+        }
+    } catch (error) {
+      setMessages((prevMessages) => ({
+        ...prevMessages,
+        [index]: "Error adding to room", // Set an error message if needed
+      }));
+      console.error("Error adding to room: ", error)
+    }
+  };
+
+  const wishDecoration = async (item, index, image_url) => {
+    try {
+        // Prepare user data to send to the backend
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        };
+        console.log(item.htmlSnippet);
+
+        const decoration={
+          "searchLink": item.link,
+          "fkr": null,
+          "wishId": null,
+          "description": new DOMParser().parseFromString(item.htmlSnippet, 'text/html').body.textContent.trim() || "No description available.",
+          "title": item.title,
+          "image": image_url,
+        }
+
+        console.log("Create Decoration:", decoration);
+        // Send POST request to backend
+        const response = await axios.post('http://localhost:8080/api/decoration/wish', decoration , {headers});
+        
+        if (response.status === 200) {
+            console.log('Room wishlisted successfully:', response.data);
+            setMessages((prevMessages) => ({
+              ...prevMessages,
+              [index]: "Added to wishlist!", // Set message for the specific index
             }));
         }
     } catch (error) {
@@ -175,6 +213,11 @@ const ResultsPage = ({ query }) => {
                   </button>
                   {menuOpenStates[index] && (
                     <div className="dropdown-menu">
+                      <button className="room-button" 
+                          onClick={() => wishDecoration(item, index, imageUrl)}  
+                        >
+                          Wishlist
+                        </button>
                       {rooms.length === 0 ? (
                         <div>
                           <button className="room-button" onClick={handleCreateRoom}>Create a Room</button>
@@ -228,9 +271,4 @@ const ResultsPage = ({ query }) => {
     </div>
   );
 };
-
-ResultsPage.propTypes = {
-  query: PropTypes.string.isRequired
-};
-
 export default ResultsPage;

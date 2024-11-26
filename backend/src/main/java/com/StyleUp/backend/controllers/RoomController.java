@@ -76,17 +76,6 @@ public class RoomController {
 
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addItemToRoom(@RequestBody Decoration decoration, @RequestParam Long roomId) {
-        try {
-            roomService.addDecorationToRoom(decoration, roomId);
-            return ResponseEntity.ok("Item added to room successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to add item to room: " + e.getMessage());
-        }
-    }
-
     @PostMapping("/leave")
     public ResponseEntity<String> leaveRoom(@RequestBody Invitation invitation) {
         System.out.println("RECEIVED LEAVE REQUEST FOR ROOM: "+invitation);
